@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração Inicial do Sistema</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+        .setup-intro-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Configuração Inicial</h2> <p class="setup-intro-text">Bem-vindo! Cadastre o primeiro gerente iniciar o sistema </p>
+            <form id="setup-form">
+                <div class="input-group">
+                    <label for="setup-username">Nome do Gerente </label>
+                    <input type="text" id="setup-username" required>
+                </div>
+                <div class="input-group">
+                    <label for="setup-password">Senha</label>
+                    <input type="password" id="setup-password" required>
+                </div>
+                <button type="submit">Criar Gerente e Iniciar </button>
+            </form>
+            <p id="setup-message" class="message"></p>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+
+            const checkStatusAndSetup = async () => {
+                try {
+                    const response = await fetch('http://localhost:3000/api/status');
+                    const data = await response.json();
+
+                    if (data.usersExist) {
+                        window.location.href = 'index.html';
+                        return; 
+                    }
+
+
+                    setupFormListener();
+
+                } catch (error) {
+                    document.body.innerHTML = '<h2 style="color: red; text-align: center;">Erro de Conexão</h2><p style="text-align: center;">Não foi possível conectar ao servidor.</p>';
+                }
+            };
+
+
+            const setupFormListener = () => {
+                document.getElementById('setup-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const messageEl = document.getElementById('setup-message');
+                    const username = document.getElementById('setup-username').value;
+                    const password = document.getElementById('setup-password').value;
+                    
+                    try {
+                        const registerResponse = await fetch('http://localhost:3000/api/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password, cargo: 'Administrador' })
+                        });
+
+                        const responseData = await registerResponse.json();
+                        if (!registerResponse.ok) throw new Error(responseData.message);
+
+                        messageEl.textContent = 'Administrador criado com sucesso! Redirecionando para a página de login...';
+                        messageEl.style.color = 'green';
+
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 2500);
+
+                    } catch (err) {
+                        messageEl.textContent = err.message || 'Erro ao conectar com o servidor.';
+                        messageEl.style.color = 'red';
+                    }
+                });
+            };
+
+            checkStatusAndSetup();
+        });
+    </script>
+</body>
+</html>
