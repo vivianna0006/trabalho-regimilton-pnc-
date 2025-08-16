@@ -157,4 +157,20 @@ app.delete('/api/users/:username', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta http://localhost:${PORT}`);
+  // Rota para LER a lista de produtos
+app.get('/api/products', (req, res) => {
+  try {
+    // Lê o conteúdo do arquivo de produtos.
+    const productsData = fs.readFileSync('./products.json');
+    // Converte o conteúdo para um objeto JavaScript.
+    const products = JSON.parse(productsData);
+    // Responde com status 200 (OK) e a lista de produtos.
+    res.status(200).json(products);
+  } catch (error) {
+    // Se o arquivo não for encontrado ou houver outro erro...
+    console.error("Erro ao ler o arquivo de produtos:", error);
+    // ...responde com um erro 500.
+    res.status(500).json({ message: 'Erro ao buscar os produtos.' });
+  }
+});
 });

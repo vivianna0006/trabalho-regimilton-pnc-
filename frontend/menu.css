@@ -1,0 +1,133 @@
+/* --- ESTILOS PARA O MENU DE NAVEGAÇÃO --- */
+
+/* Configura o cabeçalho para ficar fixo no topo da página */
+header {
+    background-color: #1f0000d4; /* Fundo branco. */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade. */
+    padding: 0 2rem; /* Espaçamento nas laterais. */
+    position: fixed; /* Mantém o menu fixo no topo. */
+    width: 100%; /* Ocupa toda a largura da tela. */
+    top: 0;
+    left: 0;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total. */
+    z-index: 1000; /* Garante que o menu fique sempre acima de outros conteúdos. */
+}
+
+/* A barra de navegação principal */
+nav {
+    display: flex; /* Ativa o Flexbox para alinhar os itens. */
+    justify-content: space-between; /* ESSENCIAL: Empurra o grupo da esquerda e o da direita para os cantos opostos. */
+    align-items: center; /* Alinha tudo verticalmente no centro. */
+    height: 70px; /* Altura da barra. */
+}
+
+/* Estilo da marca da loja */
+.brand-name {
+    font-size: 1.5rem; /* Tamanho da fonte. */
+    font-weight: bold; /* Texto em negrito. */
+    color: #ffffff; /* Cor cinza escuro. */
+    text-decoration: none; /* Remove o sublinhado. */
+}
+
+/* Contêiner que agrupa os itens da direita (links e botão) */
+.nav-right {
+    display: flex; /* Alinha os itens dentro dele na horizontal. */
+    align-items: center; /* Alinha os itens verticalmente. */
+    gap: 2.5rem; /* Adiciona um espaço entre a lista de links e o botão "Sair". */
+}
+
+/* A lista de links de navegação */
+.navbar-links {
+    list-style: none; /* Remove os marcadores de lista (as "bolinhas"). */
+    display: flex; /* Alinha os links na horizontal. */
+    margin: 0;
+    padding: 0;
+    gap: 2rem; /* Adiciona um espaço entre cada item do menu (Caixa, Estoque). */
+}
+
+.navbar-links a {
+    text-decoration: none; /* Remove o sublinhado. */
+    color: #ffffff; /* Cor cinza médio. */
+    font-size: 1rem; /* Tamanho da fonte. */
+    transition: color 0.3s; /* Adiciona uma transição suave para a mudança de cor. */
+}
+
+.navbar-links a:hover {
+    color: #edff9b; /* Muda a cor para azul ao passar o mouse. */
+}
+
+/* Estilo do botão "Sair" */
+#logout-btn-menu {
+    width: auto; /* Faz o botão se ajustar ao tamanho do texto. */
+    padding: 8px 20px; /* Espaçamento interno. */
+    font-size: 1rem;
+    background-color: #ebff9b; /* Cor cinza. */
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#logout-btn-menu:hover {
+    background-color: #5a6268; /* Cinza mais escuro ao passar o mouse. */
+}
+
+/* Garante que o conteúdo principal não fique escondido atrás do menu */
+.main-content {
+    padding-top: 100px;
+    text-align: center;
+}
+.mobile-menu-button {
+    display: none; /* Esconde o botão em telas grandes */
+    background: none;
+    border: none;
+    font-size: 2rem; /* Tamanho do ícone */
+    cursor: pointer;
+    color: #333;
+}
+
+/* Media Query: Aplica estes estilos apenas quando a tela for menor que 768px */
+@media (max-width: 768px) {
+    .mobile-menu-button {
+        display: block; /* Mostra o botão em telas pequenas */
+    }
+
+    .nav-right {
+        display: none; /* Esconde o menu normal da direita */
+        position: absolute; /* Posiciona o menu abaixo do cabeçalho */
+        top: 70px; /* Distância do topo (altura do header) */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        flex-direction: column; /* Empilha os itens verticalmente */
+        padding: 1rem 0;
+    }
+
+    /* Quando o menu estiver ativo, ele será mostrado */
+    .nav-right.active {
+        display: flex;
+    }
+
+    .navbar-links {
+        flex-direction: column; /* Empilha os links verticalmente */
+        width: 100%;
+        text-align: center;
+        gap: 0;
+    }
+
+    .navbar-links li {
+        margin: 0;
+        width: 100%;
+    }
+
+    .navbar-links a {
+        display: block; /* Faz o link ocupar toda a largura */
+        padding: 1rem 0; /* Aumenta a área de clique */
+    }
+
+    #logout-btn-menu {
+        margin-top: 1rem; /* Adiciona um espaço acima do botão de sair */
+    }
+}

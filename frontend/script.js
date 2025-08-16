@@ -38,15 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginMessage.textContent = data.message + " Redirecionando...";
                 loginMessage.style.color = 'green';
 
-                setTimeout(() => {
-                    if (data.cargo === 'Administrador') {
-                        window.location.href = 'admin.html';
-                    } else if (data.cargo === 'Usuário') {
-                        window.location.href = 'usuario.html';
-                    } else {
-                        window.location.href = 'index.html';
-                    }
-                }, 1500);
+setTimeout(() => { // Agenda uma ação para daqui a 1.5 segundos.
+    // Após um login bem-sucedido, redireciona TODOS os usuários para a página do menu.
+    window.location.href = 'menu.html';
+}, 1500); // Define o tempo de espera em milissegundos.
+
             } else {
                 loginMessage.textContent = data.message;
                 loginMessage.style.color = 'red';
