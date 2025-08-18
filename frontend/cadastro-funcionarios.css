@@ -1,0 +1,84 @@
+.main-content .form-box {
+    max-width: 450px;
+    width: 100%;
+}
+
+.form-box h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem; 
+    margin-bottom: 10px;
+}
+
+.form-box p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+
+#cadastro-form {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+}
+
+
+.input-group {
+    margin-bottom: 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+}
+
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+
+#cadastro-form button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cadastro-form button:hover {
+    background-color: #218838;
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    min-height: 20px;
+    font-weight: bold;
+}

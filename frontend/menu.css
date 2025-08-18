@@ -1,68 +1,65 @@
-/* --- ESTILOS PARA O MENU DE NAVEGAÇÃO --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
-/* Configura o cabeçalho para ficar fixo no topo da página */
 header {
-    background-color: #1f0000d4; /* Fundo branco. */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para dar profundidade. */
-    padding: 0 2rem; /* Espaçamento nas laterais. */
-    position: fixed; /* Mantém o menu fixo no topo. */
-    width: 100%; /* Ocupa toda a largura da tela. */
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0 2rem;
+    position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total. */
-    z-index: 1000; /* Garante que o menu fique sempre acima de outros conteúdos. */
+    box-sizing: border-box;
+    z-index: 1000;
 }
 
-/* A barra de navegação principal */
 nav {
-    display: flex; /* Ativa o Flexbox para alinhar os itens. */
-    justify-content: space-between; /* ESSENCIAL: Empurra o grupo da esquerda e o da direita para os cantos opostos. */
-    align-items: center; /* Alinha tudo verticalmente no centro. */
-    height: 70px; /* Altura da barra. */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
 }
 
-/* Estilo da marca da loja */
 .brand-name {
-    font-size: 1.5rem; /* Tamanho da fonte. */
-    font-weight: bold; /* Texto em negrito. */
-    color: #ffffff; /* Cor cinza escuro. */
-    text-decoration: none; /* Remove o sublinhado. */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    text-decoration: none;
 }
 
-/* Contêiner que agrupa os itens da direita (links e botão) */
 .nav-right {
-    display: flex; /* Alinha os itens dentro dele na horizontal. */
-    align-items: center; /* Alinha os itens verticalmente. */
-    gap: 2.5rem; /* Adiciona um espaço entre a lista de links e o botão "Sair". */
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
 }
 
-/* A lista de links de navegação */
 .navbar-links {
-    list-style: none; /* Remove os marcadores de lista (as "bolinhas"). */
-    display: flex; /* Alinha os links na horizontal. */
+    list-style: none;
+    display: flex;
     margin: 0;
     padding: 0;
-    gap: 2rem; /* Adiciona um espaço entre cada item do menu (Caixa, Estoque). */
+    gap: 2rem;
 }
 
 .navbar-links a {
-    text-decoration: none; /* Remove o sublinhado. */
-    color: #ffffff; /* Cor cinza médio. */
-    font-size: 1rem; /* Tamanho da fonte. */
-    transition: color 0.3s; /* Adiciona uma transição suave para a mudança de cor. */
-}
-
-.navbar-links a:hover {
-    color: #edff9b; /* Muda a cor para azul ao passar o mouse. */
-}
-
-/* Estilo do botão "Sair" */
-#logout-btn-menu {
-    width: auto; /* Faz o botão se ajustar ao tamanho do texto. */
-    padding: 8px 20px; /* Espaçamento interno. */
+    text-decoration: none;
+    color: #34495e;
     font-size: 1rem;
-    background-color: #ebff9b; /* Cor cinza. */
-    color: rgb(0, 0, 0);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover, .navbar-links a.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+#logout-btn-menu {
+    width: auto;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    background-color: #e74c3c;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -70,64 +67,95 @@ nav {
 }
 
 #logout-btn-menu:hover {
-    background-color: #5a6268; /* Cinza mais escuro ao passar o mouse. */
+    background-color: #c0392b;
 }
 
-/* Garante que o conteúdo principal não fique escondido atrás do menu */
 .main-content {
     padding-top: 100px;
     text-align: center;
 }
+
+.hidden {
+    display: none !important;
+}
+
+/* --- ESTILOS PARA O MENU DROPDOWN --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- ESTILOS PARA O MENU RESPONSIVO --- */
 .mobile-menu-button {
-    display: none; /* Esconde o botão em telas grandes */
+    display: none;
     background: none;
     border: none;
-    font-size: 2rem; /* Tamanho do ícone */
+    font-size: 2rem;
     cursor: pointer;
     color: #333;
 }
 
-/* Media Query: Aplica estes estilos apenas quando a tela for menor que 768px */
 @media (max-width: 768px) {
     .mobile-menu-button {
-        display: block; /* Mostra o botão em telas pequenas */
+        display: block;
     }
-
     .nav-right {
-        display: none; /* Esconde o menu normal da direita */
-        position: absolute; /* Posiciona o menu abaixo do cabeçalho */
-        top: 70px; /* Distância do topo (altura do header) */
+        display: none;
+        position: absolute;
+        top: 70px;
         left: 0;
         width: 100%;
         background-color: #ffffff;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        flex-direction: column; /* Empilha os itens verticalmente */
+        flex-direction: column;
         padding: 1rem 0;
     }
-
-    /* Quando o menu estiver ativo, ele será mostrado */
     .nav-right.active {
         display: flex;
     }
-
     .navbar-links {
-        flex-direction: column; /* Empilha os links verticalmente */
+        flex-direction: column;
         width: 100%;
         text-align: center;
         gap: 0;
     }
-
     .navbar-links li {
         margin: 0;
         width: 100%;
     }
-
     .navbar-links a {
-        display: block; /* Faz o link ocupar toda a largura */
-        padding: 1rem 0; /* Aumenta a área de clique */
+        display: block;
+        padding: 1rem 0;
     }
-
     #logout-btn-menu {
-        margin-top: 1rem; /* Adiciona um espaço acima do botão de sair */
+        margin-top: 1rem;
     }
 }

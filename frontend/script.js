@@ -38,11 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginMessage.textContent = data.message + " Redirecionando...";
                 loginMessage.style.color = 'green';
 
-setTimeout(() => { // Agenda uma ação para daqui a 1.5 segundos.
-    // Após um login bem-sucedido, redireciona TODOS os usuários para a página do menu.
+setTimeout(() => {
+    
     window.location.href = 'menu.html';
-}, 1500); // Define o tempo de espera em milissegundos.
-
+}, 1500); 
             } else {
                 loginMessage.textContent = data.message;
                 loginMessage.style.color = 'red';

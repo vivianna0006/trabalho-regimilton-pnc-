@@ -1,7 +1,12 @@
 [
   {
     "username": "aninha123",
-    "password": "$2b$10$IEGQDcNzGU5dveUTfNz0IeVbVq571ht6xwnsmmojaL9wQ/F3GpU9O",
+    "password": "$2b$10$cWTeyU50/Yf.CBz7Ckb.ZumzD2Hq8wpk.3a9rzX9UxNMd5S/FZaH.",
     "cargo": "Administrador"
+  },
+  {
+    "username": "01126547814",
+    "password": "$2b$10$WKvg97TMUJocGMDP8DuQkuYgKT1H4ezRoCylPPkeL7o47CAQayoh6",
+    "cargo": "Funcionário"
   }
 ]

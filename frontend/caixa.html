@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa - Styllo Fashion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+    <style>
+        .caixa-main-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 100px auto 2rem;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+        .caixa-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .item-produto, .item-venda {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .item-produto .add-btn, .item-venda .remove-btn {
+            width: auto;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .item-venda .remove-btn {
+            background-color: #e74c3c;
+        }
+        .item-venda .remove-btn:hover {
+            background-color: #c0392b;
+        }
+        #total-venda {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+            color: #28a745;
+        }
+        #finalizar-venda-btn {
+            margin-top: 20px;
+            background-color: #28a745;
+        }
+        .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2000;
+            opacity: 0;
+            transition: top 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        .toast-notification.show {
+            top: 20px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
+            <div class="nav-right">
+                <ul class="navbar-links">
+                    <li class="dropdown">
+                        <a href="./caixa.html" class="dropbtn">Caixa</a>
+                        <div class="dropdown-content">
+                            <a href="./caixa.html">Registro de Venda</a>
+                            <a href="#" id="sangria-link" class="hidden">Sangria</a>
+                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
+                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
+                            <a href="#">Fechamento de Caixa</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Estoque</a></li>
+                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
+                </ul>
+                <button id="logout-btn-menu" type="button">Sair</button>
+            </div>
+        </nav>
+    </header>
+    <div id="toast-notification" class="toast-notification"></div>
+    <main class="caixa-main-container">
+        <section class="caixa-section">
+            <h2>Venda Atual</h2>
+            <div id="lista-venda"></div>
+            <div id="total-venda">Total: R$ 0,00</div>
+            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button>
+        </section>
+        <section class="caixa-section">
+            <h2>Buscar Produto</h2>
+            <div class="input-group">
+                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto...">
+            </div>
+            <div id="lista-produtos"></div>
+        </section>
+    </main>
+    <script src="caixa.js"></script>
+</body>
+</html>
