@@ -8,5 +8,10 @@
     "username": "01126547814",
     "password": "$2b$10$WKvg97TMUJocGMDP8DuQkuYgKT1H4ezRoCylPPkeL7o47CAQayoh6",
     "cargo": "Funcionário"
+  },
+  {
+    "username": "skzlindos",
+    "password": "$2b$10$qhw7v.RVi73tUXOML5Wt3./i1Zm4JtxMxPjTqEhZqPZ1UpTtIXe1O",
+    "cargo": "Administrador"
   }
 ]
