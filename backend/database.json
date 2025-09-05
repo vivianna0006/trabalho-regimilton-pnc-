@@ -13,5 +13,21 @@
     "username": "skzlindos",
     "password": "$2b$10$qhw7v.RVi73tUXOML5Wt3./i1Zm4JtxMxPjTqEhZqPZ1UpTtIXe1O",
     "cargo": "Administrador"
+    
+  },
+  {
+    "username": "ASDASD",
+    "password": "$2b$10$FNArh.l/5zsiQdua4Z9KwOHohHdelKIvzwXpWEUQw2hkXmvjjh71u",
+    "cargo": "Funcionário"
+  },
+  {
+    "username": "SAFASD",
+    "password": "$2b$10$O9VdWzL4xwS6iJONcxQFPuFPE7p1wbDCKYiBfM9t2k9yz8.DlY/MC",
+    "cargo": "Funcionário"
+  },
+  {
+    "username": "GVTTF",
+    "password": "$2b$10$k/3SM9Ny4RssUscFobE8TeUJ5z3AGzVCq9gJuI1P96sAJ1Nq7DaHK",
+    "cargo": "Funcionário"
   }
 ]
