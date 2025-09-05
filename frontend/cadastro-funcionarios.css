@@ -82,3 +82,9 @@
     min-height: 20px;
     font-weight: bold;
 }
+
+    label {
+  color: black !important;
+  display: block !important;
+  font-weight: bold !important;
+}
