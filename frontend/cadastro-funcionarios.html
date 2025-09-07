@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Garante que a página se adapte a diferentes tamanhos de ecrã (responsividade). -->
     <title>Cadastro de Funcionários</title> <!-- Define o título que aparece na aba do navegador. -->
     <!-- Ligações para os ficheiros de estilo (CSS) que controlam a aparência da página. -->
-    <link rel="stylesheet" href="style.css"> <!-- Estilos gerais do site. -->
-    <link rel="stylesheet" href="menu.css"> <!-- Estilos específicos do menu de navegação. -->
-    <link rel="stylesheet" href="notifications.css"> <!-- Estilos para o sistema de notificações. -->
-    <link rel="stylesheet" href="cadastro-funcionarios.css"> <!-- Estilos específicos para esta página de cadastro. -->
+     <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="componentes.css">
+<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="cadastro-funcionarios.css">
 </head>
 <body> <!-- O corpo do documento, onde todo o conteúdo visível é colocado. -->
 
@@ -16,25 +17,6 @@
     <!-- O menu de navegação padrão do sistema, que será controlado pelo JavaScript. -->
     <header>
         <nav>
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
-            <div class="nav-right">
-                <ul class="navbar-links">
-                    <li><a href="./menu.html">Início</a></li>
-                    <li class="dropdown">
-                        <a href="./caixa.html" class="dropbtn">Caixa</a>
-                        <div class="dropdown-content">
-                            <a href="./caixa.html">Registro de Venda</a>
-                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a>
-                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
-                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
-                            <a href="#">Fechamento de Caixa</a>
-                        </div>
-                    </li>
-                    <li><a href="./estoque.html">Estoque</a></li>
-                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
-                </ul>
-                <button id="logout-btn-menu" type="button">Sair</button>
-            </div>
         </nav>
     </header>
 
@@ -95,7 +77,8 @@
         </div>
     </main>
     <!-- Scripts no final para melhor desempenho -->
-    <script src="notifications.js"></script> <!-- Carrega o nosso sistema de notificações. -->
-    <script src="cadastro-funcionarios.js"></script> <!-- Carrega a lógica específica desta página. -->
+    <script src="notifications.js"></script>
+    <script src="auth.js"></script> <!-- Carrega o nosso sistema de notificações. -->
+    <script src="cadastro-funcionarios.js"></script><!-- Carrega a lógica específica desta página. -->
 </body>
 </html>

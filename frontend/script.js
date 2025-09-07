@@ -11,23 +11,21 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
 
     // O comentário abaixo é um separador para organizar o código, indicando a seção da função de verificação.
     // O comentário abaixo descreve a finalidade da função seguinte.
-    const checkSystemStatus = async () => { // Declara uma função assíncrona (que pode usar 'await') para verificar o estado do sistema.
-        try { // Inicia um bloco de código que pode gerar um erro (neste caso, a comunicação com o servidor).
-            const response = await fetch(`${API_URL}/status`); // Faz uma requisição para a rota '/status' da API e espera (await) pela resposta.
-            const data = await response.json(); // Espera a resposta do servidor chegar e a converte de texto JSON para um objeto JavaScript.
-        
-            if (data.usersExist) { // Verifica a propriedade 'usersExist' no objeto recebido do servidor.
-                // O comentário abaixo descreve a finalidade do bloco 'if' seguinte.
-                loginBox.classList.remove('hidden'); // Se existem utilizadores, remove a classe 'hidden' da caixa de login para a tornar visível.
-            } else { // Caso a condição anterior seja falsa...
-                // O comentário abaixo descreve a finalidade do bloco 'else' seguinte.
-                window.location.href = './setup.html'; // Se não existem utilizadores, redireciona o navegador para a página de configuração inicial.
-            } // Fecha o bloco 'else'.
-        } catch (error) { // Captura qualquer erro que tenha ocorrido no bloco 'try' (ex: falha de rede).
-            // O comentário abaixo descreve a finalidade do bloco 'catch' seguinte.
-            document.body.innerHTML = '<h2 style="color: red; text-align: center;">Erro de Conexão</h2><p style="text-align: center;">Não foi possível conectar ao servidor. Verifique se o back-end está rodando e tente novamente.</p>'; // Substitui todo o conteúdo da página por uma mensagem de erro clara.
-        } // Fecha o bloco 'catch'.
-    }; // Fecha a declaração da função 'checkSystemStatus'.
+   const checkSystemStatus = async () => {
+    try {
+        // A LINHA ABAIXO É A MUDANÇA CRÍTICA - adiciona um parâmetro único para evitar o cache
+        const response = await fetch(`${API_URL}/status?t=${new Date().getTime()}`);
+        const data = await response.json();
+
+        if (data.usersExist) {
+            loginBox.classList.remove('hidden');
+        } else {
+            window.location.href = './setup.html';
+        }
+    } catch (error) {
+        document.body.innerHTML = '<h2 style="color: red; text-align: center;">Erro de Conexão</h2><p style="text-align: center;">Não foi possível conectar ao servidor. Verifique se o back-end está rodando e tente novamente.</p>';
+    }
+};
 
 
     // O comentário abaixo é um separador para organizar o código, indicando a seção da lógica de login.

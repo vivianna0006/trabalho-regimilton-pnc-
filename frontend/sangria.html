@@ -5,70 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva, ajustando-a à tela do dispositivo. -->
     <title>Sangria de Caixa - Styllo Fashion</title> <!-- Define o texto que aparecerá na aba do navegador. -->
     <!-- O comentário abaixo indica a finalidade dos links seguintes. -->
-    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos geral do site. -->
-    <link rel="stylesheet" href="menu.css"> <!-- Importa a folha de estilos específica do menu de navegação. -->
-    <link rel="stylesheet" href="notifications.css"> <!-- Importa a folha de estilos para as notificações flutuantes (toasts). -->
-    <style>
-        /* O comentário abaixo indica a finalidade da regra de estilo. */
-        .main-content { /* Seleciona o elemento com a classe 'main-content'. */
-            width: 100%; /* Faz o elemento ocupar 100% da largura disponível. */
-            max-width: 900px; /* Limita a largura máxima do elemento a 900 pixels. */
-            margin: 100px auto 2rem; /* Define as margens: 100px no topo, centralizado nas laterais, e 2rem na base. */
-            padding: 0 1rem; /* Define um espaçamento interno de 1rem nas laterais. */
-            box-sizing: border-box; /* Garante que o padding não aumente a largura total do elemento. */
-        } /* Fecha a regra de estilo para .main-content. */
-
-
-        .sangria-form-box { /* Seleciona o elemento com a classe 'sangria-form-box'. */
-            max-width: 450px; /* Limita a largura máxima da caixa do formulário a 450 pixels. */
-            margin: 0 auto; /* Remove as margens verticais e centraliza a caixa horizontalmente. */
-        } /* Fecha a regra de estilo para .sangria-form-box. */
-
-
-        .sangria-intro-text { /* Seleciona o elemento com a classe 'sangria-intro-text'. */
-            text-align: center; /* Centraliza o texto dentro do elemento. */
-            color: #666; /* Define a cor do texto como um tom de cinza. */
-            margin-bottom: 30px; /* Adiciona um espaço de 30 pixels abaixo do texto. */
-        } /* Fecha a regra de estilo para .sangria-intro-text. */
-
-
-        .sangria-submit-btn { /* Seleciona o elemento com a classe 'sangria-submit-btn'. */
-            background-color: #e74c3c; /* Define a cor de fundo como vermelho para indicar uma ação de "retirada". */
-        } /* Fecha a regra de estilo para .sangria-submit-btn. */
-        .sangria-submit-btn:hover { /* Seleciona o botão de sangria quando o mouse está sobre ele. */
-            background-color: #c0392b; /* Muda a cor de fundo para um vermelho mais escuro. */
-        } /* Fecha a regra de estilo para o estado :hover. */
-    </style> <!-- Fecha o bloco de estilos CSS internos. -->
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="componentes.css">
+<link rel="stylesheet" href="notifications.css">
+<link rel="stylesheet" href="caixa.css">
 </head> <!-- Fecha a seção de cabeçalho do documento. -->
 <body> <!-- Inicia o corpo do documento, onde todo o conteúdo visível é colocado. -->
     <!-- O comentário abaixo indica que a seção seguinte é o menu principal. -->
-    <header> <!-- Define uma seção de cabeçalho para a página. -->
+    <header>
         <nav> <!-- Define uma seção de navegação. -->
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Cria um link com o nome da loja que leva para o menu principal. -->
-            <div class="nav-right"> <!-- Cria um contêiner para os elementos à direita na barra de navegação. -->
-                <ul class="navbar-links"> <!-- Cria uma lista não ordenada para os links de navegação. -->
-                    <li><a href="./menu.html">Início</a></li> <!-- Item da lista com um link para a página 'Início'. -->
-                    <li class="dropdown"> <!-- Item da lista que funciona como um menu suspenso (dropdown). -->
-                        <a href="./caixa.html" class="dropbtn">Caixa</a> <!-- O texto visível do dropdown que também é um link. -->
-                        <div class="dropdown-content"> <!-- Contêiner para os links que aparecerão no menu suspenso. -->
-                            <a href="./caixa.html">Registro de Venda</a> <!-- Link para a página de registro de venda. -->
-                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a> <!-- Link para a página de sangria, inicialmente oculto. -->
-                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a> <!-- Link para suprimento, inicialmente oculto. -->
-                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a> <!-- Link para histórico, inicialmente oculto. -->
-                            <a href="#">Fechamento de Caixa</a> <!-- Link para a funcionalidade de fechamento de caixa. -->
-                        </div> <!-- Fecha o contêiner do dropdown. -->
-                    </li> <!-- Fecha o item da lista do dropdown. -->
-                    <li><a href="./estoque.html">Estoque</a></li> <!-- Item da lista com um link para a página 'Estoque'. -->
-                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li> <!-- Item da lista para cadastro, inicialmente oculto para não-admins. -->
-                </ul> <!-- Fecha a lista de links de navegação. -->
-                <button id="logout-btn-menu" type="button">Sair</button> <!-- Cria um botão com o texto 'Sair' para o usuário deslogar. -->
-            </div> <!-- Fecha o contêiner da direita da navegação. -->
         </nav> <!-- Fecha a seção de navegação. -->
     </header> <!-- Fecha a seção de cabeçalho. -->
 
 
     <!-- O comentário abaixo indica o início do conteúdo principal da página. -->
-    <main class="main-content"> <!-- Inicia a seção de conteúdo principal. -->
+    <main class="main-content">
         <div class="form-box sangria-form-box"> <!-- Cria um contêiner para o formulário com estilos base e específicos de sangria. -->
                 <h2>Registrar Sangria</h2> <!-- Título principal do formulário. -->
             <p class="sangria-intro-text">Insira o valor a ser retirado do caixa e o motivo.</p> <!-- Parágrafo de instrução para o usuário. -->
@@ -86,7 +38,8 @@
         </div> <!-- Fecha a caixa do formulário. -->
     </main> <!-- Fecha a seção de conteúdo principal. -->
     <!-- O comentário abaixo indica que os scripts são carregados no final para otimização. -->
-    <script src="notifications.js"></script> <!-- Importa e executa o script responsável por mostrar as notificações. -->
+    <script src="notifications.js"></script>
+    <script src="auth.js"></script><!-- Importa e executa o script responsável por mostrar as notificações. -->
     <script src="sangria.js"></script> <!-- Importa e executa o script com a lógica específica da página de sangria. -->
 </body> <!-- Fecha a seção do corpo do documento. -->
 </html> <!-- Fecha o documento HTML. -->

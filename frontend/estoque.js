@@ -107,6 +107,7 @@ const form = document.getElementById("form-produto");
 const campoBusca = document.getElementById("campo-busca");
 const categoriaSelect = document.getElementById("categoria-select");
 const subcategoriaSelect = document.getElementById("subcategoria-select");
+const valorProdutoInput = document.getElementById("valor-produto");
 
 // ==== Funções de Renderização e Exibição ====
 /**
@@ -279,21 +280,17 @@ async function realizarBusca() {
         return;
     }
 
-    try {
-        const response = await fetch(`${BACKEND_URL}/produtos/busca?termo=${termo}`);
-        if (!response.ok) {
-            throw new Error('Erro na busca.');
-        }
+   try {
+        const response = await fetch(`${BACKEND_URL}/produtos?termo=${encodeURIComponent(termo)}`);
+        if (!response.ok) throw new Error('Erro na busca.');
         const produtosEncontrados = await response.json();
-        exibirProdutos(produtosEncontrados, `Resultados para "${termo}" (${produtosEncontrados.length} encontrados)`, null, null);
+        exibirProdutos(produtosEncontrados, `Resultados para "${termo}"`, null, null);
     } catch (error) {
         console.error('Erro ao buscar produtos:', error);
-        areaProdutos.innerHTML = `
-            <h2>Resultados da busca</h2>
-            <p>Não foi possível realizar a busca. Tente novamente.</p>
-        `;
+        areaProdutos.innerHTML = `<p>Não foi possível realizar a busca.</p>`;
     }
 }
+
 
 /**
  * Altera a quantidade de um produto no backend.
@@ -307,8 +304,7 @@ async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tama
     try {
         const response = await fetch(`${BACKEND_URL}/produtos/${prodId}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
+            headers: {'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 categoriaNome: catNome,
@@ -327,10 +323,9 @@ async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tama
         } else {
             buscarEExibirProdutos(catNome, subcatNome);
         }
-
-    } catch (error) {
-        console.error('Erro ao sincronizar com o backend:', error);
-        alert('Atenção: Não foi possível sincronizar com o servidor.');
+ } catch (error) {
+        console.error('Erro ao alterar quantidade:', error);
+        alert(`Erro: ${error.message}`);
     }
 }
 
@@ -341,47 +336,31 @@ async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tama
  */
 form.addEventListener("submit", async e => {
     e.preventDefault();
-
-    const catNome = document.getElementById("categoria-select").value.trim();
-    const subcat = document.getElementById("subcategoria-select").value.trim();
-    const id = document.getElementById("id").value.trim();
-    const nome = document.getElementById("nome").value.trim();
-    const descricao = document.getElementById("descricao").value.trim();
-    const valor = parseFloat(document.getElementById("valor-produto").value.replace(',', '.')) || 0;
-
-    let tamanhos = {};
+    const novoProduto = {
+        id: document.getElementById("id").value.trim(),
+        nome: document.getElementById("nome").value.trim(),
+        descricao: document.getElementById("descricao").value.trim(),
+        valor: parseFloat(document.getElementById("valor-produto").value.replace(',', '.')) || 0,
+        categoriaNome: document.getElementById("categoria-select").value.trim(),
+        subcategoriaNome: document.getElementById("subcategoria-select").value.trim(),
+        tamanhos: {}
+    };
     const inputsTamanho = document.getElementById("tamanhos-inputs").querySelectorAll("input");
     inputsTamanho.forEach(input => {
         const tamanho = input.id.replace('qtd-', '').toUpperCase();
-        tamanhos[tamanho] = parseInt(input.value) || 0;
+        novoProduto.tamanhos[tamanho] = parseInt(input.value) || 0;
     });
 
-    if (!catNome || !id || !nome || !descricao || valor <= 0) {
-        alert("Por favor, preencha todos os campos obrigatórios, incluindo um valor válido para o produto.");
+    if (!novoProduto.id || !novoProduto.nome || !novoProduto.categoriaNome || !novoProduto.valor) {
+        showToast("Preencha todos os campos obrigatórios, incluindo um valor válido.", 'error');
         return;
     }
 
-    // AQUI ESTÁ A MUDANÇA IMPORTANTE
-    // Criamos o objeto que será enviado no corpo da requisição.
-    // Ele precisa conter todas as informações que o backend espera.
-    const novoProduto = {
-        id,
-        categoriaNome: catNome, // Adicionamos a categoria aqui
-        subcategoriaNome: subcat, // Adicionamos a subcategoria aqui
-        nome,
-        descricao,
-        valor,
-        tamanhos
-    };
-
     try {
-        // Agora, enviamos apenas o objeto do produto.
         const response = await fetch(`${BACKEND_URL}/produtos`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(novoProduto) // Mudamos para enviar apenas `novoProduto`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novoProduto)
         });
 
         if (!response.ok) {
@@ -391,12 +370,15 @@ form.addEventListener("submit", async e => {
 
         form.reset();
         carregarCategoriasNoFormulario();
-        alert('Produto cadastrado com sucesso!');
-        buscarEExibirProdutos(catNome, subcat || null);
+        showToast('Produto cadastrado com sucesso!');
+
+        // AÇÃO CORRIGIDA: Em vez de tentar recarregar uma categoria indefinida,
+        // vamos voltar para a visão geral das categorias.
+        mostrarCategorias();
 
     } catch (error) {
         console.error('Erro no cadastro:', error);
-        alert(`Erro no cadastro: ${error.message}`);
+        showToast(`Erro no cadastro: ${error.message}`, 'error');
     }
 });
 
@@ -457,10 +439,7 @@ function atualizarCamposTamanho(categoriaNome) {
 
 // ==== Event Listeners e Inicialização ====
 // Inicia o sistema ao carregar a página
-document.addEventListener("DOMContentLoaded", function() {
     mostrarCategorias();
-});
-
 campoBusca.addEventListener("input", realizarBusca);
 
 categoriaSelect.addEventListener("change", (e) => {
@@ -488,4 +467,26 @@ categoriaSelect.addEventListener("change", (e) => {
     }
 
     atualizarCamposTamanho(categoriaNome);
+});
+const formatarMoeda = (valor) => {
+    // Remove tudo que não for número
+    const apenasNumeros = valor.replace(/\D/g, '');
+
+    // Se não houver números, retorna uma string vazia
+    if (!apenasNumeros) return '';
+
+    // Garante que temos pelo menos 3 dígitos para os centavos
+    const numeroComZeros = apenasNumeros.padStart(3, '0');
+    const centavos = numeroComZeros.slice(-2);
+    const inteiro = numeroComZeros.slice(0, -2);
+
+    // Formata a parte inteira com pontos de milhar
+    const inteiroFormatado = parseInt(inteiro, 10).toLocaleString('pt-BR');
+
+    return `${inteiroFormatado},${centavos}`;
+};
+
+// Adiciona o "ouvinte" que formata o valor enquanto o usuário digita
+valorProdutoInput.addEventListener('input', () => {
+    valorProdutoInput.value = formatarMoeda(valorProdutoInput.value);
 });

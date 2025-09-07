@@ -1,32 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" que espera todo o HTML da página carregar antes de executar o código dentro das chaves.
-    // O comentário abaixo é um separador para organizar o código, indicando a seção de segurança.
-    // O comentário abaixo descreve a finalidade do bloco de código seguinte.
-    const userCargo = sessionStorage.getItem('userCargo'); // Pega o valor da chave 'userCargo' que foi guardado na memória da sessão do navegador durante o login.
-    if (!userCargo) { // Verifica se a variável 'userCargo' está vazia, ou seja, se o utilizador não está logado.
-        alert('Acesso negado. Por favor, faça o login primeiro.'); // Exibe uma caixa de alerta padrão do navegador com uma mensagem de acesso negado.
-        window.location.href = './index.html'; // Redireciona o navegador do utilizador para a página de login 'index.html'.
-        return; // Interrompe imediatamente a execução de todo o código dentro desta função.
-    } // Fecha o bloco da condição 'if'.
-    const isAdministrador = userCargo === 'Administrador'; // Compara o cargo do utilizador com 'Administrador' e guarda o resultado (verdadeiro/falso) na variável.
-    const adminLink = document.getElementById('admin-link'); // Procura no HTML o elemento que tem o ID 'admin-link' e guarda-o numa variável.
-    if (isAdministrador && adminLink) { adminLink.classList.remove('hidden'); } // Se for administrador e o link existir, remove a classe 'hidden' para o tornar visível.
-    const sangriaLink = document.getElementById('sangria-link'); // Procura no HTML o elemento que tem o ID 'sangria-link'.
-    if (isAdministrador && sangriaLink) { sangriaLink.classList.remove('hidden'); } // Se for administrador e o link existir, remove a classe 'hidden' para o tornar visível.
-    const suprimentoLink = document.getElementById('suprimento-link'); // Procura no HTML o elemento que tem o ID 'suprimento-link'.
-    if (isAdministrador && suprimentoLink) { suprimentoLink.classList.remove('hidden'); } // Se for administrador e o link existir, remove a classe 'hidden' para o tornar visível.
-    const historicoLink = document.getElementById('historico-link'); // Procura no HTML o elemento que tem o ID 'historico-link'.
-    if (isAdministrador && historicoLink) { historicoLink.classList.remove('hidden'); } // Se for administrador e o link existir, remove a classe 'hidden' para o tornar visível.
-    const logoutBtn = document.getElementById('logout-btn-menu'); // Procura no HTML o botão que tem o ID 'logout-btn-menu'.
-    if (logoutBtn) { // Verifica se o botão de logout foi efetivamente encontrado na página.
-        logoutBtn.addEventListener('click', () => { // Adiciona um "ouvinte" que executa uma função quando o botão for clicado.
-            if (confirm('Tem certeza que deseja sair?')) { // Exibe uma caixa de confirmação do navegador e verifica se o utilizador clicou em "OK".
-                sessionStorage.removeItem('userCargo'); // Remove a informação 'userCargo' da memória da sessão do navegador.
-                sessionStorage.removeItem('username'); // Remove a informação 'username' da memória da sessão do navegador.
-                window.location.href = './index.html'; // Redireciona o navegador do utilizador para a página de login.
-            } // Fecha o bloco da condição 'if' da confirmação.
-        }); // Fecha a função do "ouvinte" de clique.
-    } // Fecha o bloco 'if' que verifica a existência do botão.
-
 
     // O comentário abaixo é um separador para organizar o código, indicando a seção da lógica da sangria.
     const sangriaForm = document.getElementById('sangria-form'); // Procura no HTML o formulário que tem o ID 'sangria-form'.
@@ -112,4 +83,3 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
             showToast(error.message || 'Erro ao registar a sangria.', 'error'); // Mostra a mensagem do erro capturado ou uma mensagem padrão.
         } // Fecha o bloco 'catch'.
     }); // Fecha o "ouvinte" de envio do formulário.
-}); // Fecha o "ouvinte" do 'DOMContentLoaded'.

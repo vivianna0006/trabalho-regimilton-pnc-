@@ -1,298 +1,259 @@
-// ===================================================================================
-// ==                          SERVIDOR STYLLO FASHION MODAS                        ==
-// ===================================================================================
-// Descrição: Este arquivo é o coração do backend. Ele utiliza Node.js e Express
-// para criar uma API que gerencia usuários, produtos, vendas e transações de caixa.
-// ===================================================================================
+// backend/server.js (VERSÃO FINAL E CORRIGIDA)
 
-// --- 1. IMPORTAÇÕES E CONFIGURAÇÃO INICIAL ---
-// Documentação: Aqui, importamos todas as ferramentas (módulos) necessárias.
-const express = require('express'); // A framework principal para construir o servidor.
-const bcrypt = require('bcrypt');   // Para criptografar e verificar senhas.
-const cors = require('cors');       // Para permitir a comunicação entre o frontend e o backend.
-const fs = require('fs');           // Módulo nativo do Node.js para interagir com arquivos.
+const express = require('express');
+const fs = require('fs');
+const fsp = require('fs').promises;
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const { body, validationResult } = require('express-validator');
 
-// --- 2. CONSTANTES E INICIALIZAÇÃO DO APP ---
-// Documentação: Definimos constantes para os nomes dos arquivos de "banco de dados"
-// e para a porta onde o servidor vai rodar. Isso facilita a manutenção.
 const app = express();
 const PORT = 3000;
 
-// Caminhos para os arquivos JSON que funcionam como nosso banco de dados.
-const USERS_DB_FILE = './database.json';
-const PRODUCTS_DB_FILE = './estoque.json'; // Centralizamos o uso apenas no 'estoque.json'.
-const SALES_DB_FILE = './sales.json';
-const TRANSACTIONS_DB_FILE = './cash_transactions.json';
+const DB_FILE = './database.json';
+const ESTOQUE_FILE = './estoque.json';
+const SALES_FILE = './sales.json';
+const TRANSACTIONS_FILE = './cash_transactions.json';
 
-// --- 3. MIDDLEWARES ---
-// Documentação: Middlewares são funções que o Express executa em todas as
-// requisições antes de chegarem às nossas rotas.
-app.use(cors()); // Habilita o CORS para todas as rotas.
-app.use(express.json()); // Permite que o servidor entenda o formato JSON enviado pelo frontend.
+app.use(cors());
+app.use(express.json());
 
-// --- 4. FUNÇÕES AUXILIARES (HELPERS) ---
-// Documentação: Criamos funções genéricas para ler e escrever nos arquivos JSON
-// para evitar repetição de código (Princípio DRY: Don't Repeat Yourself).
+// --- Funções de Leitura/Escrita Simplificadas ---
+const readDB = async () => JSON.parse(await fsp.readFile(DB_FILE, 'utf-8'));
+const writeDB = async (data) => fsp.writeFile(DB_FILE, JSON.stringify(data, null, 2));
+const readEstoque = async () => JSON.parse(await fsp.readFile(ESTOQUE_FILE, 'utf-8'));
+const writeEstoque = async (data) => fsp.writeFile(ESTOQUE_FILE, JSON.stringify(data, null, 2));
+const readSales = async () => JSON.parse(await fsp.readFile(SALES_FILE, 'utf-8'));
+const writeSales = async (data) => fsp.writeFile(SALES_FILE, JSON.stringify(data, null, 2));
+const readTransactions = async () => JSON.parse(await fsp.readFile(TRANSACTIONS_FILE, 'utf-8'));
+const writeTransactions = async (data) => fsp.writeFile(TRANSACTIONS_FILE, JSON.stringify(data, null, 2));
 
-/**
- * Lê os dados de um arquivo JSON de forma síncrona.
- * @param {string} filePath - O caminho para o arquivo JSON.
- * @returns {Array} - Um array com os dados do arquivo ou um array vazio se o arquivo não existir.
- */
-const readData = (filePath) => {
+// --- ROTAS DA API ---
+
+// ROTA DE STATUS - LÓGICA SIMPLIFICADA E SEGURA
+app.get('/api/status', async (req, res) => {
     try {
-        // Tenta ler o arquivo.
-        const data = fs.readFileSync(filePath, 'utf8');
-        // Converte o texto JSON para um objeto/array JavaScript.
-        return JSON.parse(data);
-    } catch (error) {
-        // Se o erro for 'ENOENT' (File Not Found), significa que o arquivo ainda não existe.
-        // Nesse caso, retornamos um array vazio para o sistema não quebrar.
-        if (error.code === 'ENOENT') {
-            return [];
+        if (fs.existsSync(DB_FILE)) {
+            const db = await readDB();
+            res.json({ usersExist: db.users.length > 0 });
+        } else {
+            // Se o ficheiro não existe, a resposta é simples: não há utilizadores.
+            res.json({ usersExist: false });
         }
-        // Se for outro tipo de erro, nós o lançamos para ser tratado.
-        throw error;
-    }
-};
-
-/**
- * Escreve dados em um arquivo JSON de forma síncrona.
- * @param {string} filePath - O caminho para o arquivo JSON.
- * @param {object} data - Os dados (objeto/array) a serem salvos.
- */
-const writeData = (filePath, data) => {
-    // Converte o objeto/array JavaScript para uma string JSON formatada (com 2 espaços de indentação).
-    const jsonString = JSON.stringify(data, null, 2);
-    // Escreve a string no arquivo.
-    fs.writeFileSync(filePath, jsonString, 'utf8');
-};
-
-
-// ===================================================================================
-// ==                                 ROTAS DA API                                  ==
-// ===================================================================================
-
-// --- 5.1 ROTAS DE AUTENTICAÇÃO E STATUS ---
-
-// Rota para verificar se já existe algum usuário cadastrado (para a tela de setup).
-app.get('/api/status', (req, res) => {
-    try {
-        const users = readData(USERS_DB_FILE);
-        res.status(200).json({ usersExist: users.length > 0 });
     } catch (error) {
         console.error("Erro em /api/status:", error);
+        res.status(500).json({ message: "Erro no servidor ao verificar estado." });
+    }
+});
+
+// ROTA DE REGISTO - Garante a criação do ficheiro se for o primeiro registo
+app.post('/api/register',
+    [
+        body('username', 'O nome de utilizador é obrigatório.').not().isEmpty().trim().escape(),
+        body('password', 'A palavra-passe precisa ter no mínimo 6 caracteres.').isLength({ min: 6 })
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ success: false, message: errors.array()[0].msg });
+        }
+        try {
+            const { username, password, cargo } = req.body;
+            let db = { users: [] };
+            
+            // Tenta ler o ficheiro existente; se não existir, continua com a estrutura vazia.
+            if (fs.existsSync(DB_FILE)) {
+                db = await readDB();
+            }
+
+            if (db.users.find(user => user.username === username)) {
+                return res.status(400).json({ success: false, message: 'Este nome de utilizador já existe.' });
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+            db.users.push({ username, password: hashedPassword, cargo });
+            await writeDB(db);
+
+            res.status(201).json({ success: true, message: 'Utilizador registado com sucesso!' });
+        } catch (error) {
+            console.error("Erro no registo:", error);
+            res.status(500).json({ success: false, message: 'Ocorreu um erro no servidor.' });
+        }
+    }
+);
+
+// ROTA DE LOGIN
+app.post('/api/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const db = await readDB();
+        const user = db.users.find(u => u.username === username);
+        if (user && await bcrypt.compare(password, user.password)) {
+            res.json({ success: true, message: 'Login bem-sucedido!', cargo: user.cargo, username: user.username });
+        } else {
+            res.status(401).json({ success: false, message: 'Utilizador ou palavra-passe incorretos.' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro no servidor.' });
+    }
+});
+
+
+// ... (O resto das rotas de produtos, vendas e sangria continuam aqui) ...
+app.get('/produtos', async (req, res) => {
+    try {
+        const { categoria, subcategoria, termo } = req.query;
+        let estoque = await readEstoque();
+        let produtosFiltrados = [];
+
+        if (termo) {
+            const termoBusca = termo.toLowerCase();
+            for (const cat of estoque) {
+                for (const subcat in cat.subcategorias) {
+                    produtosFiltrados.push(...cat.subcategorias[subcat].filter(p =>
+                        p.nome.toLowerCase().includes(termoBusca) ||
+                        p.id.toLowerCase().includes(termoBusca) ||
+                        cat.nome.toLowerCase().includes(termoBusca) ||
+                        subcat.toLowerCase().includes(termoBusca)
+                    ));
+                }
+            }
+            // Remove duplicados
+            produtosFiltrados = [...new Map(produtosFiltrados.map(item => [item['id'], item])).values()];
+        } else if (categoria && subcategoria) {
+            const cat = estoque.find(c => c.nome === categoria);
+            if (cat && cat.subcategorias[subcategoria]) {
+                produtosFiltrados = cat.subcategorias[subcategoria];
+            }
+        } else if (categoria) {
+            const cat = estoque.find(c => c.nome === categoria);
+            if (cat) {
+                Object.values(cat.subcategorias).forEach(sub => {
+                    produtosFiltrados.push(...sub);
+                });
+            }
+        } else {
+            // Se nenhum filtro, retorna tudo (ou pode optar por não retornar nada)
+            for (const cat of estoque) {
+                 Object.values(cat.subcategorias).forEach(sub => {
+                    produtosFiltrados.push(...sub);
+                });
+            }
+        }
+        res.json(produtosFiltrados);
+    } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+        res.status(500).send('Erro ao buscar produtos.');
+    }
+});
+
+app.post('/produtos', async (req, res) => {
+    try {
+        const novoProduto = req.body;
+        let estoque = await readEstoque();
+
+        let categoria = estoque.find(c => c.nome === novoProduto.categoriaNome);
+        if (!categoria) {
+            // Se a categoria não existe, cria
+            categoria = { nome: novoProduto.categoriaNome, subcategorias: {} };
+            estoque.push(categoria);
+        }
+
+        if (novoProduto.subcategoriaNome && !categoria.subcategorias[novoProduto.subcategoriaNome]) {
+            categoria.subcategorias[novoProduto.subcategoriaNome] = [];
+        }
+
+        const listaProdutos = novoProduto.subcategoriaNome
+            ? categoria.subcategorias[novoProduto.subcategoriaNome]
+            : (categoria.subcategorias['Geral'] = categoria.subcategorias['Geral'] || []);
+
+        // Verifica se o ID já existe
+        const idExists = estoque.some(cat =>
+            Object.values(cat.subcategorias).some(sub =>
+                sub.some(p => p.id === novoProduto.id)
+            )
+        );
+
+        if (idExists) {
+            return res.status(400).json({ message: `O ID de produto '${novoProduto.id}' já está em uso.` });
+        }
+
+        delete novoProduto.categoriaNome;
+        delete novoProduto.subcategoriaNome;
+        listaProdutos.push(novoProduto);
+
+        await writeEstoque(estoque);
+        res.status(201).json({ message: 'Produto adicionado com sucesso!' });
+    } catch (error) {
+        console.error("Erro ao adicionar produto:", error);
         res.status(500).json({ message: 'Erro interno do servidor.' });
     }
 });
 
-// Rota para registrar o primeiro administrador ou novos funcionários.
-app.post('/api/register', async (req, res) => {
-    try {
-        const { username, password, cargo } = req.body;
-        if (!username || !password || !cargo) {
-            return res.status(400).json({ message: 'Usuário, senha e cargo são obrigatórios.' });
-        }
-
-        const users = readData(USERS_DB_FILE);
-        if (users.some(u => u.username === username)) {
-            return res.status(409).json({ message: 'Este nome de usuário já está em uso.' });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = { username, password: hashedPassword, cargo };
-        users.push(newUser);
-        writeData(USERS_DB_FILE, users);
-
-        res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
-    } catch (error) {
-        console.error("Erro em /api/register:", error);
-        res.status(500).json({ message: 'Erro interno no servidor.' });
-    }
-});
-
-// Rota de Login.
-app.post('/api/login', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const users = readData(USERS_DB_FILE);
-        const user = users.find(u => u.username === username);
-
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ success: false, message: 'Usuário ou senha inválidos.' });
-        }
-
-        res.status(200).json({
-            success: true,
-            message: 'Login bem-sucedido!',
-            cargo: user.cargo,
-            username: user.username
-        });
-    } catch (error) {
-        console.error("Erro em /api/login:", error);
-        res.status(500).json({ message: 'Erro no servidor.' });
-    }
-});
-
-
-// --- 5.2 ROTAS DE PRODUTOS / ESTOQUE ---
-
-/**
- * Rota GET para buscar produtos.
- * Esta rota é flexível e pode filtrar por categoria, subcategoria ou por um termo de busca.
- * Query Params:
- * - `categoria`: Filtra por nome da categoria.
- * - `subcategoria`: Filtra por nome da subcategoria (usado em conjunto com `categoria`).
- * - `termo`: Busca pelo termo no ID, nome ou descrição do produto.
- */
-app.get('/produtos', (req, res) => {
-    try {
-        const { categoria, subcategoria, termo } = req.query;
-        let produtos = readData(PRODUCTS_DB_FILE);
-
-        if (termo) {
-            const termoLower = termo.toLowerCase();
-            produtos = produtos.filter(p =>
-                p.nome.toLowerCase().includes(termoLower) ||
-                p.descricao.toLowerCase().includes(termoLower) ||
-                p.id.toLowerCase().includes(termoLower)
-            );
-        } else if (categoria) {
-            produtos = produtos.filter(p => p.categoriaNome === categoria);
-            if (subcategoria) {
-                produtos = produtos.filter(p => p.subcategoriaNome === subcategoria);
-            }
-        }
-        
-        res.status(200).json(produtos);
-    } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
-        res.status(500).json({ message: 'Erro ao buscar os produtos.' });
-    }
-});
-
-// Rota para cadastrar um novo produto.
-app.post('/produtos', (req, res) => {
-    try {
-        const novoProduto = req.body;
-        // Validação básica dos dados recebidos.
-        if (!novoProduto.id || !novoProduto.nome || !novoProduto.categoriaNome) {
-            return res.status(400).json({ message: 'Dados do produto incompletos (ID, Nome e Categoria são obrigatórios).' });
-        }
-
-        const produtos = readData(PRODUCTS_DB_FILE);
-        if (produtos.some(p => p.id === novoProduto.id)) {
-            return res.status(409).json({ message: 'Já existe um produto com este ID.' });
-        }
-
-        produtos.push(novoProduto);
-        writeData(PRODUCTS_DB_FILE, produtos);
-
-        res.status(201).json({ message: 'Produto cadastrado com sucesso!', produto: novoProduto });
-    } catch (error) {
-        console.error('Erro no cadastro do produto:', error);
-        res.status(500).json({ message: 'Erro interno no servidor ao cadastrar o produto.' });
-    }
-});
-
-// Rota para atualizar a quantidade de um item no estoque.
-app.put('/produtos/:id', (req, res) => {
+app.put('/produtos/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { tamanho, delta } = req.body; // 'delta' pode ser +1 ou -1
+        const { categoriaNome, subcategoriaNome, tamanho, delta } = req.body;
 
-        if (!tamanho || typeof delta !== 'number') {
-            return res.status(400).json({ message: 'Tamanho e valor de alteração (delta) são necessários.' });
+        let estoque = await readEstoque();
+        const categoria = estoque.find(c => c.nome === categoriaNome);
+
+        if (!categoria) return res.status(404).send('Categoria não encontrada.');
+
+        const subcat = categoria.subcategorias[subcategoriaNome];
+        if (!subcat) return res.status(404).send('Subcategoria não encontrada.');
+
+        const produto = subcat.find(p => p.id === id);
+        if (!produto) return res.status(404).send('Produto não encontrado.');
+
+        if (produto.tamanhos[tamanho] !== undefined) {
+            produto.tamanhos[tamanho] = Math.max(0, produto.tamanhos[tamanho] + delta);
         }
 
-        let produtos = readData(PRODUCTS_DB_FILE);
-        const produtoIndex = produtos.findIndex(p => p.id === id);
+        await writeEstoque(estoque);
+        res.status(200).json({ message: 'Quantidade atualizada com sucesso!' });
 
-        if (produtoIndex === -1) {
-            return res.status(404).json({ message: 'Produto não encontrado.' });
-        }
-
-        const produto = produtos[produtoIndex];
-        const quantidadeAtual = produto.tamanhos[tamanho] || 0;
-        const novaQuantidade = quantidadeAtual + delta;
-
-        if (novaQuantidade < 0) {
-            return res.status(400).json({ message: 'Estoque insuficiente para remover esta quantidade.' });
-        }
-
-        produto.tamanhos[tamanho] = novaQuantidade;
-        writeData(PRODUCTS_DB_FILE, produtos);
-
-        res.status(200).json({ message: 'Estoque atualizado com sucesso.', produto });
     } catch (error) {
-        console.error('Erro ao atualizar a quantidade:', error);
-        res.status(500).json({ message: 'Erro interno ao atualizar a quantidade do produto.' });
+        console.error("Erro ao atualizar quantidade:", error);
+        res.status(500).send('Erro interno do servidor.');
     }
 });
 
-// --- 5.3 ROTAS DE VENDAS E TRANSAÇÕES DE CAIXA ---
-
-// Rota para registrar uma nova venda.
-app.post('/api/sales', (req, res) => {
+app.post('/api/sales', async (req, res) => {
     try {
-        const { items, seller } = req.body;
-        if (!items || !seller || items.length === 0) {
-            return res.status(400).json({ message: 'Dados da venda incompletos.' });
-        }
-
+        const sales = await readSales();
         const newSale = {
-            id: Date.now(),
-            date: new Date().toISOString(),
-            items: items,
-            seller: seller
+            id: new Date().getTime(), // ID único para a venda
+            ...req.body,
+            date: new Date().toISOString()
         };
-
-        const sales = readData(SALES_DB_FILE);
         sales.push(newSale);
-        writeData(SALES_DB_FILE, sales);
-
-        res.status(201).json({ message: 'Venda registrada com sucesso!' });
+        await writeSales(sales);
+        res.status(201).json({ success: true, message: 'Venda registada com sucesso!' });
     } catch (error) {
-        console.error("Erro ao registrar a venda:", error);
-        res.status(500).json({ message: 'Erro interno ao registrar a venda.' });
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Erro ao registar a venda.' });
     }
 });
 
-// Rota para registrar uma nova sangria de caixa.
-app.post('/api/sangria', (req, res) => {
+app.post('/api/sangria', async (req, res) => {
     try {
-        const { amount, user } = req.body;
-        if (!amount || !user || amount <= 0) {
-            return res.status(400).json({ message: 'O valor da sangria é inválido.' });
-        }
-
+        const transactions = await readTransactions();
         const newTransaction = {
-            id: Date.now(),
-            type: 'sangria',
-            amount: amount,
-            user: user,
-            date: new Date().toISOString(),
+            id: new Date().getTime(),
+            ...req.body,
+            date: new Date().toISOString()
         };
-
-        const transactions = readData(TRANSACTIONS_DB_FILE);
         transactions.push(newTransaction);
-        writeData(TRANSACTIONS_DB_FILE, transactions);
-
-        res.status(201).json({ message: 'Sangria registrada com sucesso!' });
+        await writeTransactions(transactions);
+        res.status(201).json({ success: true, message: 'Transação registada com sucesso!' });
     } catch (error) {
-        console.error("Erro ao registrar a sangria:", error);
-        res.status(500).json({ message: 'Erro interno ao registrar a sangria.' });
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Erro ao registar a transação.' });
     }
 });
 
-
-// ===================================================================================
-// ==                          INICIALIZAÇÃO DO SERVIDOR                            ==
-// ===================================================================================
 
 app.listen(PORT, () => {
-    console.log(`--- Servidor Styllo Fashion Modas ---`);
-    console.log(`--> Status: Online`);
-    console.log(`--> Ouvindo em http://localhost:${PORT}`);
-    console.log(`-----------------------------------`);
+    console.log(`Servidor a rodar em http://localhost:${PORT}`);
 });

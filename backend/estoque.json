@@ -33,5 +33,95 @@
       "42": 30,
       "43": 30
     }
+  },
+  {
+    "id": "001",
+    "nome": "Blusa cinza",
+    "descricao": "Blusa cinza",
+    "valor": 20,
+    "categoriaNome": "Blusas",
+    "subcategoriaNome": "Masculina",
+    "tamanhos": {
+      "PP": 0,
+      "P": 0,
+      "M": 7,
+      "G": 0,
+      "GG": 0
+    }
+  },
+  {
+    "id": "003",
+    "nome": "asasa",
+    "descricao": "sasas",
+    "valor": 3000,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Masculino",
+    "tamanhos": {
+      "PP": 0,
+      "P": 0,
+      "M": 5555,
+      "G": 0,
+      "GG": 0
+    }
+  },
+  {
+    "id": "002",
+    "nome": "blusa marrom",
+    "descricao": "marrom",
+    "valor": 2000,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Feminino",
+    "tamanhos": {
+      "PP": 0,
+      "P": 1,
+      "M": 0,
+      "G": 0,
+      "GG": 0
+    }
+  },
+  {
+    "id": "004",
+    "nome": "blusa marrom",
+    "descricao": "marrom",
+    "valor": 2000,
+    "categoriaNome": "Blusas",
+    "subcategoriaNome": "Feminina",
+    "tamanhos": {
+      "PP": 0,
+      "P": 2,
+      "M": 0,
+      "G": 0,
+      "GG": 0
+    }
+  },
+  {
+    "id": "006",
+    "nome": "asasa",
+    "descricao": "sasas",
+    "valor": 10,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Feminino",
+    "tamanhos": {
+      "PP": 0,
+      "P": 0,
+      "M": 0,
+      "G": 0,
+      "GG": 0
+    }
+  },
+  {
+    "id": "10",
+    "nome": "Blusa cinza",
+    "descricao": "Blusa cinza",
+    "valor": 200,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Feminino",
+    "tamanhos": {
+      "PP": 0,
+      "P": 0,
+      "M": 69,
+      "G": 0,
+      "GG": 0
+    }
   }
 ]
