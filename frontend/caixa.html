@@ -8,6 +8,8 @@
     <!-- Importa os arquivos de estilo -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
+
+    <!-- Estilos internos (CSS específico desta página) -->
     <style>
         .caixa-main-container {
             width: 100%; /* Ocupa toda a largura disponível */
@@ -54,22 +56,22 @@
             background-color: #28a745; /* Verde */
         }
         .toast-notification {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #28a745;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 2000;
-            opacity: 0;
-            transition: top 0.5s ease-out, opacity 0.5s ease-out;
+            position: fixed; /* Fixa na tela */
+            top: -100px; /* Inicialmente fora da tela (em cima) */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajuste de centralização */
+            background-color: #28a745; /* Fundo verde */
+            color: white; /* Texto branco */
+            padding: 12px 25px; /* Espaçamento interno */
+            border-radius: 25px; /* Bordas arredondadas */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra */
+            z-index: 2000; /* Fica acima dos outros elementos */
+            opacity: 0; /* Invisível inicialmente */
+            transition: top 0.5s ease-out, opacity 0.5s ease-out; /* Animação de entrada/saída */
         }
         .toast-notification.show {
-            top: 20px;
-            opacity: 1;
+            top: 20px; /* Desce para ficar visível */
+            opacity: 1; /* Fica visível */
         }
     </style>
 </head>
@@ -81,7 +83,6 @@
             <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
             <div class="nav-right">
                 <ul class="navbar-links">
-                    <li><a href="./menu.html">Início</a></li>
                     <li class="dropdown">
                         <a href="./caixa.html" class="dropbtn">Caixa</a>
                         <div class="dropdown-content">
@@ -101,14 +102,18 @@
             </div>
         </nav>
     </header>
+
+    <!-- Notificação em formato de toast (aparece temporariamente na tela) -->
     <div id="toast-notification" class="toast-notification"></div>
+
+    <!-- Conteúdo principal da página -->
     <main class="caixa-main-container">
         <!-- Seção da venda atual -->
         <section class="caixa-section">
             <h2>Venda Atual</h2>
-            <div id="lista-venda"></div>
-            <div id="total-venda">Total: R$ 0,00</div>
-            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button>
+            <div id="lista-venda"></div> <!-- Lista de itens da venda -->
+            <div id="total-venda">Total: R$ 0,00</div> <!-- Total da venda -->
+            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button> <!-- Botão para concluir -->
         </section>
 
         <!-- Seção de busca de produtos -->
@@ -120,6 +125,8 @@
             <div id="lista-produtos"></div> <!-- Lista com resultados da busca -->
         </section>
     </main>
+
+    <!-- Script JS que controla a lógica da página -->
     <script src="caixa.js"></script>
 </body>
 </html>

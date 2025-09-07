@@ -1,5 +1,7 @@
 // Aguarda todo o conteúdo da página carregar antes de executar o script
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Recupera do sessionStorage o cargo do usuário logado
     const userCargo = sessionStorage.getItem('userCargo');
 
     // Se não houver cargo definido, bloqueia acesso e redireciona para login
@@ -9,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Verifica se o usuário é Administrador
     const isAdministrador = userCargo === 'Administrador';
 
     // Mostra links do menu que são exclusivos do Administrador
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const historicoLink = document.getElementById('historico-link');
     if (isAdministrador && historicoLink) { historicoLink.classList.remove('hidden'); }
 
+    // Botão de logout: remove cargo da sessão e volta para login
     const logoutBtn = document.getElementById('logout-btn-menu');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -31,22 +35,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-const activeLink = document.querySelector('.navbar-links a[href*="caixa.html"]');
-// Se encontrar o link, adiciona a classe 'active' a ele.
-if (activeLink) {
-    activeLink.classList.add('active');
-}
-    const buscaInput = document.getElementById('busca-produto');
-    const listaProdutosDiv = document.getElementById('lista-produtos');
-    const listaVendaDiv = document.getElementById('lista-venda');
-    const totalVendaEl = document.getElementById('total-venda');
-    const finalizarVendaBtn = document.getElementById('finalizar-venda-btn');
-    const toastNotification = document.getElementById('toast-notification');
-    const API_URL = 'http://localhost:3000/api';
 
-    let todosOsProdutos = [];
-    let vendaAtual = [];
+    // Marca o link "Caixa" como ativo no menu
+    const activeLink = document.querySelector('.navbar-links a[href*="caixa.html"]');
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
 
+    // Elementos do DOM usados no sistema de vendas
+    const buscaInput = document.getElementById('busca-produto');     // Campo de busca de produtos
+    const listaProdutosDiv = document.getElementById('lista-produtos'); // Lista de produtos encontrados
+    const listaVendaDiv = document.getElementById('lista-venda');   // Lista de itens adicionados à venda
+    const totalVendaEl = document.getElementById('total-venda');    // Exibe o total da venda
+    const finalizarVendaBtn = document.getElementById('finalizar-venda-btn'); // Botão de finalizar venda
+    const toastNotification = document.getElementById('toast-notification');  // Notificação estilo "toast"
+    const API_URL = 'http://localhost:3000/api'; // URL base da API backend
+
+    // Variáveis de controle
+    let todosOsProdutos = []; // Produtos carregados da API
+    let vendaAtual = [];      // Lista de produtos que estão sendo vendidos agora
+
+    // Função para mostrar notificações estilo "toast"
     const showToast = (message) => {
         if (!toastNotification) return;
         toastNotification.textContent = message;
@@ -55,9 +64,11 @@ if (activeLink) {
             toastNotification.classList.remove('show');
             window.removeEventListener('click', hideToast);
         };
+        // Permite fechar ao clicar na tela depois de 100ms
         setTimeout(() => {
             window.addEventListener('click', hideToast, { once: true });
         }, 100);
+        // Fecha automaticamente após 5 segundos
         setTimeout(hideToast, 5000);
     };
 
@@ -154,6 +165,7 @@ if (activeLink) {
         }
     });
 
+    // Evento: finalizar a venda e enviar para a API
     finalizarVendaBtn.addEventListener('click', async () => {
         console.log("--- [Passo A] Botão 'Finalizar Venda' foi clicado. ---");
 
@@ -162,7 +174,7 @@ if (activeLink) {
             showToast('Adicione pelo menos um produto para finalizar a venda.', 'error');
             return;
         }
-        const vendedor = sessionStorage.getItem('username');
+        const vendedor = sessionStorage.getItem('username'); // Usuário logado
         const saleData = { items: vendaAtual, seller: vendedor };
         console.log("-> A preparar para enviar os seguintes dados:", saleData);
 
