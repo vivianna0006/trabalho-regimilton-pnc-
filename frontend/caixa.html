@@ -1,62 +1,83 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html> <!-- Define que o documento segue o padrão HTML5 -->
+<html lang="pt-BR"> <!-- Informa que o idioma principal da página é português do Brasil -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caixa - Styllo Fashion</title>
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres usado (UTF-8) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade: ajusta a página ao tamanho da tela -->
+    <title>Caixa - Styllo Fashion</title> <!-- Título exibido na aba do navegador -->
+
+    <!-- Importa os arquivos de estilo -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="notifications.css">
     <style>
         .caixa-main-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 100px auto 2rem;
-            padding: 0 1rem;
-            box-sizing: border-box;
+            width: 100%; /* Ocupa toda a largura disponível */
+            max-width: 900px; /* Limite máximo de largura */
+            margin: 100px auto 2rem; /* Centraliza e adiciona espaçamento */
+            padding: 0 1rem; /* Espaçamento interno */
+            box-sizing: border-box; /* Inclui borda e padding no cálculo do tamanho */
         }
         .caixa-section {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
+            background-color: #fff; /* Fundo branco */
+            padding: 20px; /* Espaçamento interno */
+            border-radius: 8px; /* Cantos arredondados */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra leve */
+            margin-bottom: 2rem; /* Espaço abaixo da seção */
         }
         .item-produto, .item-venda {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
+            display: flex; /* Layout flexível em linha */
+            justify-content: space-between; /* Espaço entre os elementos */
+            align-items: center; /* Alinha verticalmente */
+            padding: 8px 0; /* Espaçamento interno */
+            border-bottom: 1px solid #eee; /* Linha de separação */
         }
         .item-produto .add-btn, .item-venda .remove-btn {
-            width: auto;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+            width: auto; /* Largura ajustável */
+            padding: 6px 16px; /* Espaçamento interno */
+            font-size: 0.9rem; /* Tamanho da fonte */
+            flex-shrink: 0; /* Impede que o botão diminua */
         }
         .item-venda .remove-btn {
-            background-color: #e74c3c;
+            background-color: #e74c3c; /* Vermelho */
         }
         .item-venda .remove-btn:hover {
-            background-color: #c0392b;
+            background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
         }
         #total-venda {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 20px;
-            color: #28a745;
+            font-size: 1.5rem; /* Tamanho grande do texto */
+            font-weight: bold; /* Negrito */
+            text-align: right; /* Alinhado à direita */
+            margin-top: 20px; /* Espaço acima */
+            color: #28a745; /* Verde */
         }
         #finalizar-venda-btn {
-            margin-top: 20px;
+            margin-top: 20px; /* Espaço acima */
+            background-color: #28a745; /* Verde */
+        }
+        .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
             background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2000;
+            opacity: 0;
+            transition: top 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        .toast-notification.show {
+            top: 20px;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+    <!-- Cabeçalho com a barra de navegação -->
     <header>
         <nav>
+            <!-- Nome da marca que leva para o menu principal -->
             <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
             <div class="nav-right">
                 <ul class="navbar-links">
@@ -72,30 +93,33 @@
                         </div>
                     </li>
                     <li><a href="#">Estoque</a></li>
+                    <!-- Link que só aparece para Administradores -->
                     <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
                 </ul>
+                <!-- Botão de logout -->
                 <button id="logout-btn-menu" type="button">Sair</button>
             </div>
         </nav>
     </header>
+    <div id="toast-notification" class="toast-notification"></div>
     <main class="caixa-main-container">
+        <!-- Seção da venda atual -->
         <section class="caixa-section">
-            <div class="page-header">
-    <h2>Venda Atual</h2>
-</div>
+            <h2>Venda Atual</h2>
             <div id="lista-venda"></div>
             <div id="total-venda">Total: R$ 0,00</div>
             <button id="finalizar-venda-btn" type="button">Finalizar Venda</button>
         </section>
+
+        <!-- Seção de busca de produtos -->
         <section class="caixa-section">
             <h2>Buscar Produto</h2>
             <div class="input-group">
-                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto...">
+                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto..."> <!-- Campo de busca -->
             </div>
-            <div id="lista-produtos"></div>
+            <div id="lista-produtos"></div> <!-- Lista com resultados da busca -->
         </section>
     </main>
-        <script src="notifications.js"></script>
-        <script src="caixa.js"></script>
+    <script src="caixa.js"></script>
 </body>
 </html>

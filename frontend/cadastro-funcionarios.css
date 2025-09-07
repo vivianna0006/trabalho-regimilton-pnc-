@@ -1,61 +1,56 @@
 .main-content .form-box {
-    max-width: 450px;
-    width: 100%;
+    max-width: 450px; /* Define a largura máxima do formulário como 450px */
+    width: 100%; /* Faz o formulário ocupar toda a largura disponível até o máximo definido */
 }
 
 .form-box h1 {
-    text-align: center;
-    color: #333;
-    font-size: 1.8rem; 
-    margin-bottom: 10px;
+    text-align: center; /* Centraliza o texto do título */
+    color: #333; /* Cor do título em cinza escuro */
+    font-size: 1.8rem;  /* Define o tamanho da fonte do título */
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
 }
 
 .form-box p {
-    text-align: center;
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 0.95rem;
+    text-align: center; /* Centraliza o texto do parágrafo */
+    color: #666; /* Cor do texto em cinza médio */
+    margin-bottom: 30px; /* Espaçamento abaixo do parágrafo */
+    font-size: 0.95rem; /* Define o tamanho da fonte do parágrafo */
 }
-
 
 #cadastro-form {
-    display: flex;
-    flex-direction: column; 
-    gap: 15px;
+    display: flex; /* Usa flexbox para organizar os elementos */
+    flex-direction: column;  /* Organiza os elementos em coluna (um embaixo do outro) */
+    gap: 15px; /* Espaçamento entre os elementos */
 }
 
-
 .input-group {
-    margin-bottom: 0;
+    margin-bottom: 0; /* Remove o espaçamento inferior do grupo de input */
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #444;
+    display: block; /* Faz o label ocupar uma linha inteira */
+    margin-bottom: 5px; /* Espaçamento abaixo do texto do label */
+    font-weight: bold; /* Deixa o texto do label em negrito */
+    color: #444; /* Define a cor do label como cinza escuro */
 }
-
 
 .input-group input,
 .input-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%; /* Faz o input/select ocupar toda a largura disponível */
+    padding: 10px; /* Adiciona espaço interno dentro do campo */
+    border: 1px solid #ccc; /* Define uma borda cinza clara */
+    border-radius: 5px; /* Deixa os cantos arredondados */
+    box-sizing: border-box; /* Inclui borda e padding no cálculo total de largura */
+    font-size: 1rem; /* Define o tamanho da fonte do campo */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Suaviza as mudanças na cor da borda e na sombra ao focar */
 }
-
 
 .input-group input:focus,
 .input-group select:focus {
-    outline: none;
-    border-color: #007bff; 
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    outline: none; /* Remove o contorno padrão ao focar */
+    border-color: #007bff;  /* Muda a cor da borda para azul ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  /* Aplica uma sombra azul clara ao focar */
 }
-
 
 #cadastro-form button {
     margin-top: 15px;
@@ -84,6 +79,6 @@
 }
 .main-content .intro-p {
     margin-bottom: 25px; /* Aumenta o espaço abaixo do parágrafo */
-    padding-bottom: 20px; /* Adiciona um preenchimento interno */
-    border-bottom: 1px solid #eee; /* Cria uma linha de separação subtil */
+    padding-bottom: 20px; /* Adiciona um preenchimento interno antes da linha */
+    border-bottom: 1px solid #eee; /* Cria a linha de separação */
 }
