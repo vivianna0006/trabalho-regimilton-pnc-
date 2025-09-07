@@ -82,3 +82,8 @@
     min-height: 20px;
     font-weight: bold;
 }
+.main-content .intro-p {
+    margin-bottom: 25px; /* Aumenta o espaço abaixo do parágrafo */
+    padding-bottom: 20px; /* Adiciona um preenchimento interno */
+    border-bottom: 1px solid #eee; /* Cria uma linha de separação subtil */
+}
