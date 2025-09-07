@@ -1,6 +1,6 @@
 <?php
 // Caminho do arquivo JSON (ajuste se a pasta for diferente)
-$arquivo = _DIR_ . "/database.json";
+$arquivo = "/database.json";
 
 // Captura os dados do formulário
 $username = $_POST['username'] ?? '';
