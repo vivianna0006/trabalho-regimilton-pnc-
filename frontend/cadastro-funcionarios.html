@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
 <head>
-    <meta charset="UTF-8"> <!-- Define o padrão de caracteres (UTF-8) -->
+  <meta charset="UTF-8"> <!-- Define o padrão de caracteres (UTF-8) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade em dispositivos móveis -->
     <title>Cadastro de Funcionários</title> <!-- Título da aba do navegador -->
-    <!-- Arquivos CSS externos -->
+<!-- Arquivos CSS externos -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="cadastro-funcionarios.css">
 
-    <style> 
+  <style> 
         /* Ajuste interno de estilo: limita a largura do formulário */
     <link rel="stylesheet" href="estoque.css">
     <style>
@@ -22,7 +22,7 @@
     <!-- Cabeçalho com menu de navegação -->
     <header>
         <nav>
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Nome/logo da marca -->
+        <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Nome/logo da marca -->
             <div class="nav-right">
                 <ul class="navbar-links">
                     <li class="dropdown">
@@ -49,22 +49,19 @@
     <!-- Conteúdo principal -->
     <main class="main-content">
         <div class="form-box">
-            <h1>Cadastro de Funcionários</h1> <!-- Título da página -->
+                     <h1>Cadastro de Funcionários</h1> <!-- Título da página -->
             <p>Preencha os campos abaixo para cadastrar um novo funcionário.</p>
             
-            <!-- Formulário de cadastro -->
-            <form id="cadastro-form" action="../backend/processa_cadastro_funcionario.php" method="POST">
-                
-                <!-- Nome de usuário -->
+            <form id="cadastro-form">
                 <div class="input-group">
                     <label for="novo-username">Nome de Usuário (para login):</label>
-                    <input type="text" id="novo-username" required autocomplete="off">
+                    <input type="text" id="novo-username" required>
                 </div>
 
                 <!-- Senha provisória -->
                 <div class="input-group">
                     <label for="nova-senha">Senha Provisória:</label>
-                    <input type="password" id="nova-senha" required autocomplete="new-password ">
+                    <input type="password" id="nova-senha" required>
                 </div>
 
                 <!-- Cargo -->
@@ -87,7 +84,7 @@
 
                 <!-- CPF com máscara -->
                 <div class="input-group">
-                    <label for="cpf">CPF</label>
+                    <label for="cpf">CPF:</label>
                     <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
                 </div>
 
@@ -146,10 +143,175 @@ document.querySelector("form").addEventListener("submit", function(e) {
 
                 <!-- Telefone com máscara -->
                 <div class="input-group">
-                    <div>
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" id="telefone" maxlength="15" placeholder="(XX) XXXXX-XXXX">
-                    </div>
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+
+<script>
+// Máscara automática de telefone
+const telefoneInput = document.getElementById('telefone');
+
+telefoneInput.addEventListener('input', function() {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não é número
+
+    if (valor.length > 11) {
+        valor = valor.slice(0, 11); // Limita a 11 números
+    }
+
+    // Coloca a máscara (DDD e hífen)
+    valor = valor.replace(/^(\d{2})(\d)/, '($1) $2'); // Ex: (99) 9
+    valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Ex: 99999-9999
+
+    telefoneInput.value = valor; // Atualiza no campo
+});
+</script>
+
+                <!-- Botão de envio -->
+                <button type="submit">Cadastrar Funcionário</button>
+                <!-- Mensagem de feedback -->
+                <p id="cadastro-message" class="message"></p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Script externo -->
+    <script src="cadastro-funcionarios.js"></script>
+</body>
+</html>gura do formulário */
+    <link rel="stylesheet" href="estoque.css">
+    <style>
+        .main-content .form-box {
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com menu de navegação -->
+    <header>
+        <nav>
+            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
+            <div class="nav-right">
+                <ul class="navbar-links">
+                    <li class="dropdown">
+                        <!-- Menu Caixa com opções -->
+                        <a href="./caixa.html" class="dropbtn">Caixa</a>
+                        <div class="dropdown-content">
+                            <a href="./caixa.html">Registro de Venda</a>
+                            <a href="#" id="sangria-link" class="hidden">Sangria</a>
+                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
+                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
+                            <a href="#">Fechamento de Caixa</a>
+                        </div>
+                    </li>
+                    <!-- Outros links do menu -->
+                    <li><a href="./estoque.html">Estoque</a></li>
+                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
+                </ul>
+                <!-- Botão de logout -->
+                <button id="logout-btn-menu" type="button">Sair</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <div class="form-box">
+            <h1>Cadastro de Funcionários</h1>
+            <p>Preencha os campos abaixo para cadastrar um novo funcionário.</p>
+            
+            <form id="cadastro-form">
+                <div class="input-group">
+                    <label for="novo-username">Nome de Usuário (para login):</label>
+                    <input type="text" id="novo-username" required>
+                </div>
+
+                <!-- Senha provisória -->
+                <div class="input-group">
+                    <label for="nova-senha">Senha Provisória:</label>
+                    <input type="password" id="nova-senha" required>
+                </div>
+
+                <!-- Cargo -->
+                <div class="input-group">
+                    <label for="novo-cargo">Cargo:</label>
+                    <select id="novo-cargo" required>
+                        <option value="Funcionário" selected>Funcionário</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                </div>
+
+                <!-- Linha divisória -->
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;"> 
+
+                <!-- Nome completo -->
+                <div class="input-group">
+                    <label for="nome-completo">Nome Completo:</label>
+                    <input type="text" id="nome-completo" name="nome-completo" required>
+                </div>
+
+                <!-- CPF com máscara -->
+                <div class="input-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                </div>
+
+<script>
+// Máscara de CPF automática
+document.getElementById("cpf").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+    if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
+
+    // Coloca a máscara progressivamente
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    e.target.value = value; // Atualiza o valor no input
+});
+
+// Função para validar se o CPF é verdadeiro
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, ""); // Remove pontos e traço
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Rejeita CPFs repetidos (ex: 111.111...)
+
+    let soma = 0, resto;
+
+    // Primeiro dígito verificador
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+    // Segundo dígito verificador
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+    return true;
+}
+
+// Impede envio do formulário se o CPF for inválido
+document.querySelector("form").addEventListener("submit", function(e) {
+    let cpf = document.getElementById("cpf").value;
+    if (!validarCPF(cpf)) {
+        alert("CPF inválido! Digite um CPF válido.");
+        e.preventDefault(); // Cancela o envio
+    }
+});
+</script>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- Telefone com máscara -->
+                <div class="input-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
                 </div>
 
 <script>

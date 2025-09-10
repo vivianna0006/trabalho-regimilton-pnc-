@@ -1,9 +1,104 @@
-// Meus amores o JavaScript e a parte funcional do nosso codigo 0w0
-// ==== 🚀 NOVO: URL do nosso backend 🚀 ====
-const BACKEND_URL = "http://localhost:3000/api";
 
-// ==== Variável para armazenar os dados do estoque (temporariamente) ====
-let categorias = [];
+// A URL base é declarada no topo do arquivo para ser acessível em qualquer função.
+const BACKEND_URL = "http://localhost:3000";
+
+
+// ==== Estrutura de Dados ====
+
+
+// Mantém a estrutura de categorias e subcategorias para construir o menu de navegação.
+// Os produtos são carregados dinamicamente do backend.
+let categorias = [
+    {
+        nome: "Acessórios",
+        subcategorias: {
+            Feminino: [],
+            Masculino: []
+        }
+    },
+    {
+        nome: "Blusas",
+        subcategorias: {
+            "Feminina": [],
+            Masculina: [],
+            "Infantil Feminina": [],
+            "Infantil Masculina": []
+        }
+    },
+    {
+        nome: "Bolsas",
+        subcategorias: {
+            Feminina: [],
+            Masculina: [],
+            "Infantil Feminina": [],
+            "Infantil Masculina": []
+        }
+    },
+    {
+        nome: "Bonés",
+        subcategorias: {
+            Feminino: [],
+            Masculino: []
+        }
+    },
+    {
+        nome: "Calçados",
+        subcategorias: {
+            Feminino: [],
+            Masculino: [],
+            "Infantil Feminino": [],
+            "Infantil Masculino": []
+        }
+    },
+    {
+        nome: "Calças",
+        subcategorias: {
+            Feminina: [],
+            Masculina: [],
+            "Infantil Feminina": [],
+            "Infantil Masculina": []
+        }
+    },
+    {
+        nome: "Cintos",
+        subcategorias: {
+            Feminino: [],
+            Masculino: []
+        }
+    },
+    {
+        nome: "Cropped",
+        subcategorias: {
+            "Feminina": []
+        }
+    },
+    {
+        nome: "Saias",
+        subcategorias: {
+            Feminina: [],
+            "Infantil Feminina": []
+        }
+    },
+    {
+        nome: "Shorts",
+        subcategorias: {
+            Feminino: [],
+            Masculino: [],
+            "Infantil Feminina": [],
+            "Infantil Masculina": []
+        }
+    },
+    {
+        nome: "Vestidos",
+        subcategorias: {
+            Feminina: [],
+            "Infantil Feminina": []
+        }
+    }
+];
+
+// Ordena as categorias em ordem alfabética.
+categorias.sort((a, b) => a.nome.localeCompare(b.nome));
 
 // ==== Seletores de Elementos HTML ====
 const menuCategorias = document.getElementById("menu-categorias");
@@ -14,11 +109,16 @@ const categoriaSelect = document.getElementById("categoria-select");
 const subcategoriaSelect = document.getElementById("subcategoria-select");
 
 // ==== Funções de Renderização e Exibição ====
+/**
+ * Exibe a lista de produtos na área principal.
+ * @param {Array} produtosParaExibir - Lista de produtos a serem exibidos.
+ * @param {string} tituloDaPagina - Título da página de produtos.
+ * @param {string} categoriaNome - Nome da categoria.
+ * @param {string} subcategoriaNome - Nome da subcategoria (opcional).
+ */
 function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subcategoriaNome) {
     areaProdutos.innerHTML = "";
 
-    // ADICIONADO: Verifica se existe um nome de categoria para decidir se o botão Voltar deve ser exibido.
-    // Isso evita que o botão apareça na tela de resultados da busca.
     if (categoriaNome) {
         const btnVoltar = document.createElement("button");
         btnVoltar.className = "btn-voltar";
@@ -32,7 +132,6 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
         areaProdutos.appendChild(btnVoltar);
     }
 
-    // Título da página
     const titulo = document.createElement("h2");
     titulo.textContent = tituloDaPagina;
     areaProdutos.appendChild(titulo);
@@ -44,13 +143,11 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
         return;
     }
 
-    // ==== essa parte mostra a lista de produtos ====
     produtosParaExibir.forEach(p => {
         const total = Object.values(p.tamanhos).reduce((soma, qtd) => soma + qtd, 0);
         const div = document.createElement("div");
         div.className = "produto";
 
-        // Adiciona classes para alertas de estoque total
         if (total <= 10 && total > 0) {
             div.classList.add("alerta");
         } else if (total === 0) {
@@ -58,7 +155,6 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
         }
 
         let tamanhosHTML = '';
-        // Adiciona classes para alertas de estoque por tamanho
         for (const tamanho in p.tamanhos) {
             const qtdTamanho = p.tamanhos[tamanho];
             let classesAlerta = '';
@@ -76,7 +172,6 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
             `;
         }
 
-        // Adiciona o valor do produto
         const valorFormatado = p.valor ? `R$ ${p.valor.toFixed(2).replace('.', ',')}` : "Não definido";
         div.innerHTML = `
             <strong>${p.nome}</strong> (ID: ${p.id})<br>
@@ -89,53 +184,36 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
     });
 }
 
-// ==== Cria botões das categorias no menu ====
-async function mostrarCategorias() {
+/**
+ * Cria os botões das categorias no menu.
+ */
+function mostrarCategorias() {
     menuCategorias.innerHTML = "";
     campoBusca.value = "";
     areaProdutos.innerHTML = `
         <h2>Bem-vindo!</h2>
-        <p>Carregando categorias...</p>
+        <p>Selecione uma categoria para ver os produtos.</p>
     `;
 
-    try {
-        // ==== 🚀 NOVO: Busca as categorias do backend 🚀 ====
-        const response = await fetch(`${BACKEND_URL}/categorias`);
-        if (!response.ok) {
-            throw new Error('Erro ao carregar os dados do estoque.');
-        }
-        categorias = await response.json();
-        categorias.sort((a, b) => a.nome.localeCompare(b.nome));
-
-        areaProdutos.innerHTML = `
-            <h2>Bem-vindo!</h2>
-            <p>Selecione uma categoria para ver os produtos.</p>
-        `;
-        categorias.forEach(cat => {
-            const btn = document.createElement("button");
-            btn.textContent = cat.nome;
-            btn.onclick = () => {
-                if (cat.subcategorias) {
-                    mostrarSubcategorias(cat.nome);
-                } else {
-                    mostrarProdutos(cat.nome);
-                }
-            };
-            menuCategorias.appendChild(btn);
-        });
-
-        carregarCategoriasNoFormulario();
-
-    } catch (error) {
-        console.error('Falha ao carregar o estoque:', error);
-        areaProdutos.innerHTML = `
-            <h2>Erro</h2>
-            <p>Não foi possível carregar o estoque. Por favor, verifique se o backend está rodando.</p>
-        `;
-    }
+    categorias.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat.nome;
+        btn.onclick = () => {
+            if (cat.subcategorias) {
+                mostrarSubcategorias(cat.nome);
+            } else {
+                buscarEExibirProdutos(cat.nome);
+            }
+        };
+        menuCategorias.appendChild(btn);
+    });
+    carregarCategoriasNoFormulario();
 }
 
-// ==== Mostra subcategorias exemplo feminino, masculino,Infantil feminina,Infantil masculino ====
+/**
+ * Mostra as subcategorias de uma categoria selecionada.
+ * @param {string} categoriaNome - O nome da categoria.
+ */
 function mostrarSubcategorias(categoriaNome) {
     const categoria = categorias.find(c => c.nome === categoriaNome);
     areaProdutos.innerHTML = "";
@@ -156,35 +234,44 @@ function mostrarSubcategorias(categoriaNome) {
     Object.keys(categoria.subcategorias).forEach(sub => {
         const btn = document.createElement("button");
         btn.textContent = sub;
-        btn.onclick = () => mostrarProdutos(categoriaNome, sub);
+        btn.onclick = () => buscarEExibirProdutos(categoriaNome, sub);
         lista.appendChild(btn);
     });
 
     areaProdutos.appendChild(lista);
 }
 
-// ==== Mostra produtos da categoria (ou subcategoria) e importante pra gente conseguir visualizar
-// se tirar isso n vai dar pra ver as categorias====
-function mostrarProdutos(categoriaNome, subcategoriaNome = null) {
-    const categoria = categorias.find(c => c.nome === categoriaNome);
-    let produtos = [];
-
-    if (subcategoriaNome && categoria.subcategorias) {
-        produtos = categoria.subcategorias[subcategoriaNome] || [];
-    } else if (categoria.produtos) {
-        produtos = categoria.produtos;
+// ==== Funções de Comunicação com o Backend ====
+/**
+ * Busca produtos no backend e os exibe na tela.
+ * @param {string} categoriaNome - A categoria para buscar.
+ * @param {string} [subcategoriaNome=null] - A subcategoria para buscar (opcional).
+ */
+async function buscarEExibirProdutos(categoriaNome, subcategoriaNome = null) {
+    areaProdutos.innerHTML = `
+        <h2>Carregando produtos de ${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}...</h2>
+    `;
+    const url = `${BACKEND_URL}/produtos?categoria=${categoriaNome}${subcategoriaNome ? '&subcategoria=' + subcategoriaNome : ''}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar produtos do servidor.');
+        }
+        const produtos = await response.json();
+        exibirProdutos(produtos, `${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}`, categoriaNome, subcategoriaNome);
+    } catch (error) {
+        console.error('Erro ao carregar produtos:', error);
+        areaProdutos.innerHTML = `
+            <h2>${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}</h2>
+            <p>Ocorreu um erro ao carregar os produtos. Verifique sua conexão com o backend.</p>
+        `;
     }
-
-    const titulo = `${categoriaNome}${subcategoriaNome ? " - " + subcategoriaNome : ""}`;
-    exibirProdutos(produtos, titulo, categoriaNome, subcategoriaNome);
 }
 
-
-// ==== Funções de Interação e Lógica do App ====
-// ==== Evento para a barra de pesquisa ====
-campoBusca.addEventListener("input", realizarBusca);
-
-function realizarBusca() {
+/**
+ * Realiza uma busca de produtos no backend com base em um termo.
+ */
+async function realizarBusca() {
     const termo = campoBusca.value.trim().toLowerCase();
 
     if (termo === "") {
@@ -192,39 +279,32 @@ function realizarBusca() {
         return;
     }
 
-    let resultados = [];
-
-    categorias.forEach(categoria => {
-        if (categoria.subcategorias) {
-            Object.keys(categoria.subcategorias).forEach(subcategoriaNome => {
-                const produtosSub = categoria.subcategorias[subcategoriaNome];
-                produtosSub.forEach(produto => {
-                    if (
-                        produto.nome.toLowerCase().includes(termo) ||
-                        produto.id.toLowerCase().includes(termo) ||
-                        produto.descricao.toLowerCase().includes(termo) ||
-                        categoria.nome.toLowerCase().includes(termo) ||
-                        subcategoriaNome.toLowerCase().includes(termo)
-                    ) {
-                        resultados.push({
-                            categoria: categoria.nome,
-                            subcategoria: subcategoriaNome,
-                            produto: produto
-                        });
-                    }
-                });
-            });
+    try {
+        const response = await fetch(`${BACKEND_URL}/produtos/busca?termo=${termo}`);
+        if (!response.ok) {
+            throw new Error('Erro na busca.');
         }
-    });
-
-    const produtosFormatados = resultados.map(item => item.produto);
-    exibirProdutos(produtosFormatados, `Resultados para "${termo}" (${resultados.length} encontrados)`, null, null);
+        const produtosEncontrados = await response.json();
+        exibirProdutos(produtosEncontrados, `Resultados para "${termo}" (${produtosEncontrados.length} encontrados)`, null, null);
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+        areaProdutos.innerHTML = `
+            <h2>Resultados da busca</h2>
+            <p>Não foi possível realizar a busca. Tente novamente.</p>
+        `;
+    }
 }
 
-// ==== aqui e onde fica o codigo de alterar a quantidade de um produto ====
+/**
+ * Altera a quantidade de um produto no backend.
+ * @param {string} catNome - Nome da categoria.
+ * @param {string} prodId - ID do produto.
+ * @param {number} delta - A quantidade a ser adicionada ou removida (+1 ou -1).
+ * @param {string} [subcatNome=null] - Nome da subcategoria (opcional).
+ * @param {string} tamanho - O tamanho do produto.
+ */
 async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tamanho) {
     try {
-        // ==== 🚀 NOVO: Envia a requisição para o backend 🚀 ====
         const response = await fetch(`${BACKEND_URL}/produtos/${prodId}`, {
             method: 'PUT',
             headers: {
@@ -239,25 +319,92 @@ async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tama
         });
 
         if (!response.ok) {
-            throw new Error('Falha ao atualizar a quantidade do produto.');
+            throw new Error('Falha ao atualizar a quantidade no backend.');
         }
 
-        // Se a atualização for bem-sucedida, recarrega a página de produtos
         if (campoBusca.value.trim() !== "") {
             realizarBusca();
         } else {
-            // Recarrega a categoria do backend para manter a consistência
-            await mostrarCategorias();
-            mostrarProdutos(catNome, subcatNome);
+            buscarEExibirProdutos(catNome, subcatNome);
         }
 
     } catch (error) {
-        console.error('Erro ao alterar a quantidade:', error);
-        alert('Erro ao atualizar o estoque.');
+        console.error('Erro ao sincronizar com o backend:', error);
+        alert('Atenção: Não foi possível sincronizar com o servidor.');
     }
 }
 
-// ==== NOVO: Função para carregar as categorias no select do formulário ====
+// ... (código anterior do estoque.js)
+
+/**
+ * Adiciona um novo produto ao backend.
+ */
+form.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const catNome = document.getElementById("categoria-select").value.trim();
+    const subcat = document.getElementById("subcategoria-select").value.trim();
+    const id = document.getElementById("id").value.trim();
+    const nome = document.getElementById("nome").value.trim();
+    const descricao = document.getElementById("descricao").value.trim();
+    const valor = parseFloat(document.getElementById("valor-produto").value.replace(',', '.')) || 0;
+
+    let tamanhos = {};
+    const inputsTamanho = document.getElementById("tamanhos-inputs").querySelectorAll("input");
+    inputsTamanho.forEach(input => {
+        const tamanho = input.id.replace('qtd-', '').toUpperCase();
+        tamanhos[tamanho] = parseInt(input.value) || 0;
+    });
+
+    if (!catNome || !id || !nome || !descricao || valor <= 0) {
+        alert("Por favor, preencha todos os campos obrigatórios, incluindo um valor válido para o produto.");
+        return;
+    }
+
+    // AQUI ESTÁ A MUDANÇA IMPORTANTE
+    // Criamos o objeto que será enviado no corpo da requisição.
+    // Ele precisa conter todas as informações que o backend espera.
+    const novoProduto = {
+        id,
+        categoriaNome: catNome, // Adicionamos a categoria aqui
+        subcategoriaNome: subcat, // Adicionamos a subcategoria aqui
+        nome,
+        descricao,
+        valor,
+        tamanhos
+    };
+
+    try {
+        // Agora, enviamos apenas o objeto do produto.
+        const response = await fetch(`${BACKEND_URL}/produtos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoProduto) // Mudamos para enviar apenas `novoProduto`
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Falha ao adicionar o produto no backend.');
+        }
+
+        form.reset();
+        carregarCategoriasNoFormulario();
+        alert('Produto cadastrado com sucesso!');
+        buscarEExibirProdutos(catNome, subcat || null);
+
+    } catch (error) {
+        console.error('Erro no cadastro:', error);
+        alert(`Erro no cadastro: ${error.message}`);
+    }
+});
+
+
+// ==== Funções de Formulário e UI ====
+/**
+ * Carrega as categorias no campo de seleção do formulário.
+ */
 function carregarCategoriasNoFormulario() {
     categoriaSelect.innerHTML = '<option value="">Selecione a Categoria</option>';
     categorias.forEach(cat => {
@@ -266,24 +413,23 @@ function carregarCategoriasNoFormulario() {
         option.textContent = cat.nome;
         categoriaSelect.appendChild(option);
     });
-    // Adiciona uma opção para novas categorias
     const novaCategoriaOption = document.createElement("option");
     novaCategoriaOption.value = "nova-categoria";
     novaCategoriaOption.textContent = "Adicionar nova categoria";
     categoriaSelect.appendChild(novaCategoriaOption);
 }
 
-// ==== AQUI VAI O CODIGO NOVO PARA ATUALIZAR OS INPUTS DE TAMANHO ====
-// Mudei o nome da função para ser mais clara
+/**
+ * Atualiza os campos de entrada de tamanho com base na categoria selecionada.
+ * @param {string} categoriaNome - O nome da categoria selecionada.
+ */
 function atualizarCamposTamanho(categoriaNome) {
     const tamanhosInputsContainer = document.getElementById("tamanhos-inputs");
-    tamanhosInputsContainer.innerHTML = ''; // Limpa os inputs antigos
+    tamanhosInputsContainer.innerHTML = '';
 
     let tamanhos;
     if (categoriaNome === "Calçados") {
-        tamanhos = Array.from({
-            length: 10
-        }, (_, i) => (34 + i).toString());
+        tamanhos = Array.from({ length: 10 }, (_, i) => (34 + i).toString());
     } else {
         tamanhos = ["PP", "P", "M", "G", "GG"];
     }
@@ -308,14 +454,15 @@ function atualizarCamposTamanho(categoriaNome) {
         tamanhosInputsContainer.appendChild(div);
     });
 }
-// ==== FIM DO CODIGO NOVO ====
 
 // ==== Event Listeners e Inicialização ====
+// Inicia o sistema ao carregar a página
 document.addEventListener("DOMContentLoaded", function() {
     mostrarCategorias();
 });
 
-// ==== NOVO: Evento para atualizar o select de subcategoria e o fieldset de tamanhos ====
+campoBusca.addEventListener("input", realizarBusca);
+
 categoriaSelect.addEventListener("change", (e) => {
     const categoriaNome = e.target.value;
     const categoria = categorias.find(c => c.nome === categoriaNome);
@@ -341,66 +488,4 @@ categoriaSelect.addEventListener("change", (e) => {
     }
 
     atualizarCamposTamanho(categoriaNome);
-});
-
-// ==== aqui e onde fica o codigo para adicionar novo produto ====
-form.addEventListener("submit", async e => {
-    e.preventDefault();
-
-    let catNome = document.getElementById("categoria-select").value.trim();
-    let subcat = document.getElementById("subcategoria-select").value.trim();
-
-    const id = document.getElementById("id").value.trim();
-    const nome = document.getElementById("nome").value.trim();
-    const descricao = document.getElementById("descricao").value.trim();
-    const valor = parseFloat(document.getElementById("valor-produto").value.replace(',', '.')) || 0;
-
-    let tamanhos = {};
-    const inputsTamanho = document.getElementById("tamanhos-inputs").querySelectorAll("input");
-    inputsTamanho.forEach(input => {
-        const tamanho = input.id.replace('qtd-', '').toUpperCase();
-        tamanhos[tamanho] = parseInt(input.value) || 0;
-    });
-
-    if (!catNome || !id || !nome || !descricao || valor <= 0) {
-        alert("Por favor, preencha todos os campos obrigatórios, incluindo um valor válido para o produto.");
-        return;
-    };
-
-    const novoProduto = {
-        id,
-        nome,
-        descricao,
-        valor,
-        tamanhos
-    };
-
-    try {
-        // ==== 🚀 NOVO: Envia o produto para o backend 🚀 ====
-        const response = await fetch(`${BACKEND_URL}/produtos`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                categoriaNome: catNome,
-                subcategoriaNome: subcat,
-                novoProduto: novoProduto
-            })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Falha ao adicionar o produto.');
-        }
-
-        form.reset();
-        await mostrarCategorias();
-        alert('Produto cadastrado com sucesso!');
-        mostrarProdutos(catNome, subcat || null);
-
-    } catch (error) {
-        console.error('Erro no cadastro:', error);
-        alert(`Erro no cadastro: ${error.message}`);
-    }
 });
