@@ -1,116 +1,121 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caixa - Styllo Fashion</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
-     <link rel="stylesheet" href="estoque.css">
+<!DOCTYPE html> <!-- Declara ao navegador que este é um documento HTML5. -->
+<html lang="pt-BR"> <!-- Inicia o elemento raiz do HTML, definindo o idioma como Português do Brasil. -->
+<head> <!-- Inicia a seção de cabeçalho, com informações para o navegador. -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8, suportando acentuação. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a página para ser responsiva a diferentes tamanhos de tela. -->
+    <title>Caixa - Styllo Fashion</title> <!-- Define o título que aparece na aba do navegador. -->
+
+
+    <!-- A tag de comentário abaixo serve para agrupar as folhas de estilo. -->
+    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos principal do site. -->
+    <link rel="stylesheet" href="menu.css"> <!-- Importa a folha de estilos específica para o menu. -->
     <style>
-        .caixa-main-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 100px auto 2rem;
-            padding: 0 1rem;
-            box-sizing: border-box;
-        }
-        .caixa-section {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        .item-produto, .item-venda {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .item-produto .add-btn, .item-venda .remove-btn {
-            width: auto;
-            padding: 6px 16px;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .item-venda .remove-btn {
-            background-color: #e74c3c;
-        }
-        .item-venda .remove-btn:hover {
-            background-color: #c0392b;
-        }
-        #total-venda {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 20px;
-            color: #28a745;
-        }
-        #finalizar-venda-btn {
-            margin-top: 20px;
-            background-color: #28a745;
-        }
-        .toast-notification {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #28a745;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 2000;
-            opacity: 0;
-            transition: top 0.5s ease-out, opacity 0.5s ease-out;
-        }
-        .toast-notification.show {
-            top: 20px;
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
-            <div class="nav-right">
-                <ul class="navbar-links">
-                    <li class="dropdown">
-                        <a href="./caixa.html" class="dropbtn">Caixa</a>
-                        <div class="dropdown-content">
-                            <a href="./caixa.html">Registro de Venda</a>
-                            <a href="#" id="sangria-link" class="hidden">Sangria</a>
-                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
-                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
-                            <a href="#">Fechamento de Caixa</a>
-                        </div>
-                    </li>
-                    <li><a href="./estoque.html">Estoque</a></li>
-                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
-                </ul>
-                <button id="logout-btn-menu" type="button">Sair</button>
-            </div>
-        </nav>
-    </header>
-    <div id="toast-notification" class="toast-notification"></div>
-    <main class="caixa-main-container">
-        <section class="caixa-section">
-            <h2>Venda Atual</h2>
-            <div id="lista-venda"></div>
-            <div id="total-venda">Total: R$ 0,00</div>
-            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button>
-        </section>
-        <section class="caixa-section">
-            <h2>Buscar Produto</h2>
-            <div class="input-group">
-                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto...">
-            </div>
-            <div id="lista-produtos"></div>
-        </section>
-    </main>
-    <script src="caixa.js"></script>
-</body>
-</html>
+        .caixa-main-container { /* Define um estilo para a classe 'caixa-main-container'. */
+            width: 100%; /* Faz o elemento ocupar toda a largura disponível. */
+            max-width: 900px; /* Limita a largura máxima do elemento a 900 pixels. */
+            margin: 100px auto 2rem; /* Define margens (topo, laterais, base) para centralizar e espaçar. */
+            padding: 0 1rem; /* Adiciona espaçamento interno nas laterais. */
+            box-sizing: border-box; /* Garante que o padding não aumente a largura total do elemento. */
+        } /* Fecha o bloco de estilo da classe '.caixa-main-container'. */
+        .caixa-section { /* Define um estilo para a classe 'caixa-section'. */
+            background-color: #fff; /* Define a cor de fundo como branco. */
+            padding: 20px; /* Adiciona 20 pixels de espaçamento interno em todos os lados. */
+            border-radius: 8px; /* Arredonda os cantos do elemento. */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adiciona uma sombra sutil. */
+            margin-bottom: 2rem; /* Adiciona uma margem na parte de baixo. */
+        } /* Fecha o bloco de estilo da classe '.caixa-section'. */
+        .item-produto, .item-venda { /* Aplica o mesmo estilo para as classes 'item-produto' e 'item-venda'. */
+            display: flex; /* Organiza os elementos filhos em linha. */
+            justify-content: space-between; /* Distribui o espaço entre os elementos filhos. */
+            align-items: center; /* Alinha os elementos filhos verticalmente ao centro. */
+            padding: 8px 0; /* Adiciona espaçamento interno no topo e na base. */
+            border-bottom: 1px solid #eee; /* Adiciona uma linha de separação na parte de baixo. */
+        } /* Fecha o bloco de estilo para as classes '.item-produto' e '.item-venda'. */
+        .item-produto .add-btn, .item-venda .remove-btn { /* Estiliza os botões dentro dos itens. */
+            width: auto; /* Faz a largura do botão se ajustar ao conteúdo. */
+            padding: 6px 16px; /* Define o espaçamento interno do botão. */
+            font-size: 0.9rem; /* Define o tamanho da fonte do texto do botão. */
+            flex-shrink: 0; /* Impede que o botão encolha se o espaço for limitado. */
+        } /* Fecha o bloco de estilo dos botões. */
+        .item-venda .remove-btn { /* Estiliza especificamente o botão de remover. */
+            background-color: #e74c3c; /* Define a cor de fundo como vermelho. */
+        } /* Fecha o bloco de estilo do botão de remover. */
+        .item-venda .remove-btn:hover { /* Estiliza o botão de remover quando o mouse está sobre ele. */
+            background-color: #c0392b; /* Muda a cor de fundo para um vermelho mais escuro. */
+        } /* Fecha o bloco de estilo do 'hover'. */
+        #total-venda { /* Estiliza o elemento com o ID 'total-venda'. */
+            font-size: 1.5rem; /* Aumenta o tamanho da fonte. */
+            font-weight: bold; /* Deixa o texto em negrito. */
+            text-align: right; /* Alinha o texto à direita. */
+            margin-top: 20px; /* Adiciona uma margem no topo. */
+            color: #28a745; /* Define a cor do texto como verde. */
+        } /* Fecha o bloco de estilo para o total da venda. */
+        #finalizar-venda-btn { /* Estiliza o elemento com o ID 'finalizar-venda-btn'. */
+            margin-top: 20px; /* Adiciona uma margem no topo. */
+            background-color: #28a745; /* Define a cor de fundo como verde. */
+        } /* Fecha o bloco de estilo do botão finalizar venda. */
+        .toast-notification { /* Estiliza a classe para notificações flutuantes. */
+            position: fixed; /* Fixa a posição do elemento na tela. */
+            top: -100px; /* Posiciona o elemento fora da tela, no topo, inicialmente. */
+            left: 50%; /* Centraliza o elemento horizontalmente na metade da tela. */
+            transform: translateX(-50%); /* Ajusta a centralização horizontal do elemento. */
+            background-color: #28a745; /* Define a cor de fundo como verde. */
+            color: white; /* Define a cor do texto como branco. */
+            padding: 12px 25px; /* Adiciona espaçamento interno. */
+            border-radius: 25px; /* Arredonda os cantos para um formato de pílula. */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona uma sombra para dar profundidade. */
+            z-index: 2000; /* Garante que a notificação apareça sobre outros elementos. */
+            opacity: 0; /* Deixa a notificação invisível inicialmente. */
+            transition: top 0.5s ease-out, opacity 0.5s ease-out; /* Anima a entrada e saída da notificação. */
+        } /* Fecha o bloco de estilo da notificação. */
+        .toast-notification.show { /* Estilo para a notificação quando ela deve ser exibida. */
+            top: 20px; /* Move a notificação para uma posição visível no topo. */
+            opacity: 1; /* Torna a notificação totalmente visível. */
+        } /* Fecha o bloco de estilo para exibir a notificação. */
+    </style> <!-- Fecha o bloco de estilos CSS. -->
+</head> <!-- Fecha a seção de cabeçalho. -->
+<body> <!-- Inicia a seção do corpo, onde o conteúdo visível da página é colocado. -->
+    <header> <!-- Cria a seção de cabeçalho da página. -->
+        <nav> <!-- Cria a barra de navegação. -->
+            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Cria um link com o nome da loja que leva para o menu. -->
+            <div class="nav-right"> <!-- Cria um contêiner para os elementos à direita da navegação. -->
+                <ul class="navbar-links"> <!-- Cria uma lista não ordenada para os links de navegação. -->
+                    <li><a href="./menu.html">Início</a></li> <!-- Cria um item da lista com um link para a página 'Início'. -->
+                    <li class="dropdown"> <!-- Cria um item da lista que será um menu suspenso (dropdown). -->
+                        <a href="./caixa.html" class="dropbtn">Caixa</a> <!-- O título clicável do dropdown, que também é um link. -->
+                        <div class="dropdown-content"> <!-- Contêiner para os itens do menu suspenso. -->
+                            <a href="./caixa.html">Registro de Venda</a> <!-- Link para a própria página de registro de venda. -->
+                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a> <!-- Link para a página de Sangria, inicialmente oculto. -->
+                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a> <!-- Link para Suprimento, inicialmente oculto. -->
+                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a> <!-- Link para o Histórico, inicialmente oculto. -->
+                            <a href="#">Fechamento de Caixa</a> <!-- Link para a funcionalidade de fechamento de caixa. -->
+                        </div> <!-- Fecha o contêiner do dropdown. -->
+                    </li> <!-- Fecha o item da lista do dropdown. -->
+                    <li><a href="./estoque.html">Estoque</a></li> <!-- Cria um item da lista com um link para a página 'Estoque'. -->
+                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li> <!-- Item da lista para administradores, inicialmente oculto. -->
+                </ul> <!-- Fecha a lista de links da navegação. -->
+                <button id="logout-btn-menu" type="button">Sair</button> <!-- Cria o botão de 'Sair' do sistema. -->
+            </div> <!-- Fecha o contêiner direito da navegação. -->
+        </nav> <!-- Fecha a barra de navegação. -->
+    </header> <!-- Fecha a seção de cabeçalho. -->
+    <div id="toast-notification" class="toast-notification"></div> <!-- Elemento que será usado pelo JavaScript para exibir notificações flutuantes. -->
+    <main class="caixa-main-container"> <!-- Inicia o conteúdo principal da página, com a classe de estilo para centralização. -->
+        <section class="caixa-section"> <!-- Inicia a primeira seção, dedicada à venda atual. -->
+            <h2>Venda Atual</h2> <!-- Título da seção. -->
+            <div id="lista-venda"></div> <!-- Contêiner onde o JavaScript irá inserir os produtos da venda. -->
+            <div id="total-venda">Total: R$ 0,00</div> <!-- Elemento que exibirá o valor total da venda, atualizado por JavaScript. -->
+            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button> <!-- Botão para finalizar a venda e registrar os dados. -->
+        </section> <!-- Fecha a seção da venda atual. -->
+
+
+        <section class="caixa-section"> <!-- Inicia a segunda seção, dedicada à busca de produtos. -->
+            <h2>Buscar Produto</h2> <!-- Título da seção. -->
+            <div class="input-group"> <!-- Agrupa o campo de input para estilização. -->
+                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto..."> <!-- Campo de texto para o usuário digitar a busca. -->
+            </div> <!-- Fecha o grupo do input. -->
+            <div id="lista-produtos"></div> <!-- Contêiner onde o JavaScript irá mostrar os resultados da busca de produtos. -->
+        </section> <!-- Fecha a seção de busca de produtos. -->
+    </main> <!-- Fecha o conteúdo principal da página. -->
+    <script src="caixa.js"></script> <!-- Inclui e executa o arquivo JavaScript que controla a lógica desta página. -->
+</body> <!-- Fecha a seção do corpo. -->
+</html> <!-- Fecha o documento HTML. -->

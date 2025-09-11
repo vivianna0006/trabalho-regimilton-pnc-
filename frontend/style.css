@@ -1,92 +1,105 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+body { /* Aplica estilos a todo o corpo (<body>) da página HTML. */
+    font-family: Arial, sans-serif; /* Define a família da fonte principal, com Arial como primeira opção. */
+    background-color: #f0f2f5; /* Define uma cor de fundo cinza claro para a página. */
+    display: flex; /* Ativa o layout flexbox para o corpo da página. */
+    justify-content: center; /* Centraliza o conteúdo filho horizontalmente. */
+    align-items: center; /* Centraliza o conteúdo filho verticalmente. */
+    height: 100vh; /* Define a altura do corpo para ser 100% da altura da janela de visualização (viewport). */
+    margin: 0; /* Remove qualquer margem padrão do corpo da página. */
+} /* Fecha o bloco de estilos para o body. */
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
 
-.form-box {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
+.container { /* Estiliza elementos com a classe 'container'. */
+    display: flex; /* Ativa o layout flexbox para este contêiner. */
+    justify-content: center; /* Centraliza os itens filhos do contêiner no eixo horizontal. */
+    align-items: center; /* Centraliza os itens filhos do contêiner no eixo vertical. */
+    width: 100%; /* Faz o contêiner ocupar 100% da largura do seu elemento pai (o body). */
+} /* Fecha o bloco de estilos para a classe .container. */
 
-.hidden {
-    display: none;
-}
 
-h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
+.form-box { /* Estiliza a caixa que contém os formulários. */
+    background-color: #ffffff; /* Define a cor de fundo da caixa como branco. */
+    padding: 40px; /* Adiciona um espaçamento interno de 40 pixels em todos os lados. */
+    border-radius: 8px; /* Arredonda os cantos da caixa em 8 pixels. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil para dar um efeito de elevação. */
+    width: 100%; /* Faz a caixa ocupar 100% da largura do seu pai (o .container). */
+    max-width: 400px; /* Limita a largura máxima da caixa a 400 pixels. */
+} /* Fecha o bloco de estilos para a classe .form-box. */
 
-.input-group {
-    margin-bottom: 15px;
-}
 
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
+.hidden { /* Cria uma classe de utilidade para esconder elementos. */
+    display: none; /* Esconde completamente qualquer elemento que tenha esta classe. */
+} /* Fecha o bloco de estilos para a classe .hidden. */
 
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+h2 { /* Estiliza todos os elementos de título de nível 2 (<h2>). */
+    text-align: center; /* Centraliza o texto do título. */
+    color: #333; /* Define a cor do texto do título como um cinza escuro. */
+    margin-bottom: 20px; /* Adiciona um espaço de 20 pixels abaixo do título. */
+} /* Fecha o bloco de estilos para o h2. */
 
-button:hover {
-    background-color: #0056b3;
-}
 
-.message {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-    min-height: 20px; 
-}
+.input-group { /* Estiliza os contêineres que agrupam rótulos e campos de entrada. */
+    margin-bottom: 15px; /* Adiciona um espaço de 15 pixels abaixo de cada grupo. */
+} /* Fecha o bloco de estilos para a classe .input-group. */
 
-.switch-form {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-}
 
-.switch-form a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
+.input-group label { /* Estiliza os rótulos (<label>) dentro de um 'input-group'. */
+    display: block; /* Faz o rótulo ocupar sua própria linha. */
+    margin-bottom: 5px; /* Adiciona um pequeno espaço abaixo do rótulo, antes do campo de entrada. */
+    color: #555; /* Define a cor do texto do rótulo como um cinza médio. */
+} /* Fecha o bloco de estilos para os rótulos. */
 
-.switch-form a:hover {
-    text-decoration: underline;
-}
+
+.input-group input { /* Estiliza os campos de entrada (<input>) dentro de um 'input-group'. */
+    width: 100%; /* Faz o campo de entrada ocupar 100% da largura do seu contêiner. */
+    padding: 10px; /* Adiciona um espaçamento interno de 10 pixels. */
+    border: 1px solid #ccc; /* Define uma borda cinza claro de 1 pixel. */
+    border-radius: 4px; /* Arredonda os cantos do campo de entrada. */
+    box-sizing: border-box; /* Garante que o padding e a borda não aumentem a largura total do campo. */
+} /* Fecha o bloco de estilos para os campos de entrada. */
+
+
+button { /* Estiliza todos os elementos de botão (<button>). */
+    width: 100%; /* Faz o botão ocupar 100% da largura do seu contêiner. */
+    padding: 12px; /* Adiciona um espaçamento interno de 12 pixels. */
+    border: none; /* Remove qualquer borda do botão. */
+    border-radius: 4px; /* Arredonda os cantos do botão. */
+    background-color: #007bff; /* Define a cor de fundo do botão como azul. */
+    color: white; /* Define a cor do texto do botão como branco. */
+    font-size: 16px; /* Define o tamanho da fonte do texto do botão. */
+    cursor: pointer; /* Muda o cursor do mouse para uma mãozinha ao passar sobre o botão. */
+    transition: background-color 0.3s; /* Adiciona uma animação suave de 0.3 segundos para a mudança da cor de fundo. */
+} /* Fecha o bloco de estilos para os botões. */
+
+
+button:hover { /* Estiliza os botões quando o cursor do mouse está sobre eles. */
+    background-color: #0056b3; /* Muda a cor de fundo para um tom de azul mais escuro. */
+} /* Fecha o bloco de estilos para o estado 'hover' do botão. */
+
+
+.message { /* Estiliza os elementos de parágrafo usados para exibir mensagens. */
+    margin-top: 15px; /* Adiciona um espaço de 15 pixels acima da mensagem. */
+    text-align: center; /* Centraliza o texto da mensagem. */
+    font-size: 14px; /* Define o tamanho da fonte da mensagem. */
+    min-height: 20px; /* Define uma altura mínima para evitar que o layout "pule" quando a mensagem aparece. */
+} /* Fecha o bloco de estilos para a classe .message. */
+
+
+.switch-form { /* Estiliza o contêiner para o link de alternar formulário. */
+    text-align: center; /* Centraliza o texto. */
+    margin-top: 20px; /* Adiciona um espaço de 20 pixels acima. */
+    font-size: 14px; /* Define o tamanho da fonte. */
+} /* Fecha o bloco de estilos para a classe .switch-form. */
+
+
+.switch-form a { /* Estiliza os links (<a>) dentro do contêiner 'switch-form'. */
+    color: #007bff; /* Define a cor do texto do link como azul. */
+    text-decoration: none; /* Remove o sublinhado padrão do link. */
+    font-weight: bold; /* Deixa o texto do link em negrito. */
+} /* Fecha o bloco de estilos para os links. */
+
+
+.switch-form a:hover { /* Estiliza os links dentro do 'switch-form' quando o mouse está sobre eles. */
+    text-decoration: underline; /* Adiciona um sublinhado ao link. */
+} /* Fecha o bloco de estilos para o estado 'hover' do link. */
