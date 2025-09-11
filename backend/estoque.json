@@ -1,0 +1,37 @@
+[
+  {
+    "id": "05",
+    "categoriaNome": "Blusas",
+    "subcategoriaNome": "Feminina",
+    "nome": "blusa listrada",
+    "descricao": "blusa kwaii do sol listrada",
+    "valor": 50,
+    "tamanhos": {
+      "PP": 30,
+      "P": 20,
+      "M": 10,
+      "G": 20,
+      "GG": 30
+    }
+  },
+  {
+    "id": "02",
+    "categoriaNome": "Calçados",
+    "subcategoriaNome": "Infantil Feminino",
+    "nome": "calçado infantil",
+    "descricao": "calçado rosa com listras verdes da lolinha",
+    "valor": 59,
+    "tamanhos": {
+      "34": 30,
+      "35": 40,
+      "36": 30,
+      "37": 30,
+      "38": 30,
+      "39": 30,
+      "40": 30,
+      "41": 30,
+      "42": 30,
+      "43": 30
+    }
+  }
+]

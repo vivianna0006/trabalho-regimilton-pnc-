@@ -73,8 +73,6 @@ nav { /* Aplica estilos ao elemento <nav> (barra de navegação). */
     cursor: pointer; /* Muda o cursor do mouse para uma mãozinha ao passar sobre o botão. */
     transition: background-color 0.3s; /* Adiciona uma animação suave para a mudança da cor de fundo. */
 } /* Fecha o bloco de estilos para o botão de logout. */
-
-
 #logout-btn-menu:hover { /* Estiliza o botão de sair quando o mouse está sobre ele. */
     background-color: #c0392b; /* Muda a cor de fundo para um tom de vermelho mais escuro. */
 } /* Fecha o bloco de estilos para o estado hover do botão. */

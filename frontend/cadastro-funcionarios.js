@@ -147,3 +147,63 @@ document.addEventListener('DOMContentLoaded', () => {
         telefoneInput.value = valor; // Atualiza o valor no campo.
     });
 });
+// Máscara de CPF automática
+document.getElementById("cpf").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+    if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
+
+    // Coloca a máscara progressivamente
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    e.target.value = value; // Atualiza o valor no input
+});
+
+// Função para validar se o CPF é verdadeiro
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, ""); // Remove pontos e traço
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Rejeita CPFs repetidos (ex: 111.111...)
+
+    let soma = 0, resto;
+
+    // Primeiro dígito verificador
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+    // Segundo dígito verificador
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+    return true;
+}
+
+// Impede envio do formulário se o CPF for inválido
+document.querySelector("form").addEventListener("submit", function(e) {
+    let cpf = document.getElementById("cpf").value;
+    if (!validarCPF(cpf)) {
+        alert("CPF inválido! Digite um CPF válido.");
+        e.preventDefault(); // Cancela o envio
+    }
+});
+// Máscara automática de telefone
+const telefoneInput = document.getElementById('telefone');
+
+telefoneInput.addEventListener('input', function() {
+    let valor = telefoneInput.value.replace(/\D/g, ''); // Remove tudo que não é número
+
+    if (valor.length > 11) {
+        valor = valor.slice(0, 11); // Limita a 11 números
+    }
+
+    // Coloca a máscara (DDD e hífen)
+    valor = valor.replace(/^(\d{2})(\d)/, '($1) $2'); // Ex: (99) 9
+    valor = valor.replace(/(\d{5})(\d)/, '$1-$2'); // Ex: 99999-9999
+
+    telefoneInput.value = valor; // Atualiza no campo
+});

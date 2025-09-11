@@ -94,8 +94,6 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
             listaProdutosDiv.appendChild(produtoDiv); // ...adiciona o 'div' recém-criado à página, dentro da área de resultados.
         }); // Fecha o laço 'forEach'.
     }; // Fecha a definição da função 'renderizarProdutos'.
-
-
     // O comentário abaixo descreve a função 'renderizarVenda'.
     const renderizarVenda = () => { // Define uma função para exibir os itens da venda atual e calcular o total.
         listaVendaDiv.innerHTML = ''; // Limpa completamente o conteúdo da área da venda atual.
@@ -106,14 +104,12 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
             itemDiv.innerHTML = `
                 <span>${item.name} (R$ ${item.price.toFixed(2)})</span>
                 <button class="remove-btn" data-index="${index}">Remover</button>
-            `; // Define o conteúdo HTML interno do 'div' com o nome, preço e um botão de remover.
+                `; // Define o conteúdo HTML interno do 'div' com o nome, preço e um botão de remover.
             listaVendaDiv.appendChild(itemDiv); // ...adiciona o 'div' recém-criado à página, dentro da área da venda.
             total += item.price; // ...soma o preço do item ao total da venda.
         }); // Fecha o laço 'forEach'.
         totalVendaEl.textContent = `Total: R$ ${total.toFixed(2)}`; // Atualiza o texto do elemento do total com o valor final formatado.
     }; // Fecha a definição da função 'renderizarVenda'.
-
-
     // O comentário abaixo descreve o "ouvinte" de evento para a busca.
     buscaInput.addEventListener('input', () => { // Adiciona um "ouvinte" que dispara a função toda vez que o usuário digita no campo de busca.
         const termoBusca = buscaInput.value.toLowerCase(); // Pega o texto digitado, converte para minúsculas para facilitar a comparação.

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
         try { // Inicia um bloco de código que pode gerar um erro (neste caso, a comunicação com o servidor).
             const response = await fetch(`${API_URL}/status`); // Faz uma requisição para a rota '/status' da API e espera (await) pela resposta.
             const data = await response.json(); // Espera a resposta do servidor chegar e a converte de texto JSON para um objeto JavaScript.
-           
+        
             if (data.usersExist) { // Verifica a propriedade 'usersExist' no objeto recebido do servidor.
                 // O comentário abaixo descreve a finalidade do bloco 'if' seguinte.
                 loginBox.classList.remove('hidden'); // Se existem utilizadores, remove a classe 'hidden' da caixa de login para a tornar visível.
@@ -34,11 +34,9 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
     // O comentário abaixo descreve a finalidade do bloco de código seguinte.
     loginForm.addEventListener('submit', async (e) => { // Adiciona um "ouvinte" que executa uma função assíncrona quando o formulário de login é enviado.
         e.preventDefault(); // Impede o comportamento padrão do formulário, que é recarregar a página.
-       
+
         const username = document.getElementById('login-username').value; // Pega o valor (texto) digitado no campo de utilizador.
-        const password = document.getElementById('login-password').value; // Pega o valor (texto) digitado no campo de senha.
-
-
+        const password = document.getElementById('login-password').value; // Pega o valor (texto) digitado no campo de senha
         try { // Inicia um bloco de código que pode gerar um erro.
             const response = await fetch(`${API_URL}/login`, { // Faz uma requisição para a rota '/login' da API e espera (await) pela resposta.
                 method: 'POST', // Define o método da requisição como POST, pois estamos a enviar dados.
