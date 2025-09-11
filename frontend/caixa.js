@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`${API_URL}/sales`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },ç[~z    \z[,ç c]]
                 body: JSON.stringify(saleData)
             });
             if (!response.ok) throw new Error('O servidor respondeu com um erro.');
