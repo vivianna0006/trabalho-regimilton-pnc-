@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sangria de Caixa - Styllo Fashion</title>
+    <!-- Ligações para os ficheiros de estilo -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="notifications.css">
+    <style>
+        /* Estilos específicos para a página de Sangria */
+        .main-content {
+            width: 100%;
+            max-width: 900px;
+            margin: 100px auto 2rem;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        .sangria-form-box {
+            max-width: 450px;
+            margin: 0 auto; /* Centraliza a caixa do formulário */
+        }
+
+        .sangria-intro-text {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .sangria-submit-btn {
+            background-color: #e74c3c; /* Vermelho específico para a ação de retirada */
+        }
+        .sangria-submit-btn:hover {
+            background-color: #c0392b; /* Vermelho mais escuro */
+        }
+    </style>
+</head>
+<body>
+    <!-- O menu principal é inserido aqui -->
+    <header>
+        <nav>
+            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
+            <div class="nav-right">
+                <ul class="navbar-links">
+                    <li><a href="./menu.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="./caixa.html" class="dropbtn">Caixa</a>
+                        <div class="dropdown-content">
+                            <a href="./caixa.html">Registro de Venda</a>
+                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a>
+                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
+                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
+                            <a href="#">Fechamento de Caixa</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Estoque</a></li>
+                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
+                </ul>
+                <button id="logout-btn-menu" type="button">Sair</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal da página -->
+    <main class="main-content">
+        <div class="form-box sangria-form-box">
+                <h2>Registrar Sangria</h2>
+            <p class="sangria-intro-text">Insira o valor a ser retirado do caixa e o motivo.</p>
+            <form id="sangria-form">
+                <div class="input-group">
+                    <label for="sangria-valor">Valor (R$):</label>
+                    <input type="text" id="sangria-valor" placeholder="0,00" required>
+                </div>
+                <div class="input-group">
+                    <label for="sangria-motivo">Motivo:</label>
+                    <input type="text" id="sangria-motivo" placeholder="Ex: Pagamento de fornecedor" required>
+                </div>
+                <button type="submit" class="sangria-submit-btn">Confirmar Retirada</button>
+            </form>
+        </div>
+    </main>
+    <!-- Scripts no final para melhor desempenho -->
+    <script src="notifications.js"></script>
+    <script src="sangria.js"></script>
+</body>
+</html>

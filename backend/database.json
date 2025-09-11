@@ -10,6 +10,12 @@
     "cargo": "Funcionário"
   },
   {
+    "username": "skzlindos",
+    "password": "$2b$10$qhw7v.RVi73tUXOML5Wt3./i1Zm4JtxMxPjTqEhZqPZ1UpTtIXe1O",
+    "cargo": "Administrador"
+   }, 
+
+   {
     "username": "aninha124",
     "password": "$2b$10$A0AeZigAcnDa84bzbnImLuXzDkMwZyKdVNF4n17LWT/o3r1HfgnGa",
     "cargo": "Funcionário"
@@ -27,6 +33,11 @@
   {
     "username": "GVTTF",
     "password": "$2b$10$k/3SM9Ny4RssUscFobE8TeUJ5z3AGzVCq9gJuI1P96sAJ1Nq7DaHK",
+    "cargo": "Funcionário"
+  },
+  {
+    "username": "asasas",
+    "password": "$2b$10$O0Cu4hExfzzg/QVRCVgzPONateKS2lD2Pfpw9qa/bJW47f9/En5Dm",
     "cargo": "Funcionário"
   }
 ]

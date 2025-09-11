@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1755906195085,
+    "type": "sangria",
+    "amount": 100,
+    "user": "aninha123",
+    "date": "2025-08-22T23:43:15.085Z"
+  },
+  {
+    "id": 1755906198880,
+    "type": "sangria",
+    "amount": 100,
+    "user": "aninha123",
+    "date": "2025-08-22T23:43:18.880Z"
+  },
+  {
+    "id": 1755906969284,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:56:09.284Z"
+  },
+  {
+    "id": 1755906972937,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:56:12.937Z"
+  },
+  {
+    "id": 1755906999122,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:56:39.122Z"
+  },
+  {
+    "id": 1755907142995,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:59:02.995Z"
+  },
+  {
+    "id": 1755907144980,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:59:04.980Z"
+  },
+  {
+    "id": 1755907153009,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:59:13.009Z"
+  },
+  {
+    "id": 1755907162425,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-22T23:59:22.425Z"
+  },
+  {
+    "id": 1755907983290,
+    "type": "sangria",
+    "amount": 10,
+    "user": "undefined",
+    "date": "2025-08-23T00:13:03.290Z"
+  },
+  {
+    "id": 1755907987968,
+    "type": "sangria",
+    "amount": 1,
+    "user": "undefined",
+    "date": "2025-08-23T00:13:07.968Z"
+  },
+  {
+    "id": 1755908159453,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:15:59.453Z"
+  },
+  {
+    "id": 1755908161446,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:16:01.446Z"
+  },
+  {
+    "id": 1755908430115,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:20:30.115Z"
+  },
+  {
+    "id": 1755908663436,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:24:23.436Z"
+  },
+  {
+    "id": 1755908693231,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:24:53.231Z"
+  },
+  {
+    "id": 1755909279678,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "undefined",
+    "date": "2025-08-23T00:34:39.678Z"
+  },
+  {
+    "id": 1756165069653,
+    "type": "sangria",
+    "amount": 100,
+    "user": "aninha123",
+    "date": "2025-08-25T23:37:49.653Z"
+  },
+  {
+    "id": 1756165919324,
+    "type": "sangria",
+    "amount": 10,
+    "user": "aninha123",
+    "date": "2025-08-25T23:51:59.324Z"
+  },
+  {
+    "id": 1756165929735,
+    "type": "sangria",
+    "amount": 10,
+    "user": "aninha123",
+    "date": "2025-08-25T23:52:09.735Z"
+  },
+  {
+    "id": 1757032225651,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "aninha123",
+    "date": "2025-09-05T00:30:25.651Z"
+  },
+  {
+    "id": 1757032235997,
+    "type": "sangria",
+    "amount": 800,
+    "user": "aninha123",
+    "date": "2025-09-05T00:30:35.997Z"
+  },
+  {
+    "id": 1757032254645,
+    "type": "sangria",
+    "amount": 500,
+    "user": "aninha123",
+    "date": "2025-09-05T00:30:54.645Z"
+  },
+  {
+    "id": 1757032924246,
+    "type": "sangria",
+    "amount": 1000,
+    "user": "aninha123",
+    "date": "2025-09-05T00:42:04.246Z"
+  },
+  {
+    "id": 1757270248168,
+    "type": "sangria",
+    "amount": 200,
+    "user": "aninha123",
+    "date": "2025-09-07T18:37:28.168Z"
+  },
+  {
+    "id": 1757272133617,
+    "type": "sangria",
+    "amount": 20,
+    "user": "aninha123",
+    "date": "2025-09-07T19:08:53.617Z"
+  }
+]

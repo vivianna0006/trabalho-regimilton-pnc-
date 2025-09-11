@@ -159,3 +159,31 @@ nav {
         margin-top: 1rem;
     }
 }
+.back-to-menu-btn {
+    display: inline-block; /* Permite definir largura/altura e margens */
+    margin-bottom: 20px; /* Espaço abaixo do botão */
+    padding: 8px 16px; /* Espaçamento interno */
+    background-color: #6c757d; /* Cor cinza, neutra */
+    color: white; /* Texto branco */
+    text-decoration: none; /* Remove o sublinhado do link */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 0.9rem; /* Tamanho da fonte */
+    transition: background-color 0.3s; /* Animação suave na cor de fundo */
+}
+
+.back-to-menu-btn:hover {
+    background-color: #5a6268; /* Cinza mais escuro ao passar o mouse */
+}
+.page-header {
+    display: flex; /* Alinha o título e o botão na horizontal */
+    justify-content: space-between; /* Coloca espaço máximo entre eles */
+    align-items: center; /* Alinha verticalmente no centro */
+    margin-bottom: 25px; /* Espaço abaixo do cabeçalho */
+    border-bottom: 1px solid #eee; /* Linha de separação subtil */
+    padding-bottom: 15px; /* Espaço entre o conteúdo e a linha */
+}
+
+/* Ajuste no botão 'Voltar' para remover a margem que já não é necessária */
+.back-to-menu-btn {
+    margin-bottom: 0; 
+}

@@ -53,5 +53,32 @@
 }
 
 #cadastro-form button {
-    margin-top: 15px; /* Espaçamento acima do botão */
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cadastro-form button:hover {
+    background-color: #218838;
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    min-height: 20px;
+    font-weight: bold;
+}
+.main-content .intro-p {
+    margin-bottom: 25px; /* Aumenta o espaço abaixo do parágrafo */
+    padding-bottom: 20px; /* Adiciona um preenchimento interno antes da linha */
+    border-bottom: 1px solid #eee; /* Cria a linha de separação */
 }

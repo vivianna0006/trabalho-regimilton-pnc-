@@ -1,0 +1,40 @@
+/* Estilos para o sistema de notificação "Toast" */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none; /* Permite clicar através do contêiner */
+}
+
+.toast {
+    padding: 12px 25px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    /* A animação controla o tempo de vida da notificação */
+    animation: fadeInOut 4s ease-in-out forwards;
+}
+
+.toast.success {
+    background-color: #28a745; /* Verde para sucesso */
+}
+
+.toast.error {
+    background-color: #e74c3c; /* Vermelho para erro */
+}
+
+/* Animação de aparecer e desaparecer suavemente */
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
