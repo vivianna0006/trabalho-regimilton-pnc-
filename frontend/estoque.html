@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Estoque Styllo Fachion Modas</title>
+    <link rel="stylesheet" href="estoque.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Estoque Styllo Fachion Modas</h1>
+        <div class="search-bar">
+            <input type="text" id="campo-busca" placeholder="Buscar por produtos, categorias ou ID..." >
+        </div>
+        <div class="layout">
+            <div class="menu-categorias" id="menu-categorias">
+            </div>
+            <div class="produtos" id="area-produtos">
+                <h2>Bem-vindo!</h2>
+                <p>Selecione uma categoria para ver os produtos.</p>
+            </div>
+        </div>
+
+
+        <form id="form-produto" class="form">
+            <h3>Adicionar Novo Produto</h3>
+
+
+            <label for="categoria-select">Categoria:</label>
+            <select id="categoria-select" required>
+            </select>
+            <label for="subcategoria-select">Subcategoria:</label>
+            <select id="subcategoria-select"></select>
+
+
+            <input type="number" id="id" placeholder="ID do produto" required>
+            <input type="text" id="nome" placeholder="Nome do produto" required>
+            <input type="text" id="descricao" placeholder="Descrição (Ex: Saia rosa floral)" required>
+            <input type="number" id="valor-produto" placeholder="Valor do produto (Ex: 99.90)" step="0.01" min="0" required>
+
+
+            <fieldset id="fieldset-tamanhos">
+                <legend>Quantidades por Tamanho</legend>
+                <div id="tamanhos-inputs"></div>
+            </fieldset>
+            <button type="submit">Adicionar Produto</button>
+        </form>
+    </div>
+
+
+    <script src="estoque.js"></script>
+</body>
+</html>
