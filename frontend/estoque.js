@@ -1,11 +1,7 @@
 
 // A URL base é declarada no topo do arquivo para ser acessível em qualquer função.
 const BACKEND_URL = "http://localhost:3000";
-
-
 // ==== Estrutura de Dados ====
-
-
 // Mantém a estrutura de categorias e subcategorias para construir o menu de navegação.
 // Os produtos são carregados dinamicamente do backend.
 let categorias = [
