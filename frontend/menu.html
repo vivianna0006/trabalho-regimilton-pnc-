@@ -1,46 +1,45 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
-     <link rel="stylesheet" href="estoque.css">
-     <link rel="stylesheet" href="estoque.html">
-    <title>Menu Principal - Styllo Fashion</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
-            <button class="mobile-menu-button" id="mobile-menu-button" type="button">
-                &#9776;
-            </button>
-            <div class="nav-right">
-                <ul class="navbar-links">
-                    <li><a href="./menu.html">Início</a></li>
-                    <li class="dropdown">
-                        <a href="./caixa.html" class="dropbtn">Caixa</a>
-                        <li><a href="./estoque.html">Estoque</a></li>
-                        <div class="dropdown-content">
-                            <a href="./caixa.html">Registro de Venda</a>
-                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a>
-                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a>
-                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a>
-                            <a href="#">Fechamento de Caixa</a>
-                        </div>
-                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li>
-                </ul>
-                <button id="logout-btn-menu" type="button">Sair</button>
-            </div>
-        </nav>
-    </header>
-    <main class="main-content">
-        <h1>Bem-vindo(a) ao Sistema!</h1>
-        <p>Selecione uma opção no menu acima para começar.</p>
-    </main>
-    <script src="menu.js"></script>
-</body>
-</html>
+<!DOCTYPE html> <!-- Declara ao navegador que este documento é um arquivo HTML5. -->
+<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como Português do Brasil. -->
+<head> <!-- Inicia a seção de cabeçalho, que contém metadados e links para outros arquivos. -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8, para exibir acentos e símbolos corretamente. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva, adaptando-a a diferentes tamanhos de tela. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Pré-conecta ao servidor de fontes do Google para acelerar o carregamento da fonte. -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> <!-- Importa a fonte 'Playfair Display' do Google Fonts para ser usada na página. -->
+    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos principal do site. -->
+    <link rel="stylesheet" href="menu.css"> <!-- Importa a folha de estilos específica para o menu. -->
+    <title>Menu Principal - Styllo Fashion</title> <!-- Define o título que aparece na aba do navegador. -->
+</head> <!-- Fecha a seção de cabeçalho. -->
+<body> <!-- Inicia o corpo do documento, onde todo o conteúdo visível é colocado. -->
+    <header> <!-- Define uma seção de cabeçalho para a página, contendo a navegação. -->
+        <nav> <!-- Define o contêiner da barra de navegação. -->
+            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Cria um link com o nome da loja que leva para a página do menu. -->
+            <button class="mobile-menu-button" id="mobile-menu-button" type="button"> <!-- Cria um botão para o menu responsivo (visível em telas pequenas). -->
+                &#9776; <!-- Adiciona o caractere especial "hambúrguer" (☰) como ícone do botão. -->
+            </button> <!-- Fecha o botão do menu mobile. -->
+            <div class="nav-right"> <!-- Cria um contêiner para agrupar os elementos à direita da barra de navegação. -->
+                <ul class="navbar-links"> <!-- Cria uma lista não ordenada para os links de navegação. -->
+                    <li><a href="./menu.html">Início</a></li> <!-- Cria um item da lista contendo um link para a página "Início". -->
+                    <li class="dropdown"> <!-- Cria um item da lista que funcionará como um menu suspenso (dropdown). -->
+                        <a href="./caixa.html" class="dropbtn">Caixa</a> <!-- Cria o link principal do dropdown, com o texto "Caixa". -->
+                        <div class="dropdown-content"> <!-- Cria o contêiner que agrupa os itens do menu suspenso. -->
+                            <a href="./caixa.html">Registro de Venda</a> <!-- Cria um link dentro do dropdown para a página de Registro de Venda. -->
+                            <a href="./sangria.html" id="sangria-link" class="hidden">Sangria</a> <!-- Cria um link para a página de Sangria, inicialmente oculto. -->
+                            <a href="#" id="suprimento-link" class="hidden">Suprimento de Caixa</a> <!-- Cria um link (sem destino) para Suprimento de Caixa, inicialmente oculto. -->
+                            <a href="#" id="historico-link" class="hidden">Histórico de Vendas</a> <!-- Cria um link (sem destino) para Histórico de Vendas, inicialmente oculto. -->
+                            <a href="#">Fechamento de Caixa</a> <!-- Cria um link (sem destino) para Fechamento de Caixa. -->
+                        </div> <!-- Fecha o contêiner do dropdown. -->
+                    </li> <!-- Fecha o item da lista do dropdown. -->
+                    <li><a href="./estoque.html">Estoque</a></li> <!-- Cria um item da lista contendo um link para a página "Estoque". -->
+                    <li id="admin-link" class="hidden"><a href="./cadastro-funcionarios.html">Cadastro de Funcionarios</a></li> <!-- Cria um item da lista para o cadastro, inicialmente oculto, para ser exibido apenas para administradores. -->
+                </ul> <!-- Fecha a lista de links de navegação. -->
+                <button id="logout-btn-menu" type="button">Sair</button> <!-- Cria um botão com o texto "Sair" para o usuário fazer logout. -->
+            </div> <!-- Fecha o contêiner dos elementos da direita. -->
+        </nav> <!-- Fecha o contêiner da barra de navegação. -->
+    </header> <!-- Fecha a seção de cabeçalho. -->
+    <main class="main-content"> <!-- Inicia a seção de conteúdo principal da página. -->
+        <h1>Bem-vindo(a) ao Sistema!</h1> <!-- Cria um título principal de boas-vindas. -->
+        <p>Selecione uma opção no menu acima para começar.</p> <!-- Cria um parágrafo de instrução para o usuário. -->
+    </main> <!-- Fecha a seção de conteúdo principal. -->
+    <script src="menu.js"></script> <!-- Carrega e executa o arquivo JavaScript que controla a funcionalidade desta página. -->
+</body> <!-- Fecha a seção do corpo. -->
+</html> <!-- Fecha o documento HTML. -->

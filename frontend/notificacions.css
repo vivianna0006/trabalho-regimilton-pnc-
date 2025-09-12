@@ -1,0 +1,44 @@
+/* O comentário abaixo indica a finalidade geral desta folha de estilos. */
+.toast-container { /* Estiliza o contêiner que irá agrupar todas as notificações. */
+    position: fixed; /* Fixa a posição do contêiner em relação à janela do navegador, para que ele não role com a página. */
+    top: 20px; /* Posiciona o contêiner a 20 pixels de distância do topo da tela. */
+    left: 50%; /* Posiciona o contêiner no meio horizontal da tela. */
+    transform: translateX(-50%); /* Move o contêiner 50% de sua própria largura para a esquerda para centralizá-lo perfeitamente. */
+    z-index: 9999; /* Define uma ordem de empilhamento muito alta para garantir que o contêiner fique sobre todos os outros elementos. */
+    display: flex; /* Utiliza o layout flexbox para alinhar as notificações filhas. */
+    flex-direction: column; /* Organiza as notificações em uma coluna, uma abaixo da outra. */
+    align-items: center; /* Centraliza as notificações horizontalmente dentro do contêiner. */
+    gap: 10px; /* Cria um espaço de 10 pixels entre cada notificação. */
+    pointer-events: none; /* Faz com que o contêiner seja "invisível" para cliques, permitindo clicar em elementos que estejam atrás dele. */
+} /* Fecha o bloco de estilos para a classe .toast-container. */
+
+
+.toast { /* Estiliza cada notificação individual. */
+    padding: 12px 25px; /* Adiciona espaçamento interno para dar respiro ao texto. */
+    border-radius: 25px; /* Arredonda os cantos para criar um formato de pílula. */
+    color: white; /* Define a cor do texto como branco. */
+    font-weight: bold; /* Deixa o texto da notificação em negrito. */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destacar a notificação. */
+    opacity: 0; /* Inicia a notificação totalmente transparente (invisível). */
+    /* A propriedade 'animation' abaixo aplica uma animação completa à notificação. */
+    animation: fadeInOut 4s ease-in-out forwards; /* Aplica a animação chamada 'fadeInOut' com duração de 4s e comportamento específico. */
+} /* Fecha o bloco de estilos para a classe .toast. */
+
+
+.toast.success { /* Estiliza uma notificação quando ela tem a classe 'success'. */
+    background-color: #28a745; /* Define a cor de fundo como verde para indicar sucesso. */
+} /* Fecha o bloco de estilos para .toast.success. */
+
+
+.toast.error { /* Estiliza uma notificação quando ela tem a classe 'error'. */
+    background-color: #e74c3c; /* Define a cor de fundo como vermelho para indicar erro. */
+} /* Fecha o bloco de estilos para .toast.error. */
+
+
+/* O comentário abaixo descreve a animação que será definida. */
+@keyframes fadeInOut { /* Define uma animação chamada 'fadeInOut' com vários estágios. */
+    0% { opacity: 0; transform: translateY(-20px); } /* No início (0%), a notificação está invisível e 20px acima de sua posição final. */
+    15% { opacity: 1; transform: translateY(0); } /* Aos 15% da animação, ela se torna totalmente visível e desce para sua posição normal. */
+    85% { opacity: 1; transform: translateY(0); } /* Dos 15% aos 85%, a notificação permanece visível e parada. */
+    100% { opacity: 0; transform: translateY(-20px); } /* No final (100%), a notificação volta a ficar invisível e sobe 20px. */
+} /* Fecha a definição da animação @keyframes. */
