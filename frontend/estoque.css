@@ -1,5 +1,3 @@
-/* Meus amores o CSS e a parte bonita do nosso codigo, e aqui que
-fica toda a parte das cores,fontes e tamanhos */
 
 /* ==== ESTILOS GERAIS DA PAGINA ==== */
 body { /* Define o estilo do corpo da página inteira. */
@@ -9,40 +7,40 @@ body { /* Define o estilo do corpo da página inteira. */
     margin: 0; /* removendo as margens padrão */
 }
 
-.container { /*  Define o estilo de um elemento de uma div que tem a classe container */
+.container { /* Define o estilo de um elemento de uma div que tem a classe container */
     max-width: 1100px; /* Este elemento terá uma largura máxima */
     margin: auto; /* ficará centralizado na página */
-    background: white; /*  terá um fundo branco */
-    padding: 30px; /* Adiciona um espaçamento interno de 30 pixels em todos os lados   */
+    background: white; /* terá um fundo branco */
+    padding: 30px; /* Adiciona um espaçamento interno de 30 pixels em todos os lados */
     border-radius: 12px; /* Arredonda as bordas do elemento com um raio de 12 pixels */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /*Cria uma sombra suave ao redor da caixa.
-     A sombra é sutil, com um deslocamento de 4 pixels na vertical e um desfoque de 15 pixels.*/
+       A sombra é sutil, com um deslocamento de 4 pixels na vertical e um desfoque de 15 pixels.*/
 }
 
 h1 { /* ==== Define o estilo para todos os títulos de nível 1 ==== */
     text-align: center; /* Centraliza o texto dentro do elemento */
     color: #333; /*Define a cor do texto para um cinza escuro.*/
-    margin-bottom: 20px; /*Adiciona um espaçamento de 20 pixels 
+    margin-bottom: 20px; /*Adiciona um espaçamento de 20 pixels
     na parte de baixo do elemento h1, empurrando o conteúdo que vem depois.*/
 }
 
 /* --- Barra de Pesquisa --- */
-.search-bar {  /* --- estiliza a barra de pesquisa como um todo, como uma div que contém o campo de texto.--- */
-    margin: 20px 0 30px; /* ---  Cria um espaçamento externo.  --- */
-    text-align: center; /* ---  Centraliza qualquer texto ou elemento de linha dentro da barra --- */
+.search-bar { /* --- estiliza a barra de pesquisa como um todo, como uma div que contém o campo de texto.--- */
+    margin: 20px 0 30px; /* --- Cria um espaçamento externo. --- */
+    text-align: center; /* --- Centraliza qualquer texto ou elemento de linha dentro da barra --- */
 }
 
-.search-bar input { /* ---  define a aparência do campo de entrada de texto (<input>) que está dentro da barra de pesquisa. --- */
+.search-bar input { /* --- define a aparência do campo de entrada de texto (<input>) que está dentro da barra de pesquisa. --- */
     width: 80%; /* --- O campo de texto ocupa 80% da largura do seu elemento principal--- */
     max-width: 600px; /* --- Limita a largura máxima do campo a 600 pixels. --- */
     padding: 12px 20px; /* --- Adiciona espaçamento interno: 12 pixels em cima e embaixo, e 20 pixels nas laterais. --- */
-    border: 1px solid #ccc; /* ---  Define uma borda sólida de 1 pixel de espessura com a cor cinza claro  --- */
+    border: 1px solid #ccc; /* --- Define uma borda sólida de 1 pixel de espessura com a cor cinza claro --- */
     border-radius: 30px; /* --- Arredonda os cantos do campo de texto, dando uma aparência de pílula ou botão. --- */
     font-size: 1em; /* --- Define o tamanho da fonte do texto que o usuário digita.
-     1em é geralmente o tamanho padrão do navegador. --- */
+      1em é geralmente o tamanho padrão do navegador. --- */
     outline: none; /* --- Remove o contorno azul ou preto que alguns navegadores adicionam por padrão quando o campo é selecionado (focado). --- */
     transition: all 0.3s ease; /* --- Aplica uma transição suave de 0.3 segundos para todas as propriedades que mudarem,
-     o que deixa as animações mais fluidas. --- */
+      o que deixa as animações mais fluidas. --- */
 }
 
 .search-bar input:focus { /* --- Este bloco aplica estilos apenas quando o campo de texto está selecionado, ou seja, quando o usuário clica nele para digitar. --- */
@@ -53,12 +51,12 @@ h1 { /* ==== Define o estilo para todos os títulos de nível 1 ==== */
 /* ==== Estilos do Layout e Menus ==== */
 .layout { /* ==== Esta seção cria um layout flexível para os elementos da página. ==== */
     display: flex; /* Torna o elemento um contêiner flexível. */
-    gap: 30px; /*  Adiciona um espaço de 30 pixels entre os itens dentro do contêiner flexível.*/
+    gap: 30px; /* Adiciona um espaço de 30 pixels entre os itens dentro do contêiner flexível.*/
     margin-top: 20px; /* Adiciona uma margem de 20 pixels no topo do elemento. */
 }
 
 /* --- Menu de Categorias Lateral --- */
-.menu-categorias { /* --- Este trecho estiliza um menu lateral de categorias. */
+.menu-categorias { /* --- Esta seção estiliza um menu lateral de categorias. */
     width: 250px; /* Define a largura do menu como 250 pixels. */
     padding-right: 30px; /* Adiciona um espaçamento interno de 30 pixels à direita do menu. */
     border-right: 1px solid #ddd; /*Cria uma borda fina de 1 pixel com a cor no lado direito, funcionando como um divisor visual. */
@@ -66,7 +64,7 @@ h1 { /* ==== Define o estilo para todos os títulos de nível 1 ==== */
 
 .menu-categorias button { /* Aqui, os botões dentro do menu de categorias recebem estilos.*/
     display: block; /* Transforma o botão em um elemento de bloco, fazendo com que ele ocupe toda a largura disponível. */
-    width: 100%; /* Garante que o botão ocupe a largura total de seu elemento pai (.menu-categorias). */
+    width: 100%; /* Garante que o botão ocupe a largura total de seu elemento pai (. menu-categorias). */
     padding: 12px; /* Adiciona 12 pixels de espaçamento interno em todos os lados do botão. */
     background: #f0f4f7; /* Define a cor de fundo do botão para um cinza claro. */
     border: none; /*Remove a borda padrão do botão.*/
@@ -75,267 +73,274 @@ h1 { /* ==== Define o estilo para todos os títulos de nível 1 ==== */
     cursor: pointer; /* Muda o cursor do mouse para o ícone de mão quando ele passa sobre o botão, indicando que ele é clicável.*/
     margin-bottom: 8px; /* Adiciona 8 pixels de espaço abaixo de cada botão. */
     border-radius: 4px; /* Arredonda levemente os cantos do botão. */
-    font-weight: 500; /*  Deixa o texto do botão com uma espessura média (negrito).*/
-    transition: all 0.2s ease; /*  Cria uma animação suave de 0.2 segundos para todas as propriedades que mudarem. */
+    font-weight: 500; /* Deixa o texto do botão com uma espessura média (negrito).*/
+    transition: all 0.2s ease; /* Cria uma animação suave de 0.2 segundos para todas as propriedades que mudarem. */
 }
 
 .menu-categorias button:hover { /*aplica estilos quando o mouse está sobre o botão. */
-    background: #e0e6ec; /* Muda a cor de fundo do botão  */
-    border-left: 4px solid #007bff; /*  Muda a borda transparente da esquerda */
+    background: #e0e6ec; /* Muda a cor de fundo do botão */
+    border-left: 4px solid #007bff; /* Muda a borda transparente da esquerda */
 }
 
 /* --- Botão de Voltar --- */
 .btn-voltar { /* botão de "Voltar" recebe seus estilos. */
-    padding: 10px 18px; /* Adiciona espaçamento interno de 10 pixels em cima e embaixo, e 18 pixels nas laterais.  */
-    margin-bottom: 20px; /* Adiciona um espaço de 20 pixels abaixo do botão.  */
-    background-color: #6c757d; /* Define a cor de fundo do botão para um cinza escuro.  */
-    color: white; /* Define a cor do texto para branco.  */
-    border: none; /* Remove a borda padrão do botão.  */
-    border-radius: 5px; /* Arredonda os cantos do botão.  */
+    padding: 10px 18px; /* Adiciona espaçamento interno de 10 pixels em cima e embaixo, e 18 pixels nas laterais. */
+    margin-bottom: 20px; /* Adiciona um espaço de 20 pixels abaixo do botão. */
+    background-color: #6c757d; /* Define a cor de fundo do botão para um cinza escuro. */
+    color: white; /* Define a cor do texto para branco. */
+    border: none; /* Remove a borda padrão do botão. */
+    border-radius: 5px; /* Arredonda os cantos do botão. */
     cursor: pointer; /* Muda o cursor para o ícone de mão. */
-    font-weight: bold; /* Deixa o texto em negrito.  */
-    transition: background-color 0.2s; /* - Adiciona uma transição suave de 0.2 segundos apenas para a mudança de cor de fundo.  */
+    font-weight: bold; /* Deixa o texto em negrito. */
+    transition: background-color 0.2s; /* - Adiciona uma transição suave de 0.2 segundos apenas para a mudança de cor de fundo. */
 }
 
-.btn-voltar:hover { /*Esta parte define a aparência do botão quando o mouse está sobre ele  */
-    background-color: #5a6268; /*  Escurece a cor de fundo do botão.  */
+.btn-voltar:hover { /*Esta parte define a aparência do botão quando o mouse está sobre ele */
+    background-color: #5a6268; /* Escurece a cor de fundo do botão. */
 }
 
 /* --- Botões de Subcategoria --- */
-.lista-subcategorias { /*  Estilos para o contêiner (a lista) que agrupa os botões.  */
-    display: flex; /*  Torna o contêiner um flex container, permitindo que os itens (os botões) se alinhem de forma flexível.  */
-    flex-wrap: wrap; /*  Permite que os botões quebrem para a próxima linha se não houver espaço suficiente.  */
-    gap: 12px; /*  Adiciona um espaçamento de 12 pixels entre os botões.  */
-    margin-bottom: 20px; /*  Cria uma margem de 20 pixels abaixo de todo o contêiner. */
+.list-subcategories { /* Estilos para o contêiner (a lista) que agrupa os botões. */
+    display: flex; /* Torna o contêiner um flex container, permitindo que os itens (os botões) se alinhem de forma flexível. */
+    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha se não houver espaço suficiente. */
+    gap: 12px; /* Adiciona um espaçamento de 12 pixels entre os botões. */
+    margin-bottom: 20px; /* Cria uma margem de 20 pixels abaixo de todo o contêiner. */
 }
 
-.lista-subcategorias button { /*  Estilos aplicados diretamente aos botões dentro da lista.  */
-    padding: 10px 18px; /*  Adiciona espaçamento interno de 10px na vertical e 18px na horizontal.  */
-    background: #007bff;/* Define a cor de fundo dos botões.  */
-    color: white;/*  Define a cor do texto do botão.  */
-    border: none;/*  Remove a borda padrão do botão.  */
-    border-radius: 20px;/*  Arredonda os cantos, criando um efeito de pílula ou botão arredondado.  */
-    cursor: pointer;/*   Muda o cursor do mouse para a mãozinha ao passar por cima, indicando que é clicável.  */
-    font-weight: 500;/* Torna o texto do botão um pouco mais grosso (semi-bold).  */
-    transition: background 0.2s;/*  Anima suavemente a mudança da cor de fundo em 0.2 segundos quando o mouse passa por cima.  */
+.lista-subcategorias button { /* Estilos aplicados diretamente aos botões dentro da lista. */
+    padding: 10px 18px; /* Adiciona espaçamento interno de 10px na vertical e 18px na horizontal. */
+    background: #007bff;/* Define a cor de fundo dos botões. */
+    color: white;/* Define a cor do texto do botão. */
+    border: none;/* Remove a borda padrão do botão. */
+    border-radius: 20px;/* Arredonda os cantos, criando um efeito de pílula ou botão arredondado. */
+    cursor: pointer;/* Muda o cursor do mouse para a mãozinha ao passar por cima, indicando que é clicável. */
+    font-weight: 500;/* Torna o texto do botão um pouco mais grosso (semi-bold). */
+    transition: background 0.2s;/* Anima suavemente a mudança da cor de fundo em 0.2 segundos quando o mouse passa por cima. */
 }
 
-.lista-subcategorias button:hover {/* Estilos aplicados quando o mouse está sobre o botão.  */
-    background: #0056b3;/* Muda a cor de fundo ao passar o mouse.  */
+.lista-subcategorias button:hover { /* Estilos aplicados quando o mouse está sobre o botão. */
+    background: #0056b3;/* Muda a cor de fundo ao passar o mouse. */
 }
 
 /* ==== Estilos da Área de Produtos ==== */
-.produtos {/*   Estilos para o contêiner que agrupa os produtos.  */
-    flex: 1;/*  Faz com que este contêiner ocupe todo o espaço disponível restante dentro do meu contêiner principal.  */
+.produtos { /* Estilos para o contêiner que agrupa os produtos. */
+    flex: 1;/* Faz com que este contêiner ocupe todo o espaço disponível restante dentro do meu contêiner principal. */
 }
 
-.produto {/* Estilos para cada item de produto individual.  */
-    padding: 20px;/*  Adiciona espaçamento interno.  */
-    border-radius: 8px;/*  Arredonda os cantos da caixa do produto.  */
-    border: 1px solid #e0e0e0;/*   Adiciona uma borda fina.  */
-    margin-bottom: 15px;/*  Adiciona espaço abaixo de cada produto.  */
-    background-color: #fafafa;/*  Define a cor de fundo.  */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;/* Anima a elevação e a sombra suavemente.  */
+.produto { /* Estilos para cada item de produto individual. */
+    padding: 20px;/* Adiciona espaçamento interno. */
+    border-radius: 8px;/* Arredonda os cantos da caixa do produto. */
+    border: 1px solid #e0e0e0;/* Adiciona uma borda fina. */
+    margin-bottom: 15px;/* Adiciona espaço abaixo de cada produto. */
+    background-color: #fafafa;/* Define a cor de fundo. */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;/* Anima a elevação e a sombra suavemente. */
 }
 
-.produto:hover {/*  Estilos para quando o mouse está sobre um produto.  */
-    transform: translateY(-5px);/* Move o produto 5 pixels para cima.  */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);/*  Adiciona uma sombra sutil para dar a impressão de que o produto está "flutuando".  */
+.produto:hover { /* Estilos para quando o mouse está sobre um produto. */
+    transform: translateY(-5px);/* Move o produto 5 pixels para cima. */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);/* Adiciona uma sombra sutil para dar a impressão de que o produto está "flutuando". */
 }
 
 /* --- Alertas de Estoque --- */
-.produto.alerta {/*  Estilos para produtos com a classe alerta.  */
-    border-left: 5px solid #ffc107;/* Adiciona uma borda esquerda grossa de cor amarela para indicar um alerta.  */
-    background-color: #fff8e1;/*  Muda o fundo.  */
+.produto.alerta { /* Estilos para produtos com a classe alerta. */
+    border-left: 5px solid #ffc107;/* Adiciona uma borda esquerda grossa de cor amarela para indicar um alerta. */
+    background-color: #fff8e1;/* Muda o fundo. */
 }
 
-.produto.sem-estoque {/*  Estilos para produtos com a classe sem-estoque. */
-    border-left: 5px solid #dc3545;/* Adiciona uma borda esquerda grossa.  */
-    background-color: #fcebeb;/*  Muda o fundo.  */
+.produto.sem-estoque { /* Estilos para produtos com a classe sem-estoque. */
+    border-left: 5px solid #dc3545;/* Adiciona uma borda esquerda grossa. */
+    background-color: #fcebeb;/* Muda o fundo. */
 }
 
 /* --- Detalhes do Produto --- */
-.produto strong {/*  Estilos para o texto em negrito dentro de um produto.  */
-    color: #333;/*  Define a cor do texto .  */
+.produto strong { /* Estilos para o texto em negrito dentro de um produto. */
+    color: #333;/* Define a cor do texto . */
 }
 
-.produto em {/*  Estilos para o texto em itálico dentro de um produto. */
-    color: #666;/*  Define a cor do texto.  */
-    font-style: normal;/* Remove o itálico padrão.  */
-    display: block;/*Faz com que o elemento ocupe uma nova linha.  */
+.produto em { /* Estilos para o texto em itálico dentro de um produto. */
+    color: #666;/* Define a cor do texto. */
+    font-style: normal;/* Remove o itálico padrão. */
+    display: block;/*Faz com que o elemento ocupe uma nova linha. */
     margin-top: 5px;/*Adiciona um pequeno espaço acima.*/
 }
 
-.valor-produto {/*  Estilos para a classe valor-produto.  */
+.valor-produto { /* Estilos para a classe valor-produto. */
     display: block;/* Garante que o valor apareça em sua própria linha. */
     margin: 10px 0;/*Adiciona margem de 10px acima e abaixo. */
-    color: #28a745;/*  Cor do texto. */
-    font-size: 1.3em;/*   Aumenta o tamanho da fonte em 30% em relação ao padrão.  */
-    font-weight: bold;/* Torna o texto do valor negrito.  */
+    color: #28a745;/* Cor do texto. */
+    font-size: 1.3em;/* Aumenta o tamanho da fonte em 30% em relação ao padrão. */
+    font-weight: bold;/* Torna o texto do valor negrito. */
 }
 
 /* ==== ESTILO MELHORADO: TAMANHOS E BOTÕES DE QUANTIDADE ==== */
-.area-tamanhos {/*  Estilos para a área que contém os tamanhos dos produtos. */
-    display: flex;/*  Organiza os itens de tamanho em uma linha.  */
-    flex-wrap: wrap;/* Permite que os itens quebrem para a próxima linha se não houver espaço.  */
-    gap: 10px;/*Adiciona 10px de espaçamento entre os itens.  */
-    margin: 15px 0;/*Adiciona margem de 15px acima e abaixo.  */
+.area-tamanhos { /* Estilos para a área que contém os tamanhos dos produtos. */
+    display: flex;/* Organiza os itens de tamanho em uma linha. */
+    flex-wrap: wrap;/* Permite que os itens quebrem para a próxima linha se não houver espaço. */
+    gap: 10px;/*Adiciona 10px de espaçamento entre os itens. */
+    margin: 15px 0;/*Adiciona margem de 15px acima e abaixo. */
 }
 
-.tamanho-item {/*  Estilos para cada "pílula" de tamanho, como "P" ou "M".  */
-    display: flex;/* Organiza o texto e os botões dentro do item.  */
-    align-items: center;/* Centraliza verticalmente o conteúdo.  */
-    background-color: #f0f0f0;/* Cor de fundo cinza claro.  */
-    padding: 6px 10px;/*  Espaçamento interno.  */
-    border-radius: 20px;/*Cantos arredondados, criando o formato de pílula.  */
-    font-size: 0.9em;/*Diminui o tamanho da fonte.  */
-    font-weight: 500;/*Deixa a fonte semi-negrito.  */
+.tamanho-item { /* Estilos para cada "pílula" de tamanho, como "P" ou "M". */
+    display: flex;/* Organiza o texto e os botões dentro do item. */
+    align-items: center;/* Centraliza verticalmente o conteúdo. */
+    background-color: #f0f0f0;/* Cor de fundo cinza claro. */
+    padding: 6px 10px;/* Espaçamento interno. */
+    border-radius: 20px;/*Cantos arredondados, criando o formato de pílula. */
+    font-size: 0.9em;/*Diminui o tamanho da fonte. */
+    font-weight: 500;/*Deixa a fonte semi-negrito. */
 }
 
-.tamanho-item.alerta-tamanho {/* : Estilo para itens de tamanho com classe alerta-tamanho. */
+.tamanho-item.alerta-tamanho { /* : Estilo para itens de tamanho com classe alerta-tamanho. */
     background-color: #fff3cd;/* Muda o fundo para um amarelo suave, indicando baixo estoque. */
 }
 
-.tamanho-item.sem-estoque-tamanho {/*Estilo para itens de tamanho com classe sem-estoque-tamanho.  */
-    background-color: #f5c6cb;/*Muda o fundo para um vermelho suave, indicando que não há estoque.  */
+.tamanho-item.sem-estoque-tamanho { /*Estilo para itens de tamanho com classe sem-estoque-tamanho. */
+    background-color: #f5c6cb;/*Muda o fundo para um vermelho suave, indicando que não há estoque. */
 }
 
-.tamanho-item span {/*Estilos para o texto do tamanho (ex: "P").  */
-    font-weight: bold;/*  Deixa o texto em negrito.  */
-    color: #555;/* Cor de texto  */
-    margin-right: 8px;/*Adiciona 8px de espaço à direita do texto.  */
+.tamanho-item span { /*Estilos para o texto do tamanho (ex: "P"). */
+    font-weight: bold;/* Deixa o texto em negrito. */
+    color: #555;/* Cor do texto */
+    margin-right: 8px;/*Adiciona 8px de espaço à direita do texto. */
 }
 
-.tamanho-item button {/* Estilos para os botões de adicionar e remover quantidade (+ e -). */
-    width: 28px;/* Define o tamanho do botão para ser quadrado.  */
+.tamanho-item button { /* Estilos para os botões de adicionar e remover quantidade (+ e -). */
+    width: 28px;/* Define o tamanho do botão para ser quadrado. */
     height: 28px;/*Define o tamanho do botão para ser quadrado. */
-    border-radius: 50%;/* Deixa os botões redondos.  */
-    border: 1px solid #ddd;/* Borda cor.  */
-    background-color: white;/* Fundo.  */
-    cursor: pointer;/*  Muda o cursor para uma mãozinha.  */
-    font-weight: bold;/* Deixa o texto em negrito.  */
-    line-height: 1;/* Ajuda a centralizar o texto verticalmente.  */
-    font-size: 1em;/*Tamanho da fonte padrão.  */
+    border-radius: 50%;/* Deixa os botões redondos. */
+    border: 1px solid #ddd;/* Borda cor. */
+    background-color: white;/* Fundo. */
+    cursor: pointer;/* Muda o cursor para uma mãozinha. */
+    font-weight: bold;/* Deixa o texto em negrito. */
+    line-height: 1;/* Ajuda a centralizar o texto verticalmente. */
+    font-size: 1em;/*Tamanho da fonte padrão. */
     color: #555;/* Cor de texto cinza escuro. */
     transition: all 0.2s;/* Animação suave para todas as mudanças de estilo. */
 }
 
-.tamanho-item button:hover {/* Estilos quando o mouse passa sobre os botões.  */
-    background-color: #e9e9e9;/* Muda o fundo.  */
-    transform: scale(1.1);/* Aumenta o botão em 10% para um efeito visual de interação.  */
+.tamanho-item button:hover { /* Estilos quando o mouse passa sobre os botões. */
+    background-color: #e9e9e9;/* Muda o fundo. */
+    transform: scale(1.1);/* Aumenta o botão em 10% para um efeito visual de interação. */
 }
 
-.total {/*  Estilos para o elemento de total. */
-    margin-top: 10px;/*  Adiciona 10px de margem no topo.  */
-    font-weight: bold;/* Texto em negrito.  */
+.total { /* Estilos para o elemento de total. */
+    margin-top: 10px;/* Adiciona 10px de margem no topo. */
+    font-weight: bold;/* Texto em negrito. */
     font-size: 1.1em;/* Aumenta o tamanho da fonte. */
-    display: block;/* Garante que o total fique em uma nova linha.  */
-    color: #555;/* Cor de texto.  */
+    display: block;/* Garante que o total fique em uma nova linha. */
+    color: #555;/* Cor do texto. */
 }
 
 /* ==== ESTILO MELHORADO: FORMULÁRIO DE ADIÇÃO DE PRODUTOS ==== */
-.form {/* Estilos para o formulário.  */
-    margin-top: 40px;/*  Margem de 40px no topo. */
+.form { /* Estilos para o formulário. */
+    margin-top: 40px;/* Margem de 40px no topo. */
     padding: 30px;/* Espaçamento interno. */
     border-top: 2px dashed #ccc;/* Borda superior pontilhada. */
     background-color: #f8fafd;/* Cor de fundo suave. */
-    border-radius: 12px;/* Cantos arredondados.  */
+    border-radius: 12px;/* Cantos arredondados. */
 }
 
-.form h3 {/* Estilos para o título do formulário.  */
+.form h3 { /* Estilos para o título do formulário. */
     text-align: center;/* Centraliza o texto. */
-    color: #444;/* Cor de texto.  */
-    margin-bottom: 25px;/*Margem de 25px abaixo.  */
+    color: #444;/* Cor do texto. */
+    margin-bottom: 25px;/*margem inferior de 25px. */
 }
 
-.form label {/*Estilos para os rótulos de campos.  */
-    display: block;/*Faz com que o rótulo ocupe uma linha inteira.  */
+.form label { /*Estilos para os rótulos de campos. */
+    display: block;/*Faz com que o rótulo ocupe uma linha inteira. */
     font-weight: bold;/*Texto em negrito. */
-    margin-bottom: 8px;/* Margem abaixo do rótulo.  */
-    color: #555;/* Cor de texto cinza escuro.  */
+    margin-bottom: 8px;/* Margem abaixo do rótulo. */
+    color: #555;/* Cor de texto cinza escuro. */
 }
 
 .form input,
-.form select {/* Estilos para os campos de entrada de texto e de seleção. */
-    width: 100%;/* Ocupa 100% da largura disponível.  */
-    box-sizing: border-box;/* Garante que o preenchimento e a borda não aumentem o tamanho total do elemento.  */
-    padding: 12px;/* Espaçamento interno.  */
-    margin-bottom: 15px;/* Margem abaixo.  */
-    border: 1px solid #ddd;/*Borda fina e cinza.  */
+.form select { /* Estilos para os campos de entrada de texto e de seleção. */
+    width: 100%;/* Ocupa 100% da largura disponível. */
+    box-sizing: border-box;/* Garante que o preenchimento e a borda não aumentem o tamanho total do elemento. */
+    padding: 12px;/* Espaçamento interno. */
+    margin-bottom: 15px;/* Margem abaixo. */
+    border: 1px solid #ddd;/*Borda fina e cinza. */
     border-radius: 8px;/* Cantos arredondados. */
-    font-size: 1em;/*  Tamanho de fonte padrão.  */
-    background-color: white;/* Fundo cor.  */
-    transition: border-color 0.2s;/* Animação suave para a cor da borda.  */
+    font-size: 1em;/* Tamanho de fonte padrão. */
+    background-color: white;/* Fundo cor. */
+    transition: border-color 0.2s;/* Animação suave para a cor da borda. */
 }
 
-.form input:focus,/* Estilos quando o campo está focado (selecionado). */
+.form input:focus, /* Estilos quando o campo está focado (selecionado). */
 .form select:focus {
     border-color: #007bff;/* Muda a cor da borda. */
-    outline: none;/* Remove a borda de foco padrão do navegador.  */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);/*Adiciona uma sombra.  */
+    outline: none;/* Remove a borda de foco padrão do navegador. */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);/*Adiciona uma sombra. */
 }
 
-.form fieldset {/* Estilos para o elemento fieldset, usado para agrupar campos.  */
-    padding: 20px;/* Espaçamento interno.  */
-    border: 1px solid #ddd;/* Borda fina e cinza.  */
+.form fieldset { /* Estilos para o elemento fieldset, usado para agrupar campos. */
+    padding: 20px;/* Espaçamento interno. */
+    border: 1px solid #ddd;/* Borda fina e cinza. */
     border-radius: 8px;/* Cantos arredondados. */
-    margin-bottom: 20px;/* Margem abaixo.  */
+    margin-bottom: 20px;/* Margem abaixo. */
     background-color: #fff;/* Fundo branco. */
 }
 
-.form fieldset legend {/* Estilos para a legenda do fieldset.  */
-    font-weight: bold;/* Texto em negrito.  */
-    color: #007bff;/*  Cor de texto.  */
-    padding: 0 10px;/* Espaçamento interno para separar a legenda da borda.  */
+/* Adicionei essa nova classe para estilizar o titulo */
+.form .legend-title {
+    font-size: 1.2em; /* Deixa o texto um pouco maior */
+    color: #0056b3; /* Adiciona uma cor azul mais escura */
+    text-transform: uppercase; /* Deixa o texto em letras maiúsculas */
+    letter-spacing: 1px; /* Espaça um pouco as letras */
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px; /* Adiciona um espaço na parte de baixo */
 }
 
-#tamanhos-inputs {/*Estilos para a área que agrupa os campos de tamanho e quantidade.  */
+#tamanhos-inputs { /*Estilos para a área que agrupa os campos de tamanho e quantidade. */
     display: flex;/* Organiza os itens em uma linha. */
-    flex-wrap: wrap;/* Permite que os itens quebrem a linha.  */
-    gap: 15px;/* Espaçamento entre os itens. */
+    flex-wrap: wrap;/* Permite que os itens quebrem a linha. */
+    gap: 30px;/* Aumentei o espaçamento entre os itens para 30px, antes era 15px. */
+    justify-content: center; /* Centraliza os grupos de tamanho na linha */
 }
 
-.tamanho-input-item {/*Estilos para cada conjunto de rótulo e campo de input de tamanho.  */
-    display: flex;/*  Organiza o rótulo e o campo verticalmente.  */
-    flex-direction: column;/*Alinha os itens um abaixo do outro.  */
-    align-items: center;/*Centraliza os itens horizontalmente.  */
-    flex: 1 1 80px;/* Permite que o item cresça, encolha e tenha uma base de 80px.  */
+.tamanho-input-group { /* Agrupa o label e o input, permitindo que eles fiquem alinhados lado a lado. */
+    display: flex;
+    flex-direction: column; /* Organiza o label e o input um abaixo do outro */
+    align-items: center; /* Centraliza horizontalmente o label e o input */
+    margin-bottom: 10px; /* Adiciona um pequeno espaço abaixo de cada grupo */
+    width: 80px; /* Adiciona uma largura base para cada grupo de input, garantindo que a distribuição seja mais uniforme e que a quebra de linha ocorra de forma ordenada. */
+    flex-shrink: 0; /* Impede que os itens encolham abaixo da largura base */
 }
 
-.tamanho-input-item label {/*Estilos para o rótulo dentro do item de input.  */
-    font-weight: bold;/* Texto em negrito.  */
-    color: #555;/* Cor de texto.  */
-    margin-bottom: 5px;/* Margem abaixo do rótulo.  */
+.tamanho-input-group label { /*Estilos para o rótulo dentro do item de input. */
+    font-weight: bold;/* Texto em negrito. */
+    color: #555;/* Cor do texto. */
+    margin-bottom: 5px;/* Margem abaixo do rótulo. */
 }
 
-.tamanho-input-item input[type='number'] {/* Estilos para os campos de input de número.  */
-    width: 60px;/* Largura fixa.  */
-    text-align: center;/* Centraliza o texto do número.  */
-    padding: 8px;/* Espaçamento interno.  */
-    border: 1px solid #ccc;/* Borda fina.  */
-    border-radius: 6px;/* Cantos arredondados.  */
-    font-size: 1em;/*Tamanho da fonte padrão.  */
+.tamanho-input-group input[type='number'] { /* Estilos para os campos de input de número. */
+    width: 60px;/* Largura fixa. */
+    text-align: center;/* Centraliza o texto do número. */
+    padding: 8px;/* Espaçamento interno. */
+    border: 1px solid #ccc;/* Borda fina. */
+    border-radius: 6px;/* Cantos arredondados. */
+    font-size: 1em;/* Tamanho da fonte padrão. */
 }
 
-.tamanho-input-item input[type='number']::-webkit-outer-spin-button,/*  Remove as setas de incremento e decremento do navegador Chrome/Safari.  */
-.tamanho-input-item input[type='number']::-webkit-inner-spin-button {/* Remove as setas de incremento e decremento do navegador Chrome/Safari.  */
-    -webkit-appearance: none;/* Desativa a aparência padrão.  */
+.tamanho-input-group input[type='number']::-webkit-outer-spin-button, /* Remove as setas de incremento e decremento do navegador Chrome/Safari. */
+.tamanho-input-group input[type='number']::-webkit-inner-spin-button { /* Remove as setas de incremento e decremento do navegador Chrome/Safari. */
+    -webkit-appearance: none;/* Desativa a aparência padrão. */
     margin: 0;/* Remove a margem. */
 }
 
-.form button[type='submit'] {/* Estilos para o botão de envio.  */
+.form button[type='submit'] { /* Estilos para o botão de envio. */
     width: 100%;/*Ocupa 100% da largura. */
     padding: 15px;/* Espaçamento interno. */
     background-color: #28a745;/* Cor de fundo.*/
-    color: white;/*  Cor de texto branco. */
-    border: none;/*  Remove a borda.*/
-    cursor: pointer;/*Muda o cursor para uma mãozinha.  */
-    border-radius: 8px;/*Cantos arredondados.  */
+    color: white;/* Cor de texto branco. */
+    border: none;/* Remove a borda.*/
+    cursor: pointer;/*Muda o cursor para uma mãozinha. */
+    border-radius: 8px;/*Cantos arredondados. */
     font-size: 1.1em;/* Aumenta o tamanho da fonte. */
-    font-weight: bold;/*   Texto em negrito.*/
-    transition: background-color 0.2s;/*  Animação suave para a cor de fundo. */
+    font-weight: bold;/* Texto em negrito.*/
+    transition: background-color 0.2s;/* Animação suave para a cor de fundo. */
 }
 
-.form button[type='submit']:hover {/*Estilos quando o mouse passa sobre o botão de envio.  */
-    background-color: #0a2e07;/* Muda a cor de fundo .  */
+.form button[type='submit']:hover { /*Estilos quando o mouse passa sobre o botão de envio. */
+    background-color: #0a2e07;/* Muda a cor de fundo . */
 }
