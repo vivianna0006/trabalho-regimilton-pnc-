@@ -1,8 +1,6 @@
 // Constante que armazena a URL base do backend.
 const BACKEND_URL = "http://localhost:3000";
 // --- Estrutura de Dados ---
-
-// Objeto que define as categorias e subcategorias disponíveis.
 let categorias = [  // Declara uma variável chamada categorias e a inicializa como um array (uma lista).
     {
         nome: "Acessórios", // Dentro do objeto, essa linha define uma propriedade chamada nome com o valor "Acessórios". É o nome da sua categoria principal.

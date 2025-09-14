@@ -1,66 +1,93 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estoque Styllo Fashion Modas</title>
-    <link rel="stylesheet" href="menu.css" />
-    <link rel="stylesheet" href="estoque.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-       <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
-        <div class="nav-right">
-          <ul class="navbar-links">
-            <li><a href="./index.html">Início</a></li>
-            <li><a href="./caixa.html">Caixa</a></li>
-            <li><a href="./estoque.html">Estoque</a></li>
-            <li>
-              <a href="./cadastro-funcionarios.html">Cadastro de Funcionários</a>
-            </li>
-            <li><a href="./sair.html">Sair</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+<!DOCTYPE html> <!-- Declara ao navegador que este é um documento HTML -->
+<html lang="pt-BR"> <!-- Definindo o idioma como Português do Brasil. -->
+  <head> <!-- Inicia a seção de cabeçalho, com informações para o navegador. -->
+    <meta charset="UTF-8" /> <!-- Define o conjunto de caracteres para UTF-8, permitindo acentos e símbolos. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura a página 
+    para se responsiva a diferentes tamanhos de tela. -->
+    <title>Estoque Styllo Fashion Modas</title> <!-- Define o título que aparece na aba do navegador. -->
+    <link rel="stylesheet" href="menu.css" /> <!-- Importa a folha de estilos específica para o menu. -->
+    <link rel="stylesheet" href="estoque.css" /> <!-- Importa a folha de estilos específica para o estoque. -->
+  </head>  <!-- Fecha a seção de cabeçalho. -->
+  <body> <!-- engloba todo o conteúdo visível da página. -->
+    <header> <!-- Cria a seção de cabeçalho da página. -->
+      <nav> <!-- indica que este bloco contém links de navegação. -->
+       <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a> <!-- Cria um link com o 
+       nome da loja parceira, e envia para o menu.html  -->
+        <div class="nav-right"> <!-- contêiner (<div>) agrupa elementos, é usada para posicionar
+           a lista de links à direita do nome da empresa parceira usando CSS. -->
+          <ul class="navbar-links"> <!-- Cria uma lista não ordenada (<ul>), tambem esta sendo 
+            usada para estilizar a lista inteira-->
+            <li><a href="./index.html">Início</a></li> <!-- Cria um link para quando clicado, 
+            leva o usuário para a página index.html. O ponto e barra -->
+            <li><a href="./caixa.html">Caixa</a></li> <!-- Assim como antes, 
+            mas cria um link para a página caixa.html com o texto "Caixa". -->
+            <li><a href="./estoque.html">Estoque</a></li> <!-- Mais um item de lista, 
+            este link direciona para a página estoque.html com o texto "Estoque". -->
+             <li> <a href="./cadastro-funcionarios.html">Cadastro de Funcionários</a> </li> <!-- Ele cria um link para a página cadastro-funcionarios.html 
+             com o texto "Cadastro de Funcionários". -->
+            <li><a href="./sair.html">Sair</a></li> <!-- Ele cria um link para a página ./sair.html
+             com o texto "Sair". -->
+          </ul> <!-- Fecha a lista não ordenada que foi aberta anteriormente com a tag <ul>. -->
+        </div> <!-- Fecha o contêiner <div> que agrupa a lista de links. -->
+      </nav> <!-- Fecha a tag de navegação <nav>. -->
+    </header> <!-- Fecha a tag de cabeçalho <header>. -->
 
-    <main class="main-content">
-      <div class="container">
-        <h1>Estoque Styllo Fashion Modas</h1>
-        <div class="search-bar">
-          <input
+    <main class="main-content">  <!-- "main" Define o conteúdo principal e único da página e o atributo "class" atribui uma classe CSS.  -->
+      <div class="container">  <!-- Usada para centralizar o conteúdo e limitar sua largura, deixando a página mais organizada. -->
+        <h1>Estoque Styllo Fashion Modas</h1>  <!-- Cria um cabeçalho de nível 1, com o titulo da pagina -->
+        <div class="search-bar">  <!-- A classe "search-bar" é usada para estilizar a barra de pesquisa, como sua posição e cor. -->
+          <!--Logo abaixo, "<input" cria um campo de entrada de texto onde o usuário pode digitar.  type="text": Especifica que o campo é para texto.
+          id="campo-busca": Atribui um identificador único para este elemento. placeholder="Buscar por produtos, categorias ou ID...": 
+          É um texto que aparece dentro do campo de busca, dando uma dica ao usuário sobre o que ele pode digitar. -->
+          <input  
             type="text"
             id="campo-busca"
             placeholder="Buscar por produtos, categorias ou ID..."
           />
-        </div>
+        </div> <!-- Fecha o contêiner <div>.-->
 
-        <div class="layout">
-          <div class="menu-categorias" id="menu-categorias">
-            </div>
-          <div class="produtos" id="area-produtos">
-            <h2>Bem-vindo!</h2>
-            <p>Selecione uma categoria para ver os produtos.</p>
-          </div>
-        </div>
+        <div class="layout"> <!-- Aqui indica que o CSS associado a ela define a forma como os elementos internos se comportam. -->
+          <div class="menu-categorias" id="menu-categorias"> <!--Um contêiner (<div>) que será o menu de categorias do site. 
+             A classe menu-categorias é usada para estilizar este menu.
+             "id" é um identificador único, o JS usa este id para preencher dinamicamente este <div>. -->
+          <div class="produtos" id="area-produtos">  <!-- <Um contêiner (<div>) que será como a área onde os produtos serão exibidos.
+             classe produtos é usada para estilização,O id="area-produtos" permite que o JS selecione este elemento 
+             para injetar o HTML dos produtos. -->
+            <h2>Bem-vindo!</h2> <!-- Um cabeçalho de nível 2 (<h2>), este título é exibido na área de produtos para dar uma mensagem inicial ao usuário. -->
+            <p>Selecione uma categoria para ver os produtos.</p> <!-- Um parágrafo (<p>) com uma instrução para o usuário. Essa mensagem provavelmente será 
+              substituída pelo conteúdo dos produtos quando uma categoria for selecionada. -->
+          </div>  <!-- Fecha o contêiner <div>. -->
+        </div>  <!-- Fecha o contêiner <div>. -->
 
-        <form id="form-produto" class="form">
-          <h3>Adicionar Novo Produto</h3>
-          <label for="categoria-select">Categoria:</label>
-          <select id="categoria-select" required></select>
+         <form id="form-produto" class="form"> <!-- Cria um formulário "form" para coletar dados.
+id="form-produto" Dá um nome único ao formulário para que o JS possa interagir com ele,
+class="form" Atribui uma classe para estilização via CSS. -->
+          <h3>Adicionar Novo Produto</h3> <!-- Cria um cabeçalho de nível 3, exibindo o título "Adicionar Novo Produto". -->
+          <label for="categoria-select">Categoria:</label> <!-- "label" Cria um rótulo para o campo de seleção de categoria,
+            for="categoria-select" Vincula este rótulo ao elemento com o id categoria-select, melhorando a acessibilidade. -->
+          <select id="categoria-select" required></select> <!-- "select" Cria um menu suspenso para escolher a categoria.
+            id="categoria-select" Identificador único, ja o required diz que o campo deve ser preenchido para que o formulário seja enviado,
+             A lista de opções será preenchida pelo por JS.-->
 
-          <label for="subcategoria-select">Subcategoria:</label>
-          <select id="subcategoria-select"></select>
+          <label for="subcategoria-select">Subcategoria:</label> <!-- Rótulo para o menu de subcategoria. -->
+          <select id="subcategoria-select"></select> <!--Menu suspenso para escolher a subcategoria,
+          suas opções também serão preenchidas por JS, após uma categoria principal ser selecionada. -->
 
-          <input type="number" id="id" placeholder="ID do produto" required />
-          <input type="text" id="nome" placeholder="Nome do produto" required />
+          <input type="number" id="id" placeholder="ID do produto" required /> <!--  "input" Cria um campo de entrada para o ID do produto.
+          type="number" ele aceita apenas números, placeholder="ID do produto" Texto indica o que aparece no campo,
+          required campo obrigatório. -->
+          <input type="text" id="nome" placeholder="Nome do produto" required /> <!-- input" Cria um campo de entrada para o nome do produto,
+           type="text" ele aceita apenas texto, placeholder="Nome do produto" Texto indica o que aparece no campo,
+           required campo obrigatório.-->
+            <!-- Logo abaixo, e um campo de texto para a descrição do produto. -->
           <input
             type="text"
             id="descricao"
             placeholder="Descrição (Ex: Saia rosa floral)"
             required
           />
+          <!-- Logo abaixo, e um campo numérico para o valor do produto, onde step="0.01" permite valores com duas casas decimais,
+           min="0" não aceita valores negativos, -->
           <input
             type="number"
             id="valor-produto"
@@ -70,15 +97,17 @@
             required
           />
 
-          <fieldset id="fieldset-tamanhos">
-            <legend>Quantidades por Tamanho</legend>
-            <div id="tamanhos-inputs"></div>
-          </fieldset>
-          <button type="submit">Adicionar Produto</button>
-        </form>
-      </div>
-    </main>
+          <fieldset id="fieldset-tamanhos"> <!-- "fieldseet" Cria um grupo de campos relacionados, aqui para as quantidades por tamanho. -->
+            <legend>Quantidades por Tamanho</legend> <!-- Define uma legenda para o <fieldset>, dando um título ao grupo. -->
+            <div id="tamanhos-inputs"></div> <!-- Um contêiner (<div>) que serve como um espaço reservado. Os campos de entrada de quantidade 
+              (<input>) para cada tamanho (ex: P, M, G) serão adicionados dinamicamente aqui por JS. -->
+          </fieldset> <!-- Fecha o fieldset. -->
+          <button type="submit">Adicionar Produto</button> <!-- "button" Cria um botão que, quando clicado, tenta enviar o formulário. -->
+        </form> <!-- Fecha o form. -->
+      </div> <!-- Fecha o contêiner <div>. -->
+    </main> <!-- Fecha o main. -->
 
-    <script src="estoque.js"></script>
-  </body>
-</html>
+    <script src="estoque.js"></script> <!-- Importa um arquivo JS externo(estoque.js). Este script será responsável 
+    por processar o formulário,. -->
+  </body> <!-- Fecha o body. -->
+</html> <!-- html. -->
