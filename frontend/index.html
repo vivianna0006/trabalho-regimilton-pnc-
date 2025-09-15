@@ -34,15 +34,22 @@
 
 
     <script src="script.js"></script> <!-- Carrega e executa o arquivo JavaScript que controla a lógica desta página. -->
-    <script>
+  <script>
+  // Função que aplica a máscara de CPF em um campo de input
   function mascaraCPF(input) {
-    let value = input.value.replace(/\D/g, ""); // tira tudo que não é número
-    value = value.replace(/(\d{3})(\d)/, "$1.$2");
-    value = value.replace(/(\d{3})(\d)/, "$1.$2");
-    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    input.value = value;
+    // Remove todos os caracteres que não são números (fica só com dígitos)
+    let value = input.value.replace(/\D/g, ""); 
+    // Insere um ponto após os 3 primeiros dígitos
+    value = value.replace(/(\d{3})(\d)/, "$1.$2"); 
+    // Insere outro ponto após os 6 primeiros dígitos
+    value = value.replace(/(\d{3})(\d)/, "$1.$2"); 
+    // Insere um traço antes dos últimos 2 dígitos
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); 
+    // Atualiza o valor do input com a string formatada
+    input.value = value; 
   }
 </script>
+
 </div> <!-- Fecha o contêiner principal. -->
 </body> <!-- Fecha a seção do corpo. -->
 </html> <!-- Fecha o documento HTML. -->
