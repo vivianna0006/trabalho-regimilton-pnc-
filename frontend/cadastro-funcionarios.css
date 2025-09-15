@@ -1,8 +1,11 @@
-.main-content .form-box {
+/* Estiliza a caixa principal do formulário dentro da área de conteúdo principal */
+ .main-content .form-box {
     max-width: 450px; /* Define a largura máxima do formulário como 450px */
     width: 100%; /* Faz o formulário ocupar toda a largura disponível até o máximo definido */
 }
 
+
+/* Estiliza o título principal (H1) dentro da caixa do formulário */
 .form-box h1 {
     text-align: center; /* Centraliza o texto do título */
     color: #333; /* Cor do título em cinza escuro */
@@ -10,6 +13,8 @@
     margin-bottom: 10px; /* Espaçamento abaixo do título */
 }
 
+
+/* Estiliza os parágrafos (p) dentro da caixa do formulário */
 .form-box p {
     text-align: center; /* Centraliza o texto do parágrafo */
     color: #666; /* Cor do texto em cinza médio */
@@ -17,16 +22,22 @@
     font-size: 0.95rem; /* Define o tamanho da fonte do parágrafo */
 }
 
+
+/* Estiliza o formulário de cadastro em si */
 #cadastro-form {
     display: flex; /* Usa flexbox para organizar os elementos */
     flex-direction: column;  /* Organiza os elementos em coluna (um embaixo do outro) */
     gap: 15px; /* Espaçamento entre os elementos */
 }
 
+
+/* Estiliza os grupos de input (label + campo) */
 .input-group {
     margin-bottom: 0; /* Remove o espaçamento inferior do grupo de input */
 }
 
+
+/* Estiliza as etiquetas (labels) dos campos do formulário */
 .input-group label {
     display: block; /* Faz o label ocupar uma linha inteira */
     margin-bottom: 5px; /* Espaçamento abaixo do texto do label */
@@ -34,6 +45,8 @@
     color: #444; /* Define a cor do label como cinza escuro */
 }
 
+
+/* Estiliza tanto os campos de texto (input) quanto os de seleção (select) */
 .input-group input,
 .input-group select {
     width: 100%; /* Faz o input/select ocupar toda a largura disponível */
@@ -45,6 +58,8 @@
     transition: border-color 0.3s, box-shadow 0.3s; /* Suaviza as mudanças na cor da borda e na sombra ao focar */
 }
 
+
+/* Estiliza os campos de texto e seleção quando o utilizador clica neles (estado de foco) */
 .input-group input:focus,
 .input-group select:focus {
     outline: none; /* Remove o contorno padrão ao focar */
@@ -52,31 +67,40 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  /* Aplica uma sombra azul clara ao focar */
 }
 
+
+/* Estiliza o botão de submissão do formulário */
 #cadastro-form button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 15px; /* Adiciona um espaçamento acima do botão. */
+    width: 100%; /* Faz o botão ocupar toda a largura. */
+    padding: 12px; /* Adiciona um espaçamento interno. */
+    background-color: #28a745; /* Define a cor de fundo como verde. */
+    border: none; /* Remove a borda padrão. */
+    color: white; /* Define a cor do texto como branca. */
+    font-size: 16px; /* Define o tamanho da fonte. */
+    font-weight: bold; /* Deixa o texto em negrito. */
+    border-radius: 5px; /* Deixa os cantos arredondados. */
+    cursor: pointer; /* Transforma o cursor numa "mãozinha" ao passar por cima. */
+    transition: background-color 0.3s; /* Suaviza a mudança de cor ao passar o mouse. */
 }
 
+
+/* Estiliza o botão quando o utilizador passa o mouse por cima */
 #cadastro-form button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Muda a cor de fundo para um verde mais escuro. */
 }
 
+
+/* Estiliza a área de mensagens de feedback (sucesso ou erro) */
 .message {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-    min-height: 20px;
-    font-weight: bold;
+    margin-top: 15px; /* Adiciona um espaçamento acima da mensagem. */
+    text-align: center; /* Centraliza o texto. */
+    font-size: 14px; /* Define o tamanho da fonte. */
+    min-height: 20px; /* Garante uma altura mínima para evitar que o layout "salte". */
+    font-weight: bold; /* Deixa o texto em negrito. */
 }
+
+
+/* Estiliza o parágrafo de introdução, adicionando uma linha de separação abaixo */
 .main-content .intro-p {
     margin-bottom: 25px; /* Aumenta o espaço abaixo do parágrafo */
     padding-bottom: 20px; /* Adiciona um preenchimento interno antes da linha */

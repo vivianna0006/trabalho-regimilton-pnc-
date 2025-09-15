@@ -1,178 +1,83 @@
-
-// A URL base é declarada no topo do arquivo para ser acessível em qualquer função.
+// Constante que armazena a URL base do backend.
 const BACKEND_URL = "http://localhost:3000";
 
-
-// ==== Estrutura de Dados ====
-
-
-// Mantém a estrutura de categorias e subcategorias para construir o menu de navegação.
-// Os produtos são carregados dinamicamente do backend.
+// --- Estrutura de Dados e Selectores de Elementos ---
 let categorias = [
-    {
-        nome: "Acessórios",
-        subcategorias: {
-            Feminino: [],
-            Masculino: []
-        }
-    },
-    {
-        nome: "Blusas",
-        subcategorias: {
-            "Feminina": [],
-            Masculina: [],
-            "Infantil Feminina": [],
-            "Infantil Masculina": []
-        }
-    },
-    {
-        nome: "Bolsas",
-        subcategorias: {
-            Feminina: [],
-            Masculina: [],
-            "Infantil Feminina": [],
-            "Infantil Masculina": []
-        }
-    },
-    {
-        nome: "Bonés",
-        subcategorias: {
-            Feminino: [],
-            Masculino: []
-        }
-    },
-    {
-        nome: "Calçados",
-        subcategorias: {
-            Feminino: [],
-            Masculino: [],
-            "Infantil Feminino": [],
-            "Infantil Masculino": []
-        }
-    },
-    {
-        nome: "Calças",
-        subcategorias: {
-            Feminina: [],
-            Masculina: [],
-            "Infantil Feminina": [],
-            "Infantil Masculina": []
-        }
-    },
-    {
-        nome: "Cintos",
-        subcategorias: {
-            Feminino: [],
-            Masculino: []
-        }
-    },
-    {
-        nome: "Cropped",
-        subcategorias: {
-            "Feminina": []
-        }
-    },
-    {
-        nome: "Saias",
-        subcategorias: {
-            Feminina: [],
-            "Infantil Feminina": []
-        }
-    },
-    {
-        nome: "Shorts",
-        subcategorias: {
-            Feminino: [],
-            Masculino: [],
-            "Infantil Feminina": [],
-            "Infantil Masculina": []
-        }
-    },
-    {
-        nome: "Vestidos",
-        subcategorias: {
-            Feminina: [],
-            "Infantil Feminina": []
-        }
-    }
+    { nome: "Acessórios", subcategorias: { Feminino: [], Masculino: [], "Infantil Feminina": [], "Infantil Masculina": [] } },
+    { nome: "Blusas", subcategorias: { "Feminina": [], Masculina: [], "Infantil Feminina": [], "Infantil Masculina": [] } },
+    { nome: "Bolsas", subcategorias: { Feminina: [], Masculina: [], "Infantil Feminina": [], "Infantil Masculina": [] } },
+    { nome: "Bonés", subcategorias: { Feminino: [], Masculino: [] } },
+    { nome: "Calçados", subcategorias: { Feminino: [], Masculino: [], "Infantil Feminino": [], "Infantil Masculino": [] } },
+    { nome: "Calças", subcategorias: { Feminina: [], Masculina: [], "Infantil Feminina": [], "Infantil Masculina": [] } },
+    { nome: "Cintos", subcategorias: { Feminino: [], Masculino: [] } },
+    { nome: "Cropped", subcategorias: { "Feminina": [] } },
+    { nome: "Saias", subcategorias: { Feminina: [], "Infantil Feminina": [] } },
+    { nome: "Shorts", subcategorias: { Feminino: [], Masculino: [], "Infantil Feminina": [], "Infantil Masculina": [] } },
+    { nome: "Vestidos", subcategorias: { Feminina: [], "Infantil Feminina": [] } }
 ];
 
-// Ordena as categorias em ordem alfabética.
 categorias.sort((a, b) => a.nome.localeCompare(b.nome));
 
-// ==== Seletores de Elementos HTML ====
 const menuCategorias = document.getElementById("menu-categorias");
 const areaProdutos = document.getElementById("area-produtos");
 const form = document.getElementById("form-produto");
 const campoBusca = document.getElementById("campo-busca");
 const categoriaSelect = document.getElementById("categoria-select");
 const subcategoriaSelect = document.getElementById("subcategoria-select");
+const tamanhosInputs = document.getElementById('tamanhos-inputs');
+const fieldsetTamanhos = document.getElementById('fieldset-tamanhos');
 
-// ==== Funções de Renderização e Exibição ====
-/**
- * Exibe a lista de produtos na área principal.
- * @param {Array} produtosParaExibir - Lista de produtos a serem exibidos.
- * @param {string} tituloDaPagina - Título da página de produtos.
- * @param {string} categoriaNome - Nome da categoria.
- * @param {string} subcategoriaNome - Nome da subcategoria (opcional).
- */
-function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subcategoriaNome) {
+// --- Funções de Renderização e Exibição ---
+
+function exibirProdutos(produtos, tituloDaPagina, categoriaNome, subcategoriaNome) {
     areaProdutos.innerHTML = "";
 
     if (categoriaNome) {
         const btnVoltar = document.createElement("button");
         btnVoltar.className = "btn-voltar";
-        if (subcategoriaNome) {
-            btnVoltar.textContent = "↩ Voltar para Subcategorias";
-            btnVoltar.onclick = () => mostrarSubcategorias(categoriaNome);
-        } else {
-            btnVoltar.textContent = "↩ Voltar para Categorias";
-            btnVoltar.onclick = () => mostrarCategorias();
-        }
+        btnVoltar.textContent = "↩ Voltar";
+        btnVoltar.onclick = subcategoriaNome ? () => mostrarSubcategorias(categoriaNome) : () => mostrarCategorias();
         areaProdutos.appendChild(btnVoltar);
     }
 
-    const titulo = document.createElement("h2");
-    titulo.textContent = tituloDaPagina;
-    areaProdutos.appendChild(titulo);
+    const titulo = document.createElement("h2"); //Cria um elemento de título de nível 2 (<h2>).
+    titulo.textContent = tituloDaPagina; //Define o texto do título com o valor passado para a função.
+    areaProdutos.appendChild(titulo); // Adiciona o título dentro da área de produtos, logo abaixo do botão "Voltar".
 
-    if (!produtosParaExibir || produtosParaExibir.length === 0) {
+    if (!produtos || produtos.length === 0) {
         const aviso = document.createElement("p");
-        aviso.textContent = "Sem produtos nesta categoria.";
+        if (tituloDaPagina.startsWith("Resultados para")) {
+            aviso.textContent = "Nenhum produto encontrado com este termo.";
+        } else {
+            aviso.textContent = "Nenhum produto encontrado nesta categoria.";
+        }
         areaProdutos.appendChild(aviso);
-        return;
+        return; // Interrompe a execução da função, Como não há produtos para exibir, o restante do código não precisa ser executado.
     }
 
-    produtosParaExibir.forEach(p => {
+    produtos.forEach(p => {
         const total = Object.values(p.tamanhos).reduce((soma, qtd) => soma + qtd, 0);
         const div = document.createElement("div");
-        div.className = "produto";
-
-        if (total <= 10 && total > 0) {
-            div.classList.add("alerta");
-        } else if (total === 0) {
-            div.classList.add("sem-estoque");
-        }
+        div.className = `produto ${total <= 10 && total > 0 ? "alerta" : ""} ${total === 0 ? "sem-estoque" : ""}`;
 
         let tamanhosHTML = '';
         for (const tamanho in p.tamanhos) {
             const qtdTamanho = p.tamanhos[tamanho];
-            let classesAlerta = '';
-            if (qtdTamanho <= 10 && qtdTamanho > 0) {
-                classesAlerta = 'alerta-tamanho';
-            } else if (qtdTamanho === 0) {
-                classesAlerta = 'sem-estoque-tamanho';
-            }
+            const classesAlerta = qtdTamanho <= 10 && qtdTamanho > 0 ? 'alerta-tamanho' : (qtdTamanho === 0 ? 'sem-estoque-tamanho' : '');
             tamanhosHTML += `
                 <div class="tamanho-item ${classesAlerta}">
-                    <span>${tamanho}: ${p.tamanhos[tamanho]}</span>
-                    <button onclick="alterarQuantidade('${categoriaNome}', '${p.id}', 1, '${subcategoriaNome || ""}', '${tamanho}')">+</button>
-                    <button onclick="alterarQuantidade('${categoriaNome}', '${p.id}', -1, '${subcategoriaNome || ""}', '${tamanho}')">-</button>
+                    <span>${tamanho}: ${qtdTamanho}</span>
+                    <button onclick="alterarQuantidade('${p.categoriaNome}', '${p.id}', 1, '${p.subcategoriaNome || ""}', '${tamanho}')">+</button>
+                    <button onclick="alterarQuantidade('${p.categoriaNome}', '${p.id}', -1, '${p.subcategoriaNome || ""}', '${tamanho}')">-</button>
                 </div>
             `;
         }
 
-        const valorFormatado = p.valor ? `R$ ${p.valor.toFixed(2).replace('.', ',')}` : "Não definido";
+        const valorFormatado = p.valor ? `R$ ${p.valor.toFixed(2).replace('.', ',')}` : "Não definido"; // Verifica se o produto tem um valor.
+        // Se sim, formata o valor para a moeda brasileira (R$ 10,00). Se não, define a mensagem "Não definido".
+        // Logo abaixo define o conteúdo HTML de toda a div do produto. Esse código usa um template literal (as crases `)
+        // para inserir as informações do produto, como nome, ID, descrição, o valor formatado
+        // e o HTML dos tamanhos que foi gerado no loop anterior (${tamanhosHTML}).
         div.innerHTML = `
             <strong>${p.nome}</strong> (ID: ${p.id})<br>
             <em>${p.descricao}</em>
@@ -180,13 +85,10 @@ function exibirProdutos(produtosParaExibir, tituloDaPagina, categoriaNome, subca
             <div class="area-tamanhos">${tamanhosHTML}</div>
             <strong class="total">Quantidade Total: ${total}</strong>
         `;
-        areaProdutos.appendChild(div);
+        areaProdutos.appendChild(div);  //areaProdutos.appendChild(div);: Adiciona a div completa de um produto na área de exibição principal, areaProdutos.
     });
 }
 
-/**
- * Cria os botões das categorias no menu.
- */
 function mostrarCategorias() {
     menuCategorias.innerHTML = "";
     campoBusca.value = "";
@@ -198,294 +100,285 @@ function mostrarCategorias() {
     categorias.forEach(cat => {
         const btn = document.createElement("button");
         btn.textContent = cat.nome;
-        btn.onclick = () => {
-            if (cat.subcategorias) {
-                mostrarSubcategorias(cat.nome);
-            } else {
-                buscarEExibirProdutos(cat.nome);
-            }
-        };
+        btn.onclick = () => cat.subcategorias ? mostrarSubcategorias(cat.nome) : buscarEExibirProdutos(cat.nome);
         menuCategorias.appendChild(btn);
     });
-    carregarCategoriasNoFormulario();
 }
 
-/**
- * Mostra as subcategorias de uma categoria selecionada.
- * @param {string} categoriaNome - O nome da categoria.
- */
 function mostrarSubcategorias(categoriaNome) {
     const categoria = categorias.find(c => c.nome === categoriaNome);
-    areaProdutos.innerHTML = "";
+    if (!categoria) return;
 
+    areaProdutos.innerHTML = "";
     const btnVoltar = document.createElement("button");
     btnVoltar.textContent = "↩ Voltar para Categorias";
     btnVoltar.className = "btn-voltar";
     btnVoltar.onclick = () => mostrarCategorias();
     areaProdutos.appendChild(btnVoltar);
 
-    const h2 = document.createElement("h2");
-    h2.textContent = categoriaNome;
-    areaProdutos.appendChild(h2);
+    const h2 = document.createElement("h2"); //Cria um novo elemento de título de nível 2 (<h2>).
+    h2.textContent = categoriaNome; //O texto do título é definido com o nome da categoria, como "Blusas",
+    // para que o usuário saiba em qual categoria ele está navegando.
+    areaProdutos.appendChild(h2); // Adiciona o título à página, logo abaixo do botão de voltar.
 
-    const lista = document.createElement("div");
-    lista.className = "lista-subcategorias";
+    const lista = document.createElement("div"); // Cria um novo elemento div que servirá como um contêiner para botões de subcategoria.
+    lista.className = "lista-subcategorias"; // Adiciona uma classe CSS ao contêiner para que ele possa ser estilizado.
 
-    Object.keys(categoria.subcategorias).forEach(sub => {
-        const btn = document.createElement("button");
-        btn.textContent = sub;
-        btn.onclick = () => buscarEExibirProdutos(categoriaNome, sub);
-        lista.appendChild(btn);
+    Object.keys(categoria.subcategorias).forEach(sub => { // Acessa o objeto de subcategorias da categoria principal,
+        // pega todas as chaves (os nomes) desse objeto de subcategorias, por exemplo: "Masculino", "Feminino", etc...
+        // .forEach(sub => ...): Inicia um loop que executa o código dentro das chaves para cada nome de subcategoria.
+        const btn = document.createElement("button"); // Dentro do loop, um novo botão é criado para cada subcategoria.
+        btn.textContent = sub; // O texto do botão é definido com o nome da subcategoria, como "Masculino".
+        btn.onclick = () => buscarEExibirProdutos(categoriaNome, sub);//Ao clicar a função buscarEExibirProdutos é chamada,
+        // passando tanto o nome da categoria quanto o nome da subcategoria, para que ela possa carregar e exibir apenas os produtos corretos.
+        lista.appendChild(btn); //Adiciona o botão de subcategoria ao contêiner lista.
     });
 
-    areaProdutos.appendChild(lista);
+    areaProdutos.appendChild(lista);  //Finalmente, depois que todos os botões foram criados e adicionados ao contêiner lista,
+    // o contêiner inteiro é adicionado à área principal da página, tornando todos os botões visíveis para o usuário.
 }
 
-// ==== Funções de Comunicação com o Backend ====
-/**
- * Busca produtos no backend e os exibe na tela.
- * @param {string} categoriaNome - A categoria para buscar.
- * @param {string} [subcategoriaNome=null] - A subcategoria para buscar (opcional).
- */
+// --- Funções de Comunicação com o Backend ---
+
 async function buscarEExibirProdutos(categoriaNome, subcategoriaNome = null) {
-    areaProdutos.innerHTML = `
-        <h2>Carregando produtos de ${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}...</h2>
-    `;
+    areaProdutos.innerHTML = `<h2>Carregando produtos de ${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}...</h2>`;
     const url = `${BACKEND_URL}/produtos?categoria=${categoriaNome}${subcategoriaNome ? '&subcategoria=' + subcategoriaNome : ''}`;
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Erro ao buscar produtos do servidor.');
         }
-        const produtos = await response.json();
-        exibirProdutos(produtos, `${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}`, categoriaNome, subcategoriaNome);
-    } catch (error) {
-        console.error('Erro ao carregar produtos:', error);
-        areaProdutos.innerHTML = `
+        const produtos = await response.json(); //Converte o corpo da resposta do response para um objeto JavaScript.
+        // O await é usado novamente, pois essa conversão é um processo assíncrono. O resultado é salvo na variável produtos.
+        exibirProdutos(produtos, `${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}`, categoriaNome, subcategoriaNome); //Chama a função exibirProdutos,
+        // passando todos os dados necessários: a lista de produtos,
+        // o título formatado e os nomes da categoria e subcategoria para o botão "voltar".
+    } catch (error) { //Este bloco de código é executado se qualquer erro ocorrer no bloco try.
+        console.error('Erro ao carregar produtos:', error); //Exibe o erro no console do navegador, o que é útil para depurar problemas.
+        //Logo abaixo se um erro acontecer, o código atualiza a área de produtos com uma mensagem de erro "amigável" para o usuário,
+        // ele ainda exibe o título da categoria/subcategoria, mas informa que a busca falhou.
+        areaProdutos.innerHTML = ` 
             <h2>${categoriaNome}${subcategoriaNome ? ' - ' + subcategoriaNome : ''}</h2>
             <p>Ocorreu um erro ao carregar os produtos. Verifique sua conexão com o backend.</p>
         `;
     }
 }
 
-/**
- * Realiza uma busca de produtos no backend com base em um termo.
- */
+// Variável para armazenar o timer do debounce
+let searchTimer;
+
 async function realizarBusca() {
     const termo = campoBusca.value.trim().toLowerCase();
+    
+    // Limpa o timer anterior para evitar buscas duplicadas
+    clearTimeout(searchTimer);
 
+    // Se o campo estiver vazio, retorna para a visualização de categorias
     if (termo === "") {
         mostrarCategorias();
         return;
     }
 
-    try {
-        const response = await fetch(`${BACKEND_URL}/produtos/busca?termo=${termo}`);
-        if (!response.ok) {
-            throw new Error('Erro na busca.');
+    // Define um novo timer para executar a busca após um pequeno atraso (ex: 300ms)
+    searchTimer = setTimeout(async () => {
+        areaProdutos.innerHTML = `<h2>Buscando por "${termo}"...</h2>`;
+
+        try {
+            const response = await fetch(`${BACKEND_URL}/produtos?termo=${termo}`);
+
+            if (!response.ok) {
+                throw new Error('Erro na busca.');
+            }
+
+            const produtosEncontrados = await response.json();
+            exibirProdutos(produtosEncontrados, `Resultados para "${termo}"`, null, null);
+
+        } catch (error) {
+            console.error('Erro ao buscar produtos:', error);
+            areaProdutos.innerHTML = `
+                <h2>Resultados da busca</h2>
+                <p>Não foi possível realizar a busca. Verifique sua conexão com o backend.</p>
+            `;
         }
-        const produtosEncontrados = await response.json();
-        exibirProdutos(produtosEncontrados, `Resultados para "${termo}" (${produtosEncontrados.length} encontrados)`, null, null);
-    } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
-        areaProdutos.innerHTML = `
-            <h2>Resultados da busca</h2>
-            <p>Não foi possível realizar a busca. Tente novamente.</p>
-        `;
-    }
+    }, 300); // <-- 300 milissegundos de atraso
 }
 
-/**
- * Altera a quantidade de um produto no backend.
- * @param {string} catNome - Nome da categoria.
- * @param {string} prodId - ID do produto.
- * @param {number} delta - A quantidade a ser adicionada ou removida (+1 ou -1).
- * @param {string} [subcatNome=null] - Nome da subcategoria (opcional).
- * @param {string} tamanho - O tamanho do produto.
- */
 async function alterarQuantidade(catNome, prodId, delta, subcatNome = null, tamanho) {
     try {
         const response = await fetch(`${BACKEND_URL}/produtos/${prodId}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                categoriaNome: catNome,
-                subcategoriaNome: subcatNome,
-                tamanho: tamanho,
-                delta: delta
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ categoriaNome: catNome, subcategoriaNome: subcatNome, tamanho: tamanho, delta: delta })
         });
 
-        if (!response.ok) {
-            throw new Error('Falha ao atualizar a quantidade no backend.');
+        if (!response.ok) { 
+            //Verifica se a resposta da requisição foi bem-sucedida (um status HTTP 200-299).
+            // Se o status for de erro (por exemplo, 404 ou 500), a condição é verdadeira.
+            throw new Error('Falha ao atualizar a quantidade no backend.'); // Se a resposta não for ok,
+            // um erro é "lançado", o que faz o código parar e ir direto para o bloco catch.
         }
 
-        if (campoBusca.value.trim() !== "") {
-            realizarBusca();
-        } else {
-            buscarEExibirProdutos(catNome, subcatNome);
+        if (campoBusca.value.trim() !== "") { //Checa se há um termo de busca no campo de busca.
+            realizarBusca();// Se houver um termo de busca, a função realizarBusca()
+            // é chamada novamente para recarregar os resultados da busca, refletindo a mudança na quantidade.
+        } else { // Se o campo de busca estiver vazio, significa que o usuário está navegando por categorias.
+            buscarEExibirProdutos(catNome, subcatNome); //Neste caso, a função buscarEExibirProdutos() é chamada
+            // para recarregar os produtos da categoria/subcategoria atual, atualizando a exibição.
         }
-
     } catch (error) {
         console.error('Erro ao sincronizar com o backend:', error);
         alert('Atenção: Não foi possível sincronizar com o servidor.');
     }
 }
 
-// ... (código anterior do estoque.js)
+async function adicionarProduto(event) {
+    event.preventDefault();
 
-/**
- * Adiciona um novo produto ao backend.
- */
-form.addEventListener("submit", async e => {
-    e.preventDefault();
+    const id = document.getElementById("id").value;
+    const nome = document.getElementById("nome").value;
+    const descricao = document.getElementById("descricao").value;
+    const valor = parseFloat(document.getElementById("valor").value);
+    const categoria = categoriaSelect.value;
+    const subcategoria = subcategoriaSelect.value;
 
-    const catNome = document.getElementById("categoria-select").value.trim();
-    const subcat = document.getElementById("subcategoria-select").value.trim();
-    const id = document.getElementById("id").value.trim();
-    const nome = document.getElementById("nome").value.trim();
-    const descricao = document.getElementById("descricao").value.trim();
-    const valor = parseFloat(document.getElementById("valor-produto").value.replace(',', '.')) || 0;
-
-    let tamanhos = {};
-    const inputsTamanho = document.getElementById("tamanhos-inputs").querySelectorAll("input");
+    const tamanhos = {};
+    const inputsTamanho = tamanhosInputs.querySelectorAll('input[type="number"]');
     inputsTamanho.forEach(input => {
-        const tamanho = input.id.replace('qtd-', '').toUpperCase();
-        tamanhos[tamanho] = parseInt(input.value) || 0;
+        tamanhos[input.name] = parseInt(input.value, 10);
     });
 
-    if (!catNome || !id || !nome || !descricao || valor <= 0) {
-        alert("Por favor, preencha todos os campos obrigatórios, incluindo um valor válido para o produto.");
+    if (categoria === "") {
+        alert("Por favor, selecione uma categoria.");
         return;
     }
 
-    // AQUI ESTÁ A MUDANÇA IMPORTANTE
-    // Criamos o objeto que será enviado no corpo da requisição.
-    // Ele precisa conter todas as informações que o backend espera.
-    const novoProduto = {
-        id,
-        categoriaNome: catNome, // Adicionamos a categoria aqui
-        subcategoriaNome: subcat, // Adicionamos a subcategoria aqui
-        nome,
-        descricao,
-        valor,
-        tamanhos
-    };
+    const novoProduto = { id, nome, descricao, valor, categoriaNome: categoria, subcategoriaNome: subcategoria, tamanhos };
 
     try {
-        // Agora, enviamos apenas o objeto do produto.
         const response = await fetch(`${BACKEND_URL}/produtos`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(novoProduto) // Mudamos para enviar apenas `novoProduto`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novoProduto)
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Falha ao adicionar o produto no backend.');
+            const errorText = await response.text();
+            throw new Error(errorText || 'Erro ao adicionar produto.');
         }
 
+        const produtoCriado = await response.json();
+        console.log("Produto adicionado:", produtoCriado);
         form.reset();
-        carregarCategoriasNoFormulario();
-        alert('Produto cadastrado com sucesso!');
-        buscarEExibirProdutos(catNome, subcat || null);
-
+        alert("Produto adicionado com sucesso!");
+        mostrarCategorias();
     } catch (error) {
-        console.error('Erro no cadastro:', error);
-        alert(`Erro no cadastro: ${error.message}`);
+        console.error('Erro ao adicionar produto:', error);
+        alert(`Erro ao adicionar produto: ${error.message}`);
     }
-});
+}
 
+// --- Funções para o Formulário de Cadastro ---
 
-// ==== Funções de Formulário e UI ====
-/**
- * Carrega as categorias no campo de seleção do formulário.
- */
-function carregarCategoriasNoFormulario() {
-    categoriaSelect.innerHTML = '<option value="">Selecione a Categoria</option>';
-    categorias.forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat.nome;
-        option.textContent = cat.nome;
+function carregarFormularioDeCategorias() {
+    // Limpa os campos antes de preencher
+    categoriaSelect.innerHTML = '';
+    subcategoriaSelect.innerHTML = '';
+    
+    // Adiciona uma opção padrão em branco para evitar erros de seleção
+    categoriaSelect.appendChild(new Option("Selecione uma Categoria", ""));
+    subcategoriaSelect.appendChild(new Option("Selecione uma Subcategoria", ""));
+    subcategoriaSelect.style.display = 'none'; // Esconde a subcategoria inicialmente
+
+    // Preenche o menu de categorias com base no array 'categorias'
+    categorias.forEach(categoria => {
+        const option = new Option(categoria.nome, categoria.nome);
         categoriaSelect.appendChild(option);
     });
-    const novaCategoriaOption = document.createElement("option");
-    novaCategoriaOption.value = "nova-categoria";
-    novaCategoriaOption.textContent = "Adicionar nova categoria";
-    categoriaSelect.appendChild(novaCategoriaOption);
-}
-
-/**
- * Atualiza os campos de entrada de tamanho com base na categoria selecionada.
- * @param {string} categoriaNome - O nome da categoria selecionada.
- */
-function atualizarCamposTamanho(categoriaNome) {
-    const tamanhosInputsContainer = document.getElementById("tamanhos-inputs");
-    tamanhosInputsContainer.innerHTML = '';
-
-    let tamanhos;
-    if (categoriaNome === "Calçados") {
-        tamanhos = Array.from({ length: 10 }, (_, i) => (34 + i).toString());
-    } else {
-        tamanhos = ["PP", "P", "M", "G", "GG"];
-    }
-
-    tamanhos.forEach(tamanho => {
-        const div = document.createElement("div");
-        div.className = "tamanho-input-item";
-
-        const label = document.createElement("label");
-        label.textContent = tamanho;
-        label.setAttribute("for", `qtd-${tamanho}`);
-
-        const input = document.createElement("input");
-        input.type = "number";
-        input.id = `qtd-${tamanho}`;
-        input.name = `tamanhos[${tamanho}]`;
-        input.min = "0";
-        input.value = "0";
-
-        div.appendChild(label);
-        div.appendChild(input);
-        tamanhosInputsContainer.appendChild(div);
-    });
-}
-
-// ==== Event Listeners e Inicialização ====
-// Inicia o sistema ao carregar a página
-document.addEventListener("DOMContentLoaded", function() {
-    mostrarCategorias();
-});
-
-campoBusca.addEventListener("input", realizarBusca);
-
-categoriaSelect.addEventListener("change", (e) => {
-    const categoriaNome = e.target.value;
-    const categoria = categorias.find(c => c.nome === categoriaNome);
-
-    subcategoriaSelect.innerHTML = '';
-    subcategoriaSelect.style.display = 'none';
-
-    const tamanhosInputsContainer = document.getElementById("tamanhos-inputs");
-    tamanhosInputsContainer.innerHTML = '';
-
-    if (categoria && categoria.subcategorias) {
-        subcategoriaSelect.style.display = 'inline-block';
-        Object.keys(categoria.subcategorias).forEach(sub => {
-            const option = document.createElement("option");
-            option.value = sub;
-            option.textContent = sub;
-            subcategoriaSelect.appendChild(option);
+    
+    // Lógica para gerar inputs de tamanho/calçado
+    const gerarInputsDeTamanho = (tamanhos) => {
+        tamanhosInputs.innerHTML = ''; // Limpa os inputs antigos
+        tamanhos.forEach(tamanho => {
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'tamanho-input-group';
+            inputGroup.innerHTML = `
+                <label for="qtd-${tamanho}">${tamanho}:</label>
+                <input type="number" id="qtd-${tamanho}" name="${tamanho}" value="0" min="0" required />
+            `;
+            tamanhosInputs.appendChild(inputGroup);
         });
-        const novaSubcategoriaOption = document.createElement("option");
-        novaSubcategoriaOption.value = "nova-subcategoria";
-        novaSubcategoriaOption.textContent = "Adicionar nova subcategoria";
-        subcategoriaSelect.appendChild(novaSubcategoriaOption);
-    }
+        fieldsetTamanhos.style.display = 'block';
+    };
 
-    atualizarCamposTamanho(categoriaNome);
+    // Adiciona o 'listener' de evento para o menu de categoria.
+    categoriaSelect.addEventListener('change', () => {
+        const categoriaSelecionada = categoriaSelect.value;
+        const categoriaObj = categorias.find(c => c.nome === categoriaSelecionada);
+
+        // Oculta/mostra e preenche a subcategoria
+        if (categoriaObj?.subcategorias) {
+            subcategoriaSelect.style.display = 'inline-block';
+            subcategoriaSelect.innerHTML = '<option value="">Selecione uma Subcategoria</option>';
+            Object.keys(categoriaObj.subcategorias).forEach(sub => {
+                subcategoriaSelect.appendChild(new Option(sub, sub));
+            });
+            // Preenche a subcategoria com a primeira opção (ou a padrão) e dispara o evento de 'change'
+            subcategoriaSelect.value = Object.keys(categoriaObj.subcategorias)[0] || "";
+            subcategoriaSelect.dispatchEvent(new Event('change'));
+        } else {
+            subcategoriaSelect.style.display = 'none';
+            // Garante que o campo de tamanho seja exibido para categorias sem subcategoria
+            toggleTamanhosVisibility();
+        }
+    });
+
+    // Lógica para mostrar/esconder e gerar os inputs de tamanho
+    const toggleTamanhosVisibility = () => {
+        const categoriaSelecionada = categoriaSelect.value;
+        
+        if (!categoriaSelecionada) {
+            fieldsetTamanhos.style.display = 'none';
+            return;
+        }
+
+        switch(categoriaSelecionada) {
+            case 'Calçados':
+                const numerosCalcados = Array.from({ length: 12 }, (_, i) => 33 + i);
+                gerarInputsDeTamanho(numerosCalcados);
+                fieldsetTamanhos.querySelector('legend').textContent = 'Quantidade por Numeração';
+                break;
+            case 'Acessórios':
+            case 'Bolsas':
+            case 'Cintos':
+            case 'Bonés':
+                tamanhosInputs.innerHTML = '';
+                fieldsetTamanhos.querySelector('legend').textContent = 'Sem Tamanhos';
+                fieldsetTamanhos.style.display = 'block';
+                break;
+            default:
+                const tamanhosRoupa = ['PP', 'P', 'M', 'G', 'GG'];
+                gerarInputsDeTamanho(tamanhosRoupa);
+                fieldsetTamanhos.querySelector('legend').textContent = 'Quantidade por Tamanho';
+                break;
+        }
+    };
+
+    // Adiciona o listener para o menu de subcategoria
+    subcategoriaSelect.addEventListener('change', toggleTamanhosVisibility);
+    
+    // Inicia com o fieldset de tamanhos escondido
+    fieldsetTamanhos.style.display = 'none';
+}
+
+// --- Inicialização e Event Listeners ---
+
+document.addEventListener("DOMContentLoaded", () => {
+    mostrarCategorias();
+    carregarFormularioDeCategorias();
 });
+
+form.addEventListener('submit', adicionarProduto);
+
+// Adiciona o listener para a busca em tempo real
+campoBusca.addEventListener("input", realizarBusca);
