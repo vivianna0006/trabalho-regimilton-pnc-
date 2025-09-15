@@ -12,19 +12,6 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
 
     const isAdministrador = userCargo === 'Administrador'; // Cria uma variável booleana (true/false) que verifica se o cargo do usuário é 'Administrador'.
 
-<<<<<<< HEAD
-    // Botão de logout: remove cargo da sessão e volta para login
-    const logoutBtn = document.getElementById('logout-btn-menu');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            if (confirm('Tem certeza que deseja sair?')) {
-                sessionStorage.removeItem('userCargo');
-                window.location.href = 'index.html';
-            }
-        });
-    }
-=======
->>>>>>> 0ce2b81d00b8618d9fc16734a96fb04de61267d8
 
     // O bloco de código abaixo controla a visibilidade dos links do menu.
     const adminLink = document.getElementById('admin-link'); // Procura no HTML o elemento com o ID 'admin-link' e o armazena na variável.
@@ -61,23 +48,8 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
     const API_URL = 'http://localhost:3000/api'; // Define o endereço base do servidor (backend) em uma constante.
 
 
-<<<<<<< HEAD
-    // Busca produtos do backend (rota /products)
-    const fetchProdutos = async () => {
-        try {
-            const response = await fetch(`${API_URL}/products`);
-            if (!response.ok) throw new Error(`Erro ${response.status}: Não foi possível buscar os produtos.`);
-            todosOsProdutos = await response.json();
-            renderizarProdutos([]); // Começa sem mostrar nada
-        } catch (error) {
-            console.error("### ERRO AO BUSCAR PRODUTOS:", error);
-            alert("ERRO CRÍTICO: " + error.message);
-        }
-    };
-=======
     let todosOsProdutos = []; // Cria uma lista (array) vazia para armazenar todos os produtos do estoque.
     let vendaAtual = []; // Cria uma lista (array) vazia para armazenar os itens da venda que está sendo realizada.
->>>>>>> 0ce2b81d00b8618d9fc16734a96fb04de61267d8
 
 
     const showToast = (message) => { // Define uma função chamada 'showToast' que recebe uma mensagem como parâmetro.
@@ -180,31 +152,6 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
         } // Fecha o 'if' que verifica se o alvo do clique foi o botão.
     }); // Fecha o "ouvinte" de evento 'click'.
 
-<<<<<<< HEAD
-    // Evento: finalizar a venda e enviar para a API
-    finalizarVendaBtn.addEventListener('click', async () => {
-        if (vendaAtual.length === 0) {
-            alert('Adicione pelo menos um produto para finalizar a venda.');
-            return;
-        }
-        const vendedor = sessionStorage.getItem('username'); // Usuário logado
-        const saleData = { items: vendaAtual, seller: vendedor };
-        try {
-            const response = await fetch(`${API_URL}/sales`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },ç[~z    \z[,ç c]]
-                body: JSON.stringify(saleData)
-            });
-            if (!response.ok) throw new Error('O servidor respondeu com um erro.');
-            showToast('Venda finalizada e registada com sucesso!');
-            vendaAtual = []; // Limpa a venda atual
-            renderizarVenda();
-        } catch (error) {
-            console.error("Erro ao finalizar a venda:", error);
-            alert('Não foi possível registar a venda.');
-        }
-    });
-=======
 
     // O comentário abaixo descreve o "ouvinte" para o clique em "Remover".
     listaVendaDiv.addEventListener('click', (e) => { // Adiciona um "ouvinte" de clique na área da venda atual.
@@ -219,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" q
     finalizarVendaBtn.addEventListener('click', async () => { // Adiciona um "ouvinte" de clique assíncrono ao botão de finalizar venda.
         console.log("--- [Passo A] Botão 'Finalizar Venda' foi clicado. ---"); // Registra uma mensagem no console para depuração.
 
->>>>>>> 0ce2b81d00b8618d9fc16734a96fb04de61267d8
 
         if (vendaAtual.length === 0) { // Se a lista da venda atual estiver vazia...
             console.log("-> [Falha] A venda está vazia."); // ...registra uma mensagem de falha no console.
