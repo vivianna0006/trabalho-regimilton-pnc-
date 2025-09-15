@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutBtn.addEventListener('click', () => {
             if (confirm('Tem certeza que deseja sair?')) {
                 sessionStorage.removeItem('userCargo');
-                sessionStorage.removeItem('username');
                 window.location.href = 'index.html';
             }
         });
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderizarProdutos([]); // Começa sem mostrar nada
         } catch (error) {
             console.error("### ERRO AO BUSCAR PRODUTOS:", error);
-            showToast("ERRO: " + error.message, 'error');
+            alert("ERRO CRÍTICO: " + error.message);
         }
     };
 
@@ -167,39 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento: finalizar a venda e enviar para a API
     finalizarVendaBtn.addEventListener('click', async () => {
-        console.log("--- [Passo A] Botão 'Finalizar Venda' foi clicado. ---");
-
         if (vendaAtual.length === 0) {
-            console.log("-> [Falha] A venda está vazia.");
-            showToast('Adicione pelo menos um produto para finalizar a venda.', 'error');
+            alert('Adicione pelo menos um produto para finalizar a venda.');
             return;
         }
         const vendedor = sessionStorage.getItem('username'); // Usuário logado
         const saleData = { items: vendaAtual, seller: vendedor };
-        console.log("-> A preparar para enviar os seguintes dados:", saleData);
-
         try {
-            console.log("-> A iniciar a requisição 'fetch' para /api/sales...");
             const response = await fetch(`${API_URL}/sales`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },ç[~z    \z[,ç c]]
                 body: JSON.stringify(saleData)
             });
-            console.log("-> Resposta do servidor recebida. Status:", response.status);
-
-            const data = await response.json();
-            if (!response.ok) {
-                console.error("-> A resposta do servidor não foi 'ok'. Mensagem:", data.message);
-                throw new Error(data.message || 'Ocorreu um erro no servidor.');
-            }
-
-            console.log("-> SUCESSO! A chamar showToast.");
+            if (!response.ok) throw new Error('O servidor respondeu com um erro.');
             showToast('Venda finalizada e registada com sucesso!');
             vendaAtual = []; // Limpa a venda atual
             renderizarVenda();
         } catch (error) {
-            console.error("### ERRO no bloco 'try/catch':", error);
-            showToast(error.message, 'error');
+            console.error("Erro ao finalizar a venda:", error);
+            alert('Não foi possível registar a venda.');
         }
     });
 
