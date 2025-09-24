@@ -7,7 +7,7 @@
     "descricao": "blusa kwaii do sol listrada",
     "valor": 50,
     "tamanhos": {
-      "PP": 30,
+      "PP": 55,
       "P": 20,
       "M": 10,
       "G": 20,
@@ -15,23 +15,33 @@
     }
   },
   {
-    "id": "02",
-    "categoriaNome": "Calçados",
-    "subcategoriaNome": "Infantil Feminino",
-    "nome": "calçado infantil",
-    "descricao": "calçado rosa com listras verdes da lolinha",
-    "valor": 59,
+    "id": "A01",
+    "nome": " óculos",
+    "descricao": " óculos da monster high, branco com azul claro",
+    "valor": 50,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Feminino",
     "tamanhos": {
-      "34": 30,
-      "35": 40,
-      "36": 30,
-      "37": 30,
-      "38": 30,
-      "39": 30,
-      "40": 30,
-      "41": 30,
-      "42": 30,
-      "43": 30
+      "PP": 10,
+      "P": 0,
+      "M": 90,
+      "G": 70,
+      "GG": 50
+    }
+  },
+  {
+    "id": "B01",
+    "nome": "Bolsa Kpop Idol",
+    "descricao": "Bolsa Cantil Skzoo (Wolfchan)",
+    "valor": 100,
+    "categoriaNome": "Bolsas",
+    "subcategoriaNome": "Feminina",
+    "tamanhos": {
+      "PP": 40,
+      "P": 50,
+      "M": 60,
+      "G": 60,
+      "GG": 60
     }
   }
 ]

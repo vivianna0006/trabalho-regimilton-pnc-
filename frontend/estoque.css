@@ -1,346 +1,589 @@
-
 /* ==== ESTILOS GERAIS DA PAGINA ==== */
-body { /* Define o estilo do corpo da página inteira. */
-    font-family: Arial, sans-serif; /* Ele usa a fonte Arial */
-    background: #e9eef2; /* aplica um fundo cinza claro */
-    padding: 20px; /* adiciona um espaçamento interno */
-    margin: 0; /* removendo as margens padrão */
+body {
+    font-family: Arial, sans-serif;
+    background: #e9eef2;
+    padding: 20px;
+    margin: 0;
 }
 
-.container { /* Define o estilo de um elemento de uma div que tem a classe container */
-    max-width: 1100px; /* Este elemento terá uma largura máxima */
-    margin: auto; /* ficará centralizado na página */
-    background: white; /* terá um fundo branco */
-    padding: 30px; /* Adiciona um espaçamento interno de 30 pixels em todos os lados */
-    border-radius: 12px; /* Arredonda as bordas do elemento com um raio de 12 pixels */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /*Cria uma sombra suave ao redor da caixa.
-       A sombra é sutil, com um deslocamento de 4 pixels na vertical e um desfoque de 15 pixels.*/
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-h1 { /* ==== Define o estilo para todos os títulos de nível 1 ==== */
-    text-align: center; /* Centraliza o texto dentro do elemento */
-    color: #333; /*Define a cor do texto para um cinza escuro.*/
-    margin-bottom: 20px; /*Adiciona um espaçamento de 20 pixels
-    na parte de baixo do elemento h1, empurrando o conteúdo que vem depois.*/
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 /* --- Barra de Pesquisa --- */
-.search-bar { /* --- estiliza a barra de pesquisa como um todo, como uma div que contém o campo de texto.--- */
-    margin: 20px 0 30px; /* --- Cria um espaçamento externo. --- */
-    text-align: center; /* --- Centraliza qualquer texto ou elemento de linha dentro da barra --- */
+.search-bar {
+    margin: 20px 0 30px;
+    text-align: center;
 }
 
-.search-bar input { /* --- define a aparência do campo de entrada de texto (<input>) que está dentro da barra de pesquisa. --- */
-    width: 80%; /* --- O campo de texto ocupa 80% da largura do seu elemento principal--- */
-    max-width: 600px; /* --- Limita a largura máxima do campo a 600 pixels. --- */
-    padding: 12px 20px; /* --- Adiciona espaçamento interno: 12 pixels em cima e embaixo, e 20 pixels nas laterais. --- */
-    border: 1px solid #ccc; /* --- Define uma borda sólida de 1 pixel de espessura com a cor cinza claro --- */
-    border-radius: 30px; /* --- Arredonda os cantos do campo de texto, dando uma aparência de pílula ou botão. --- */
-    font-size: 1em; /* --- Define o tamanho da fonte do texto que o usuário digita.
-      1em é geralmente o tamanho padrão do navegador. --- */
-    outline: none; /* --- Remove o contorno azul ou preto que alguns navegadores adicionam por padrão quando o campo é selecionado (focado). --- */
-    transition: all 0.3s ease; /* --- Aplica uma transição suave de 0.3 segundos para todas as propriedades que mudarem,
-      o que deixa as animações mais fluidas. --- */
+.search-bar input {
+    width: 80%;
+    max-width: 600px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1em;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.search-bar input:focus { /* --- Este bloco aplica estilos apenas quando o campo de texto está selecionado, ou seja, quando o usuário clica nele para digitar. --- */
-    border-color: #007bff; /* --- Muda a cor da borda para um azul brilhante.--- */
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* --- Adiciona uma sombra azul suave, destacando que o campo está ativo. --- */
+.search-bar input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 /* ==== Estilos do Layout e Menus ==== */
-.layout { /* ==== Esta seção cria um layout flexível para os elementos da página. ==== */
-    display: flex; /* Torna o elemento um contêiner flexível. */
-    gap: 30px; /* Adiciona um espaço de 30 pixels entre os itens dentro do contêiner flexível.*/
-    margin-top: 20px; /* Adiciona uma margem de 20 pixels no topo do elemento. */
+.layout {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
 }
 
 /* --- Menu de Categorias Lateral --- */
-.menu-categorias { /* --- Esta seção estiliza um menu lateral de categorias. */
-    width: 250px; /* Define a largura do menu como 250 pixels. */
-    padding-right: 30px; /* Adiciona um espaçamento interno de 30 pixels à direita do menu. */
-    border-right: 1px solid #ddd; /*Cria uma borda fina de 1 pixel com a cor no lado direito, funcionando como um divisor visual. */
+.menu-categorias {
+    width: 250px;
+    padding-right: 30px;
+    border-right: 1px solid #ddd;
 }
 
-.menu-categorias button { /* Aqui, os botões dentro do menu de categorias recebem estilos.*/
-    display: block; /* Transforma o botão em um elemento de bloco, fazendo com que ele ocupe toda a largura disponível. */
-    width: 100%; /* Garante que o botão ocupe a largura total de seu elemento pai (. menu-categorias). */
-    padding: 12px; /* Adiciona 12 pixels de espaçamento interno em todos os lados do botão. */
-    background: #f0f4f7; /* Define a cor de fundo do botão para um cinza claro. */
-    border: none; /*Remove a borda padrão do botão.*/
-    border-left: 4px solid transparent; /* Cria uma borda transparente de 4 pixels no lado esquerdo. Ela só fica visível quando o botão é ativado. */
-    text-align: left; /* Alinha o texto do botão à esquerda.*/
-    cursor: pointer; /* Muda o cursor do mouse para o ícone de mão quando ele passa sobre o botão, indicando que ele é clicável.*/
-    margin-bottom: 8px; /* Adiciona 8 pixels de espaço abaixo de cada botão. */
-    border-radius: 4px; /* Arredonda levemente os cantos do botão. */
-    font-weight: 500; /* Deixa o texto do botão com uma espessura média (negrito).*/
-    transition: all 0.2s ease; /* Cria uma animação suave de 0.2 segundos para todas as propriedades que mudarem. */
+.menu-categorias button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #f0f4f7;
+    border: none;
+    border-left: 4px solid transparent;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
-.menu-categorias button:hover { /*aplica estilos quando o mouse está sobre o botão. */
-    background: #e0e6ec; /* Muda a cor de fundo do botão */
-    border-left: 4px solid #007bff; /* Muda a borda transparente da esquerda */
+.menu-categorias button:hover {
+    background: #e0e6ec;
+    border-left: 4px solid #007bff;
 }
 
 /* --- Botão de Voltar --- */
-.btn-voltar { /* botão de "Voltar" recebe seus estilos. */
-    padding: 10px 18px; /* Adiciona espaçamento interno de 10 pixels em cima e embaixo, e 18 pixels nas laterais. */
-    margin-bottom: 20px; /* Adiciona um espaço de 20 pixels abaixo do botão. */
-    background-color: #6c757d; /* Define a cor de fundo do botão para um cinza escuro. */
-    color: white; /* Define a cor do texto para branco. */
-    border: none; /* Remove a borda padrão do botão. */
-    border-radius: 5px; /* Arredonda os cantos do botão. */
-    cursor: pointer; /* Muda o cursor para o ícone de mão. */
-    font-weight: bold; /* Deixa o texto em negrito. */
-    transition: background-color 0.2s; /* - Adiciona uma transição suave de 0.2 segundos apenas para a mudança de cor de fundo. */
+.btn-voltar {
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
-.btn-voltar:hover { /*Esta parte define a aparência do botão quando o mouse está sobre ele */
-    background-color: #5a6268; /* Escurece a cor de fundo do botão. */
+.btn-voltar:hover {
+    background-color: #5a6268;
 }
 
 /* --- Botões de Subcategoria --- */
-.list-subcategories { /* Estilos para o contêiner (a lista) que agrupa os botões. */
-    display: flex; /* Torna o contêiner um flex container, permitindo que os itens (os botões) se alinhem de forma flexível. */
-    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha se não houver espaço suficiente. */
-    gap: 12px; /* Adiciona um espaçamento de 12 pixels entre os botões. */
-    margin-bottom: 20px; /* Cria uma margem de 20 pixels abaixo de todo o contêiner. */
+.list-subcategories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-.lista-subcategorias button { /* Estilos aplicados diretamente aos botões dentro da lista. */
-    padding: 10px 18px; /* Adiciona espaçamento interno de 10px na vertical e 18px na horizontal. */
-    background: #007bff;/* Define a cor de fundo dos botões. */
-    color: white;/* Define a cor do texto do botão. */
-    border: none;/* Remove a borda padrão do botão. */
-    border-radius: 20px;/* Arredonda os cantos, criando um efeito de pílula ou botão arredondado. */
-    cursor: pointer;/* Muda o cursor do mouse para a mãozinha ao passar por cima, indicando que é clicável. */
-    font-weight: 500;/* Torna o texto do botão um pouco mais grosso (semi-bold). */
-    transition: background 0.2s;/* Anima suavemente a mudança da cor de fundo em 0.2 segundos quando o mouse passa por cima. */
+.lista-subcategorias button {
+    padding: 10px 18px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
 }
 
-.lista-subcategorias button:hover { /* Estilos aplicados quando o mouse está sobre o botão. */
-    background: #0056b3;/* Muda a cor de fundo ao passar o mouse. */
+.lista-subcategorias button:hover {
+    background: #0056b3;
 }
 
 /* ==== Estilos da Área de Produtos ==== */
-.produtos { /* Estilos para o contêiner que agrupa os produtos. */
-    flex: 1;/* Faz com que este contêiner ocupe todo o espaço disponível restante dentro do meu contêiner principal. */
+.produtos {
+    flex: 1;
 }
 
-.produto { /* Estilos para cada item de produto individual. */
-    padding: 20px;/* Adiciona espaçamento interno. */
-    border-radius: 8px;/* Arredonda os cantos da caixa do produto. */
-    border: 1px solid #e0e0e0;/* Adiciona uma borda fina. */
-    margin-bottom: 15px;/* Adiciona espaço abaixo de cada produto. */
-    background-color: #fafafa;/* Define a cor de fundo. */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;/* Anima a elevação e a sombra suavemente. */
+.produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.produto:hover { /* Estilos para quando o mouse está sobre um produto. */
-    transform: translateY(-5px);/* Move o produto 5 pixels para cima. */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);/* Adiciona uma sombra sutil para dar a impressão de que o produto está "flutuando". */
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.produto-info {
+    flex-grow: 1;
 }
 
 /* --- Alertas de Estoque --- */
-.produto.alerta { /* Estilos para produtos com a classe alerta. */
-    border-left: 5px solid #ffc107;/* Adiciona uma borda esquerda grossa de cor amarela para indicar um alerta. */
-    background-color: #fff8e1;/* Muda o fundo. */
+.produto.alerta {
+    border-left: 5px solid #ffc107;
+    background-color: #fff8e1;
 }
 
-.produto.sem-estoque { /* Estilos para produtos com a classe sem-estoque. */
-    border-left: 5px solid #dc3545;/* Adiciona uma borda esquerda grossa. */
-    background-color: #fcebeb;/* Muda o fundo. */
+.produto.sem-estoque {
+    border-left: 5px solid #dc3545;
+    background-color: #fcebeb;
 }
 
 /* --- Detalhes do Produto --- */
-.produto strong { /* Estilos para o texto em negrito dentro de um produto. */
-    color: #333;/* Define a cor do texto . */
+.produto strong {
+    color: #333;
 }
 
-.produto em { /* Estilos para o texto em itálico dentro de um produto. */
-    color: #666;/* Define a cor do texto. */
-    font-style: normal;/* Remove o itálico padrão. */
-    display: block;/*Faz com que o elemento ocupe uma nova linha. */
-    margin-top: 5px;/*Adiciona um pequeno espaço acima.*/
+.produto em {
+    color: #666;
+    font-style: normal;
+    display: block;
+    margin-top: 5px;
 }
 
-.valor-produto { /* Estilos para a classe valor-produto. */
-    display: block;/* Garante que o valor apareça em sua própria linha. */
-    margin: 10px 0;/*Adiciona margem de 10px acima e abaixo. */
-    color: #28a745;/* Cor do texto. */
-    font-size: 1.3em;/* Aumenta o tamanho da fonte em 30% em relação ao padrão. */
-    font-weight: bold;/* Torna o texto do valor negrito. */
+.valor-produto {
+    display: block;
+    margin: 10px 0;
+    color: #28a745;
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
-/* ==== ESTILO MELHORADO: TAMANHOS E BOTÕES DE QUANTIDADE ==== */
-.area-tamanhos { /* Estilos para a área que contém os tamanhos dos produtos. */
-    display: flex;/* Organiza os itens de tamanho em uma linha. */
-    flex-wrap: wrap;/* Permite que os itens quebrem para a próxima linha se não houver espaço. */
-    gap: 10px;/*Adiciona 10px de espaçamento entre os itens. */
-    margin: 15px 0;/*Adiciona margem de 15px acima e abaixo. */
+/* ==== ESTILO MELHORADO: TAMANHOS E QUANTIDADES VISUAIS ==== */
+.area-tamanhos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
 }
 
-.tamanho-item { /* Estilos para cada "pílula" de tamanho, como "P" ou "M". */
-    display: flex;/* Organiza o texto e os botões dentro do item. */
-    align-items: center;/* Centraliza verticalmente o conteúdo. */
-    background-color: #f0f0f0;/* Cor de fundo cinza claro. */
-    padding: 6px 10px;/* Espaçamento interno. */
-    border-radius: 20px;/*Cantos arredondados, criando o formato de pílula. */
-    font-size: 0.9em;/*Diminui o tamanho da fonte. */
-    font-weight: 500;/*Deixa a fonte semi-negrito. */
+/* NOVA CLASSE: Estilo para exibir a quantidade de cada tamanho */
+.tamanho-estoque {
+    display: flex;
+    align-items: center;
+    background-color: #f0f4f7;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
-.tamanho-item.alerta-tamanho { /* : Estilo para itens de tamanho com classe alerta-tamanho. */
-    background-color: #fff3cd;/* Muda o fundo para um amarelo suave, indicando baixo estoque. */
+.tamanho-estoque .tamanho-nome {
+    font-weight: bold;
+    color: #555;
+    margin-right: 8px;
 }
 
-.tamanho-item.sem-estoque-tamanho { /*Estilo para itens de tamanho com classe sem-estoque-tamanho. */
-    background-color: #f5c6cb;/*Muda o fundo para um vermelho suave, indicando que não há estoque. */
+.tamanho-estoque .tamanho-quantidade {
+    color: #007bff;
+    font-weight: bold;
 }
 
-.tamanho-item span { /*Estilos para o texto do tamanho (ex: "P"). */
-    font-weight: bold;/* Deixa o texto em negrito. */
-    color: #555;/* Cor do texto */
-    margin-right: 8px;/*Adiciona 8px de espaço à direita do texto. */
+/* Estilos de alerta para a nova visualização */
+.tamanho-estoque.alerta {
+    background-color: #fff3cd;
 }
 
-.tamanho-item button { /* Estilos para os botões de adicionar e remover quantidade (+ e -). */
-    width: 28px;/* Define o tamanho do botão para ser quadrado. */
-    height: 28px;/*Define o tamanho do botão para ser quadrado. */
-    border-radius: 50%;/* Deixa os botões redondos. */
-    border: 1px solid #ddd;/* Borda cor. */
-    background-color: white;/* Fundo. */
-    cursor: pointer;/* Muda o cursor para uma mãozinha. */
-    font-weight: bold;/* Deixa o texto em negrito. */
-    line-height: 1;/* Ajuda a centralizar o texto verticalmente. */
-    font-size: 1em;/*Tamanho da fonte padrão. */
-    color: #555;/* Cor de texto cinza escuro. */
-    transition: all 0.2s;/* Animação suave para todas as mudanças de estilo. */
+.tamanho-estoque.sem-estoque {
+    background-color: #f5c6cb;
 }
 
-.tamanho-item button:hover { /* Estilos quando o mouse passa sobre os botões. */
-    background-color: #e9e9e9;/* Muda o fundo. */
-    transform: scale(1.1);/* Aumenta o botão em 10% para um efeito visual de interação. */
+/* --- Botão "..." para opções --- */
+.btn-opcoes {
+    background-color: transparent;
+    border: none;
+    font-size: 2em;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 10px;
+    transition: color 0.2s, transform 0.2s;
+    transform: rotate(90deg);
 }
 
-.total { /* Estilos para o elemento de total. */
-    margin-top: 10px;/* Adiciona 10px de margem no topo. */
-    font-weight: bold;/* Texto em negrito. */
-    font-size: 1.1em;/* Aumenta o tamanho da fonte. */
-    display: block;/* Garante que o total fique em uma nova linha. */
-    color: #555;/* Cor do texto. */
+.btn-opcoes:hover {
+    color: #007bff;
+    transform: rotate(90deg) scale(1.2);
 }
 
 /* ==== ESTILO MELHORADO: FORMULÁRIO DE ADIÇÃO DE PRODUTOS ==== */
-.form { /* Estilos para o formulário. */
-    margin-top: 40px;/* Margem de 40px no topo. */
-    padding: 30px;/* Espaçamento interno. */
-    border-top: 2px dashed #ccc;/* Borda superior pontilhada. */
-    background-color: #f8fafd;/* Cor de fundo suave. */
-    border-radius: 12px;/* Cantos arredondados. */
+.form {
+    margin-top: 40px;
+    padding: 30px;
+    border-top: 2px dashed #ccc;
+    background-color: #f8fafd;
+    border-radius: 12px;
 }
 
-.form h3 { /* Estilos para o título do formulário. */
-    text-align: center;/* Centraliza o texto. */
-    color: #444;/* Cor do texto. */
-    margin-bottom: 25px;/*margem inferior de 25px. */
+.form h3 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 25px;
 }
 
-.form label { /*Estilos para os rótulos de campos. */
-    display: block;/*Faz com que o rótulo ocupe uma linha inteira. */
-    font-weight: bold;/*Texto em negrito. */
-    margin-bottom: 8px;/* Margem abaixo do rótulo. */
-    color: #555;/* Cor de texto cinza escuro. */
+.form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
 }
 
 .form input,
-.form select { /* Estilos para os campos de entrada de texto e de seleção. */
-    width: 100%;/* Ocupa 100% da largura disponível. */
-    box-sizing: border-box;/* Garante que o preenchimento e a borda não aumentem o tamanho total do elemento. */
-    padding: 12px;/* Espaçamento interno. */
-    margin-bottom: 15px;/* Margem abaixo. */
-    border: 1px solid #ddd;/*Borda fina e cinza. */
-    border-radius: 8px;/* Cantos arredondados. */
-    font-size: 1em;/* Tamanho de fonte padrão. */
-    background-color: white;/* Fundo cor. */
-    transition: border-color 0.2s;/* Animação suave para a cor da borda. */
+.form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: white;
+    transition: border-color 0.2s;
 }
 
-.form input:focus, /* Estilos quando o campo está focado (selecionado). */
+.form input:focus,
 .form select:focus {
-    border-color: #007bff;/* Muda a cor da borda. */
-    outline: none;/* Remove a borda de foco padrão do navegador. */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);/*Adiciona uma sombra. */
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
 
-.form fieldset { /* Estilos para o elemento fieldset, usado para agrupar campos. */
-    padding: 20px;/* Espaçamento interno. */
-    border: 1px solid #ddd;/* Borda fina e cinza. */
-    border-radius: 8px;/* Cantos arredondados. */
-    margin-bottom: 20px;/* Margem abaixo. */
-    background-color: #fff;/* Fundo branco. */
+.form fieldset {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
-/* Adicionei essa nova classe para estilizar o titulo */
 .form .legend-title {
-    font-size: 1.2em; /* Deixa o texto um pouco maior */
-    color: #0056b3; /* Adiciona uma cor azul mais escura */
-    text-transform: uppercase; /* Deixa o texto em letras maiúsculas */
-    letter-spacing: 1px; /* Espaça um pouco as letras */
-    text-align: center; /* Centraliza o título */
-    margin-bottom: 20px; /* Adiciona um espaço na parte de baixo */
+    font-size: 1.2em;
+    color: #0056b3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-#tamanhos-inputs { /*Estilos para a área que agrupa os campos de tamanho e quantidade. */
-    display: flex;/* Organiza os itens em uma linha. */
-    flex-wrap: wrap;/* Permite que os itens quebrem a linha. */
-    gap: 30px;/* Aumentei o espaçamento entre os itens para 30px, antes era 15px. */
-    justify-content: center; /* Centraliza os grupos de tamanho na linha */
-}
-
-.tamanho-input-group { /* Agrupa o label e o input, permitindo que eles fiquem alinhados lado a lado. */
+#tamanhos-inputs {
     display: flex;
-    flex-direction: column; /* Organiza o label e o input um abaixo do outro */
-    align-items: center; /* Centraliza horizontalmente o label e o input */
-    margin-bottom: 10px; /* Adiciona um pequeno espaço abaixo de cada grupo */
-    width: 80px; /* Adiciona uma largura base para cada grupo de input, garantindo que a distribuição seja mais uniforme e que a quebra de linha ocorra de forma ordenada. */
-    flex-shrink: 0; /* Impede que os itens encolham abaixo da largura base */
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
 }
 
-.tamanho-input-group label { /*Estilos para o rótulo dentro do item de input. */
-    font-weight: bold;/* Texto em negrito. */
-    color: #555;/* Cor do texto. */
-    margin-bottom: 5px;/* Margem abaixo do rótulo. */
+.tamanho-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 80px;
+    flex-shrink: 0;
 }
 
-.tamanho-input-group input[type='number'] { /* Estilos para os campos de input de número. */
-    width: 60px;/* Largura fixa. */
-    text-align: center;/* Centraliza o texto do número. */
-    padding: 8px;/* Espaçamento interno. */
-    border: 1px solid #ccc;/* Borda fina. */
-    border-radius: 6px;/* Cantos arredondados. */
-    font-size: 1em;/* Tamanho da fonte padrão. */
+.tamanho-input-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
 }
 
-.tamanho-input-group input[type='number']::-webkit-outer-spin-button, /* Remove as setas de incremento e decremento do navegador Chrome/Safari. */
-.tamanho-input-group input[type='number']::-webkit-inner-spin-button { /* Remove as setas de incremento e decremento do navegador Chrome/Safari. */
-    -webkit-appearance: none;/* Desativa a aparência padrão. */
-    margin: 0;/* Remove a margem. */
+.tamanho-input-group input[type='number'] {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
 }
 
-.form button[type='submit'] { /* Estilos para o botão de envio. */
-    width: 100%;/*Ocupa 100% da largura. */
-    padding: 15px;/* Espaçamento interno. */
-    background-color: #28a745;/* Cor de fundo.*/
-    color: white;/* Cor de texto branco. */
-    border: none;/* Remove a borda.*/
-    cursor: pointer;/*Muda o cursor para uma mãozinha. */
-    border-radius: 8px;/*Cantos arredondados. */
-    font-size: 1.1em;/* Aumenta o tamanho da fonte. */
-    font-weight: bold;/* Texto em negrito.*/
-    transition: background-color 0.2s;/* Animação suave para a cor de fundo. */
+.tamanho-input-group input[type='number']::-webkit-outer-spin-button,
+.tamanho-input-group input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.form button[type='submit']:hover { /*Estilos quando o mouse passa sobre o botão de envio. */
-    background-color: #0a2e07;/* Muda a cor de fundo . */
+.form button[type='submit'] {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.form button[type='submit']:hover {
+    background-color: #0a2e07;
+}
+
+/* --- Estilos do Modal (Pop-up) --- */
+
+.modal-container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.show-modal {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #555;
+}
+
+.modal-content h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.modal-content p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.modal-tamanhos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tamanho-item-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.tamanho-item-modal span {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+    width: 60px;
+}
+
+.input-quantidade {
+    width: 70px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1em;
+}
+
+.input-quantidade:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.modal-botoes-acao {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-atualizar,
+.btn-remover {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-atualizar {
+    background-color: #007bff;
+}
+
+.btn-atualizar:hover {
+    background-color: #0056b3;
+}
+
+.btn-remover {
+    background-color: #dc3545;
+}
+
+.btn-remover:hover {
+    background-color: #c82333;
+}
+
+/* ==== Estilos para o botão de Adicionar Tamanho e o separador ==== */
+.adicionar-tamanho {
+    margin-top: 20px;
+}
+
+.adicionar-tamanho-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.adicionar-tamanho-input-group input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.adicionar-tamanho-input-group .btn-adicionar-tamanho {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.adicionar-tamanho-input-group .btn-adicionar-tamanho:hover {
+    background-color: #0056b3;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 20px 0;
+}
+
+.tamanho-item-modal .btn-remover-tamanho {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.tamanho-item-modal .btn-remover-tamanho:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* ==== Estilos dos Botões de Ação do Modal ==== */
+
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-modal-salvar,
+.btn-modal-excluir {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.btn-modal-salvar {
+    background-color: #28a745; /* Verde para Salvar */
+    color: white;
+}
+
+.btn-modal-salvar:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-modal-excluir {
+    background-color: #dc3545; /* Vermelho para Excluir */
+    color: white;
+}
+
+.btn-modal-excluir:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
 }
