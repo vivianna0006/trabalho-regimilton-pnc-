@@ -1,105 +1,136 @@
-<!DOCTYPE html> <!-- Declara ao navegador que este documento é um arquivo HTML5. -->
-<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como português do Brasil. -->
-<head> <!-- Inicia a seção de cabeçalho, que contém metadados e links para outros arquivos. -->
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8, para suportar acentos e símbolos. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva, ajustando-a à tela do dispositivo. -->
-    <title>Configuração Inicial do Sistema</title> <!-- Define o texto que aparecerá na aba da janela do navegador. -->
-    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos principal do site. -->
-<style>
-        .setup-intro-text { /* Define um seletor de classe para o texto introdutório. */
-            text-align: center; /* Centraliza o alinhamento do texto. */
-            margin-bottom: 20px; /* Adiciona um espaço de 20 pixels abaixo do texto. */
-        } /* Fecha a regra de estilo para a classe '.setup-intro-text'. */
-    </style> <!-- Fecha o bloco de CSS interno. -->
-</head> <!-- Fecha a seção de cabeçalho do documento. -->
-<body> <!-- Inicia o corpo do documento, onde todo o conteúdo visível é colocado. -->
-    <div class="container"> <!-- Cria um contêiner principal para agrupar o conteúdo da página. -->
-        <div class="form-box"> <!-- Cria uma caixa estilizada para envolver o formulário. -->
-            <h2>Configuração Inicial</h2> <p class="setup-intro-text">Bem-vindo! Cadastre o primeiro gerente iniciar o sistema </p> <!-- Cria um título principal e um parágrafo com texto introdutório. -->
-            <form id="setup-form"> <!-- Inicia o formulário de configuração, com um ID para ser encontrado pelo JavaScript. -->
-                <div class="input-group"> <!-- Cria um grupo para organizar o rótulo e o campo de entrada de texto. -->
-                    <label for="setup-username">Nome do Gerente </label> <!-- Cria um rótulo de texto para o campo de nome de utilizador. -->
-                    <input type="text" id="setup-username" required> <!-- Cria um campo de entrada de texto, obrigatório (required). -->
-                </div> <!-- Fecha o grupo de entrada de texto. -->
-                <div class="input-group"> <!-- Cria outro grupo para o rótulo e o campo de senha. -->
-                    <label for="setup-password">Senha</label> <!-- Cria um rótulo de texto para o campo de senha. -->
-                    <input type="password" id="setup-password" required> <!-- Cria um campo de entrada de senha, que oculta os caracteres digitados. -->
-                </div> <!-- Fecha o grupo de entrada de senha. -->
-                <button type="submit">Criar Gerente e Iniciar </button> <!-- Cria um botão que, ao ser clicado, envia o formulário. -->
-            </form> <!-- Fecha o formulário. -->
-            <p id="setup-message" class="message"></p> <!-- Cria um parágrafo vazio que será usado pelo JavaScript para exibir mensagens de status. -->
-        </div> <!-- Fecha a caixa do formulário. -->
-    </div> <!-- Fecha o contêiner principal. -->
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuracao Inicial do Sistema</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        .setup-intro-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Configuracao Inicial</h2>
+            <p class="setup-intro-text">Bem-vindo! Cadastre o primeiro gerente para iniciar o sistema.</p>
+            <form id="setup-form">
+                <div class="input-group">
+                    <label for="setup-username">Nome do Gerente</label>
+                    <input type="text" id="setup-username" required>
+                </div>
+                <div class="input-group">
+                    <label for="setup-password">Senha</label>
+                    <input type="password" id="setup-password" required>
+                </div>
+                <button type="submit">Criar Gerente e Iniciar</button>
+            </form>
+            <p id="setup-message" class="message"></p>
+        </div>
+    </div>
 
+    <script src="api-client.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupForm = document.getElementById('setup-form');
+            const messageEl = document.getElementById('setup-message');
+            let listenerAttached = false;
 
-    <script> <!-- Inicia um bloco de código JavaScript diretamente no HTML. -->
+            const parseJson = async (response) => {
+                if (!response) {
+                    return {};
+                }
 
+                const contentType = response.headers?.get('content-type') || '';
+                if (!contentType.includes('application/json')) {
+                    return {};
+                }
 
-        document.addEventListener('DOMContentLoaded', () => { // Adiciona um "ouvinte" que espera todo o HTML carregar antes de executar o código.
-           
-            const checkStatusAndSetup = async () => { // Declara uma função assíncrona (que pode usar 'await') para verificar o status e configurar.
-                try { // Inicia um bloco para tentar executar um código que pode falhar (como uma chamada de rede).
-                    const response = await fetch('http://localhost:3000/api/status'); // Faz uma requisição à API para verificar se já existem utilizadores e espera pela resposta.
-                    const data = await response.json(); // Converte a resposta do servidor (que está em formato JSON) para um objeto JavaScript.
+                try {
+                    return await response.json();
+                } catch (_) {
+                    return {};
+                }
+            };
 
+            const setMessage = (text, color = '') => {
+                if (!messageEl) {
+                    return;
+                }
+                messageEl.textContent = text;
+                messageEl.style.color = color;
+            };
 
-                    if (data.usersExist) { // Verifica se a resposta do servidor indica que já existem utilizadores.
-                        window.location.href = 'index.html'; // Se já existirem, redireciona o navegador para a página de login principal.
-                        return; // Interrompe a execução desta função para evitar que o resto do código seja executado.
-                    } // Fecha o bloco 'if'.
+            const attachSetupFormListener = () => {
+                if (listenerAttached || !setupForm) {
+                    return;
+                }
 
+                listenerAttached = true;
+                setupForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
 
+                    const username = document.getElementById('setup-username')?.value.trim();
+                    const password = document.getElementById('setup-password')?.value;
 
+                    if (!username || !password) {
+                        setMessage('Informe o nome do gerente e uma senha valida.', 'red');
+                        return;
+                    }
 
-                    setupFormListener(); // Se não existirem utilizadores, chama a função que prepara o formulário de configuração.
+                    setMessage('Criando administrador...', '#333');
 
+                    try {
+                        const response = await ApiClient.fetch('/register', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ username, password, cargo: 'Administrador' })
+                        });
 
-                } catch (error) { // Captura qualquer erro que tenha ocorrido no bloco 'try' (ex: servidor desligado).
-                    document.body.innerHTML = '<h2 style="color: red; text-align: center;">Erro de Conexão</h2><p style="text-align: center;">Não foi possível conectar ao servidor.</p>'; // Substitui todo o conteúdo da página por uma mensagem de erro de conexão.
-                } // Fecha o bloco 'catch'.
-            }; // Fecha a declaração da função 'checkStatusAndSetup'.
+                        const data = await parseJson(response);
 
+                        if (!response.ok) {
+                            throw new Error(data.message || 'Nao foi possivel concluir o cadastro.');
+                        }
 
+                        setMessage('Administrador criado com sucesso! Redirecionando para a pagina de login...', 'green');
+                        setTimeout(() => {
+                            window.location.replace('index.html');
+                        }, 2200);
+                    } catch (error) {
+                        setMessage(error.message || 'Nao foi possivel conectar ao servidor.', 'red');
+                    }
+                });
+            };
 
+            const checkStatusAndSetup = async () => {
+                try {
+                    const response = await ApiClient.fetch('/status', { cache: 'no-store' });
+                    const data = await parseJson(response);
 
-            const setupFormListener = () => { // Declara a função que adiciona o "ouvinte" ao formulário.
-                document.getElementById('setup-form').addEventListener('submit', async (e) => { // Encontra o formulário pelo ID e espera pelo evento de envio.
-                    e.preventDefault(); // Impede o comportamento padrão do formulário, que é recarregar a página.
-                    const messageEl = document.getElementById('setup-message'); // Encontra o elemento de parágrafo para exibir mensagens.
-                    const username = document.getElementById('setup-username').value; // Pega o valor (texto) digitado no campo de nome de utilizador.
-                    const password = document.getElementById('setup-password').value; // Pega o valor (texto) digitado no campo de senha.
-                   
-                    try { // Inicia um bloco para tentar a comunicação com o servidor para registar o novo gerente.
-                        const registerResponse = await fetch('http://localhost:3000/api/register', { // Faz uma requisição para a rota de registo da API.
-                            method: 'POST', // Define o método da requisição como POST (para enviar dados).
-                            headers: { 'Content-Type': 'application/json' }, // Informa ao servidor que os dados enviados estão no formato JSON.
-                            body: JSON.stringify({ username, password, cargo: 'Administrador' }) // Converte um objeto JavaScript com os dados do gerente para texto JSON.
-                        }); // Fecha o objeto de configuração da requisição fetch.
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Nao foi possivel verificar o status do sistema.');
+                    }
 
+                    if (data.usersExist) {
+                        window.location.replace('index.html');
+                        return;
+                    }
 
-                        const responseData = await registerResponse.json(); // Converte a resposta do servidor para um objeto JavaScript.
-                        if (!registerResponse.ok) throw new Error(responseData.message); // Se a resposta indicar um erro, lança uma exceção com a mensagem do servidor.
+                    attachSetupFormListener();
+                    setMessage('');
+                } catch (error) {
+                    attachSetupFormListener();
+                    setMessage(error.message || 'Nao foi possivel conectar ao servidor.', 'red');
+                }
+            };
 
-
-                        messageEl.textContent = 'Administrador criado com sucesso! Redirecionando para a página de login...'; // Exibe uma mensagem de sucesso.
-                        messageEl.style.color = 'green'; // Muda a cor do texto da mensagem para verde.
-
-
-                        setTimeout(() => { // Agenda a execução de uma função para depois de um certo tempo.
-                            window.location.href = 'index.html'; // Redireciona o navegador para a página de login.
-                        }, 2500); // Define o tempo de espera para 2500 milissegundos (2.5 segundos).
-
-
-                    } catch (err) { // Captura qualquer erro que tenha ocorrido no bloco 'try' anterior.
-                        messageEl.textContent = err.message || 'Erro ao conectar com o servidor.'; // Exibe a mensagem de erro ou uma mensagem padrão.
-                        messageEl.style.color = 'red'; // Muda a cor do texto da mensagem para vermelho.
-                    } // Fecha o bloco 'catch'.
-                }); // Fecha o "ouvinte" de envio do formulário.
-            }; // Fecha a declaração da função 'setupFormListener'.
-
-
-            checkStatusAndSetup(); // Chama a função principal para iniciar todo o processo de verificação.
-        }); // Fecha o "ouvinte" do 'DOMContentLoaded'.
-    </script> <!-- Fecha o bloco de JavaScript. -->
-</body> <!-- Fecha a seção do corpo do documento. -->
-</html> <!-- Fecha o documento HTML. -->
+            attachSetupFormListener();
+            checkStatusAndSetup();
+        });
+    </script>
+</body>
+</html>

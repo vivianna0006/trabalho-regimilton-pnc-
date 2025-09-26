@@ -1,207 +1,431 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap'); /* Importa a fonte 'Playfair Display' do Google Fonts para ser usada no projeto. */
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
 
+:root {
+    --sf-primary: #2563eb;
+    --sf-secondary: #f97316;
+    --sf-dark: #1f2937;
+    --sf-muted: #6b7280;
+    --sf-border: #e5e7eb;
+    --sf-surface: #ffffff;
+}
 
-header { /* Aplica estilos ao elemento <header> da página. */
-    background-color: #ffffff; /* Define a cor de fundo do cabeçalho como branco. */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil na parte inferior do cabeçalho. */
-    padding: 0 2rem; /* Adiciona um espaçamento interno de 2rem nas laterais do cabeçalho. */
-    position: fixed; /* Fixa o cabeçalho no topo da tela, mesmo ao rolar a página. */
-    width: 100%; /* Faz o cabeçalho ocupar 100% da largura da tela. */
-    top: 0; /* Posiciona o cabeçalho no topo da janela de visualização. */
-    left: 0; /* Posiciona o cabeçalho no canto esquerdo da janela de visualização. */
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total do elemento. */
-    z-index: 1000; /* Define uma prioridade alta de empilhamento para que o cabeçalho fique sobre outros elementos. */
-} /* Fecha o bloco de estilos para o header. */
+header {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+    padding: 0 2.5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    backdrop-filter: blur(14px);
+}
 
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
 
-nav { /* Aplica estilos ao elemento <nav> (barra de navegação). */
-    display: flex; /* Utiliza o layout flexbox para alinhar os itens internos. */
-    justify-content: space-between; /* Distribui os itens internos, colocando espaço entre eles (um na esquerda, outro na direita). */
-    align-items: center; /* Alinha os itens verticalmente ao centro da barra de navegação. */
-    height: 70px; /* Define uma altura fixa de 70 pixels para a barra de navegação. */
-} /* Fecha o bloco de estilos para a nav. */
+.brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--sf-dark);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
 
-.brand-name { /* Estiliza o elemento com a classe 'brand-name' (o nome da loja). */
-    font-family: 'Playfair Display', serif; /* Define a família da fonte como a que foi importada, com uma fonte genérica de fallback. */
-    font-size: 1.8rem; /* Define o tamanho da fonte. */
-    color: #2c3e50; /* Define a cor do texto. */
-    text-decoration: none; /* Remove o sublinhado padrão dos links. */
-} /* Fecha o bloco de estilos para a classe .brand-name. */
+.navbar-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    align-items: center;
+}
 
+.navbar-links a {
+    position: relative;
+    text-decoration: none !important;
+    color: var(--sf-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
 
-.nav-right { /* Estiliza o contêiner dos elementos à direita na barra de navegação. */
-    display: flex; /* Utiliza o layout flexbox para alinhar os itens internos (links e botão). */
-    align-items: center; /* Alinha esses itens verticalmente ao centro. */
-    gap: 2.5rem; /* Cria um espaço de 2.5rem entre cada item filho (entre a lista de links e o botão). */
-} /* Fecha o bloco de estilos para a classe .nav-right. */
+.navbar-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 2px;
+    background: var(--sf-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
 
+.navbar-links a:hover,
+.navbar-links li.active > a {
+    color: var(--sf-primary);
+}
 
-.navbar-links { /* Estiliza a lista de links de navegação. */
-    list-style: none; /* Remove os marcadores (bolinhas) da lista. */
-    display: flex; /* Coloca os itens da lista (os links) em uma linha. */
-    margin: 0; /* Remove a margem padrão da lista. */
-    padding: 0; /* Remove o preenchimento padrão da lista. */
-    gap: 2rem; /* Cria um espaço de 2rem entre cada item da lista (cada link). */
-} /* Fecha o bloco de estilos para a classe .navbar-links. */
+.navbar-links a:hover::after,
+.navbar-links li.active > a::after {
+    transform: scaleX(1);
+}
 
+#logout-btn-menu {
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 12px 22px rgba(239, 68, 68, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background-position 0.3s ease;
+}
 
-.navbar-links a { /* Estiliza os links (<a>) dentro da lista de navegação. */
-    text-decoration: none; /* Remove o sublinhado dos links. */
-    color: #34495e; /* Define a cor do texto dos links. */
-    font-size: 1rem; /* Define o tamanho da fonte. */
-    font-weight: 500; /* Define o peso (espessura) da fonte. */
-    transition: color 0.3s; /* Adiciona uma animação suave de 0.3 segundos para a mudança de cor. */
-} /* Fecha o bloco de estilos para os links. */
+#logout-btn-menu:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px rgba(239, 68, 68, 0.28);
+}
 
+.dropdown {
+    position: relative;
+}
 
-.navbar-links a:hover, .navbar-links a.active { /* Estiliza um link quando o mouse está sobre ele OU quando ele tem a classe 'active'. */
-    color: #007bff; /* Muda a cor do texto do link para azul. */
-    font-weight: bold; /* Deixa o texto do link em negrito. */
-} /* Fecha o bloco de estilos para o estado hover/active. */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--sf-surface);
+    min-width: 200px;
+    padding: 0.75rem 0;
+    border-radius: 10px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    z-index: 1100;
+    top: calc(100% + 12px);
+    left: 0;
+}
 
+.dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    width: 16px;
+    height: 16px;
+    background: var(--sf-surface);
+    transform: rotate(45deg);
+}
 
-#logout-btn-menu { /* Estiliza o botão de sair pelo seu ID. */
-    width: auto; /* A largura do botão se ajusta automaticamente ao seu conteúdo. */
-    padding: 10px 22px; /* Adiciona espaçamento interno (10px no topo/base, 22px nas laterais). */
-    font-size: 0.95rem; /* Define o tamanho da fonte do texto do botão. */
-    font-weight: bold; /* Deixa o texto do botão em negrito. */
-    background-color: #e74c3c; /* Define a cor de fundo do botão como vermelho. */
-    color: white; /* Define a cor do texto do botão como branco. */
-    border: none; /* Remove a borda padrão do botão. */
-    border-radius: 5px; /* Arredonda os cantos do botão. */
-    cursor: pointer; /* Muda o cursor do mouse para uma mãozinha ao passar sobre o botão. */
-    transition: background-color 0.3s; /* Adiciona uma animação suave para a mudança da cor de fundo. */
-} /* Fecha o bloco de estilos para o botão de logout. */
-#logout-btn-menu:hover { /* Estiliza o botão de sair quando o mouse está sobre ele. */
-    background-color: #c0392b; /* Muda a cor de fundo para um tom de vermelho mais escuro. */
-} /* Fecha o bloco de estilos para o estado hover do botão. */
+.dropdown-content a {
+    color: var(--sf-dark);
+    padding: 12px 18px;
+    display: block;
+    text-align: left;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
 
+.dropdown-content a:hover {
+    background-color: rgba(37, 99, 235, 0.08);
+    padding-left: 22px;
+}
 
-.main-content { /* Estiliza a área de conteúdo principal da página. */
-    padding-top: 100px; /* Adiciona um espaçamento no topo para que o conteúdo não fique escondido atrás do cabeçalho fixo. */
-    text-align: center; /* Centraliza o texto dentro desta área. */
-} /* Fecha o bloco de estilos para .main-content. */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
+/* ----- Menu dashboard layout ----- */
 
-.hidden { /* Cria uma classe de utilidade para esconder elementos. */
-    display: none !important; /* Esconde completamente o elemento e o '!important' dá alta prioridade a esta regra. */
-} /* Fecha o bloco de estilos para .hidden. */
+.menu-dashboard {
+    align-items: stretch;
+    gap: 2.5rem;
+}
 
+.menu-hero {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(249, 115, 22, 0.12));
+    border-radius: 18px;
+    padding: 2.5rem 2.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+    gap: 2.25rem;
+    box-shadow: 0 25px 55px rgba(15, 23, 42, 0.12);
+    background-color: var(--sf-surface);
+}
 
-/* O comentário abaixo indica o início dos estilos para o menu suspenso (dropdown). */
-.dropdown { /* Estiliza o contêiner do dropdown. */
-    position: relative; /* Define o posicionamento como relativo para que os filhos com 'position: absolute' se posicionem em relação a ele. */
-    display: inline-block; /* Faz com que o elemento se comporte como um bloco em linha. */
-} /* Fecha o bloco de estilos para .dropdown. */
+.menu-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
 
+.menu-hero__subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sf-muted);
+}
 
-.dropdown-content { /* Estiliza a caixa que aparece quando o dropdown é ativado. */
-    display: none; /* Esconde a caixa por padrão. */
-    position: absolute; /* Posiciona a caixa em relação ao seu pai com 'position: relative'. */
-    background-color: #f1f1f1; /* Define a cor de fundo da caixa. */
-    min-width: 180px; /* Define uma largura mínima para a caixa. */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Adiciona uma sombra para destacar a caixa. */
-    z-index: 1; /* Garante que a caixa do dropdown apareça sobre outros elementos próximos. */
-    border-radius: 5px; /* Arredonda os cantos da caixa. */
-    left: 50%; /* Posiciona o início da caixa no meio do seu elemento pai. */
-    transform: translateX(-50%); /* Move a caixa 50% da sua própria largura para a esquerda para centralizá-la perfeitamente. */
-} /* Fecha o bloco de estilos para .dropdown-content. */
+.menu-hero__subtitle strong {
+    color: var(--sf-primary);
+    font-weight: 700;
+}
 
+.menu-hero__title {
+    margin: 0;
+    color: var(--sf-dark);
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
 
-.dropdown-content a { /* Estiliza os links dentro da caixa do dropdown. */
-    color: black; /* Define a cor do texto dos links como preto. */
-    padding: 12px 16px; /* Adiciona espaçamento interno. */
-    text-decoration: none; /* Remove o sublinhado dos links. */
-    display: block; /* Faz com que o link ocupe toda a largura disponível, tornando a área de clique maior. */
-    text-align: left; /* Alinha o texto dos links à esquerda. */
-} /* Fecha o bloco de estilos para os links do dropdown. */
+.menu-hero__description {
+    margin: 0;
+    color: #4b5563;
+    font-size: 1.05rem;
+    max-width: 520px;
+}
 
+.menu-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 
-.dropdown-content a:hover { /* Estiliza um link do dropdown quando o mouse está sobre ele. */
-    background-color: #ddd; /* Muda a cor de fundo para cinza claro. */
-} /* Fecha o bloco de estilos para o estado hover. */
+.menu-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.85rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.18s ease, box-shadow 0.25s ease;
+}
 
+.menu-hero__btn--primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.35);
+}
 
-.dropdown:hover .dropdown-content { /* Regra para exibir o dropdown. */
-    display: block; /* Torna a caixa do dropdown visível quando o mouse passa sobre o contêiner '.dropdown'. */
-} /* Fecha o bloco de estilos para exibir o dropdown. */
+.menu-hero__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(29, 78, 216, 0.4);
+}
 
+.menu-hero__btn--secondary {
+    background: #ffffff;
+    color: var(--sf-primary);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+}
 
-/* O comentário abaixo indica o início dos estilos para a versão responsiva (mobile). */
-.mobile-menu-button { /* Estiliza o botão do menu "hambúrguer". */
-    display: none; /* Esconde o botão em telas maiores (desktop). */
-    background: none; /* Remove qualquer cor de fundo. */
-    border: none; /* Remove a borda. */
-    font-size: 2rem; /* Define o tamanho do ícone (que é um texto). */
-    cursor: pointer; /* Muda o cursor para uma mãozinha. */
-    color: #333; /* Define a cor do ícone. */
-} /* Fecha o bloco de estilos para o botão mobile. */
+.menu-hero__btn--secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
 
+.menu-hero__card {
+    background: rgba(255, 255, 255, 0.84);
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.12);
+    backdrop-filter: blur(10px);
+}
 
-@media (max-width: 768px) { /* Inicia um bloco de regras que só se aplicam em telas com largura máxima de 768px. */
-    .mobile-menu-button { /* Dentro da regra de @media, seleciona o botão mobile. */
-        display: block; /* Torna o botão visível em telas menores. */
-    } /* Fecha o estilo do botão mobile. */
-    .nav-right { /* Seleciona o contêiner da direita da navegação. */
-        display: none; /* Esconde o menu de navegação por padrão em telas menores. */
-        position: absolute; /* Posiciona o menu de forma absoluta em relação ao cabeçalho. */
-        top: 70px; /* Posiciona o menu logo abaixo do cabeçalho de 70px de altura. */
-        left: 0; /* Alinha o menu à esquerda da tela. */
-        width: 100%; /* Faz o menu ocupar toda a largura da tela. */
-        background-color: #ffffff; /* Define um fundo branco para o menu. */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra abaixo do menu. */
-        flex-direction: column; /* Organiza os itens do menu em uma coluna (um abaixo do outro). */
-        padding: 1rem 0; /* Adiciona espaçamento interno no topo e na base. */
-    } /* Fecha o estilo de .nav-right. */
-    .nav-right.active { /* Estiliza o menu quando ele tiver a classe 'active' (adicionada via JS). */
-        display: flex; /* Torna o menu visível, com as propriedades de flex definidas acima. */
-    } /* Fecha o estilo de .nav-right.active. */
-    .navbar-links { /* Estiliza a lista de links no modo mobile. */
-        flex-direction: column; /* Organiza os links em uma coluna. */
-        width: 100%; /* Faz a lista ocupar toda a largura. */
-        text-align: center; /* Centraliza o texto dos links. */
-        gap: 0; /* Remove o espaço entre os links, pois serão controlados pelo padding. */
-    } /* Fecha o estilo de .navbar-links. */
-    .navbar-links li { /* Estiliza cada item da lista (<li>) no modo mobile. */
-        margin: 0; /* Remove qualquer margem. */
-        width: 100%; /* Faz cada item ocupar a largura total. */
-    } /* Fecha o estilo do item da lista. */
-    .navbar-links a { /* Estiliza cada link (<a>) no modo mobile. */
-        display: block; /* Transforma o link em um bloco para ocupar toda a largura e ter padding. */
-        padding: 1rem 0; /* Adiciona um espaçamento interno para aumentar a área de clique. */
-    } /* Fecha o estilo do link. */
-    #logout-btn-menu { /* Estiliza o botão de logout no modo mobile. */
-        margin-top: 1rem; /* Adiciona uma margem no topo para separá-lo dos links. */
-    } /* Fecha o estilo do botão. */
-} /* Fecha o bloco de regras @media. */
-.back-to-menu-btn { /* Estiliza uma classe para um botão de "Voltar ao Menu". */
-    display: inline-block; /* Permite que o elemento tenha largura, altura e margens, mas flua com o texto. */
-    margin-bottom: 20px; /* Adiciona um espaço na parte de baixo do botão. */
-    padding: 8px 16px; /* Define o espaçamento interno do botão. */
-    background-color: #6c757d; /* Define a cor de fundo como um tom de cinza. */
-    color: white; /* Define a cor do texto como branco. */
-    text-decoration: none; /* Remove o sublinhado do link/botão. */
-    border-radius: 5px; /* Arredonda os cantos do botão. */
-    font-size: 0.9rem; /* Define o tamanho da fonte. */
-    transition: background-color 0.3s; /* Adiciona uma animação suave para a mudança da cor de fundo. */
-} /* Fecha o bloco de estilos do botão "Voltar". */
+.menu-hero__card h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1.2rem;
+    color: var(--sf-dark);
+}
 
+.menu-hero__card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
 
-.back-to-menu-btn:hover { /* Estiliza o botão "Voltar" quando o mouse está sobre ele. */
-    background-color: #5a6268; /* Muda a cor de fundo para um cinza mais escuro. */
-} /* Fecha o bloco de estilos para o estado hover. */
-.page-header { /* Estiliza uma classe para cabeçalhos de página (título + botão). */
-    display: flex; /* Usa flexbox para alinhar os itens internos (título e botão). */
-    justify-content: space-between; /* Coloca o máximo de espaço possível entre o título e o botão. */
-    align-items: center; /* Alinha o título e o botão verticalmente ao centro. */
-    margin-bottom: 25px; /* Adiciona um espaço abaixo de todo o cabeçalho. */
-    border-bottom: 1px solid #eee; /* Adiciona uma linha de separação sutil na parte de baixo. */
-    padding-bottom: 15px; /* Adiciona um espaçamento entre o conteúdo e a linha de separação. */
-} /* Fecha o bloco de estilos do cabeçalho da página. */
+.menu-hero__card li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: var(--sf-muted);
+}
 
+.menu-hero__card .label {
+    font-weight: 600;
+    color: var(--sf-dark);
+}
 
-/* O comentário abaixo explica a necessidade da próxima regra. */
-.back-to-menu-btn { /* Re-seleciona o botão "Voltar" para sobrescrever uma regra anterior. */
-    margin-bottom: 0; /* Remove a margem inferior, útil quando o botão está dentro de um '.page-header' que já tem margem. */
-} /* Fecha o bloco de estilos de ajuste do botão. */
+.status-pill {
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.status-pill--active {
+    background: rgba(34, 197, 94, 0.12);
+    color: #15803d;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.75rem;
+}
+
+.menu-card {
+    background: var(--sf-surface);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: transform 0.18s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(37, 99, 235, 0.05);
+}
+
+.menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.18);
+}
+
+.menu-card__icon {
+    font-size: 2rem;
+}
+
+.menu-card h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--sf-dark);
+}
+
+.menu-card p {
+    margin: 0;
+    color: var(--sf-muted);
+    font-size: 0.97rem;
+    line-height: 1.55;
+}
+
+.menu-card__link {
+    margin-top: auto;
+    font-weight: 600;
+    color: var(--sf-primary);
+    text-decoration: none;
+    position: relative;
+    padding-right: 1.4rem;
+}
+
+.menu-card__link::after {
+    content: '→';
+    position: absolute;
+    right: 0;
+    transition: transform 0.2s ease;
+}
+
+.menu-card__link:hover::after {
+    transform: translateX(4px);
+}
+
+.menu-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.menu-info__card {
+    background: var(--sf-surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px dashed rgba(37, 99, 235, 0.3);
+    color: var(--sf-muted);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
+.menu-info__card h4 {
+    margin: 0 0 0.75rem;
+    color: var(--sf-dark);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    header {
+        padding: 0 1.5rem;
+    }
+
+    .menu-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-hero__card {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-right {
+        gap: 1.5rem;
+    }
+
+    .navbar-links {
+        gap: 1.2rem;
+    }
+
+    .menu-hero {
+        padding: 2rem 1.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    header {
+        padding: 0 1rem;
+    }
+
+    nav {
+        height: auto;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+    }
+
+    .nav-right {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .navbar-links {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    #logout-btn-menu {
+        align-self: flex-end;
+    }
+}

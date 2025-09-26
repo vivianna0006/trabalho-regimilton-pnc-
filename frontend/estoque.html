@@ -1,67 +1,95 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estoque Styllo Fashion Modas</title>
-    <link rel="stylesheet" href="menu.css" />
-    <link rel="stylesheet" href="estoque.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque - Styllo Fashion Modas</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="estoque.css">
 </head>
 <body>
     <header>
-        <nav>
-            <a href="./menu.html" class="brand-name">Styllo Fashion Modas</a>
-            <div class="nav-right">
-                <ul class="navbar-links">
-                    <li><a href="./menu.html">Início</a></li>
-                    <li><a href="./caixa.html">Caixa</a></li>
-                    <li><a href="./estoque.html">Estoque</a></li>
-                    <li><a href="./cadastro-funcionarios.html">Cadastro de Funcionários</a></li>
-                    <li><a href="./sair.html">Sair</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav></nav>
     </header>
-    <main class="main-content">
-        <div class="container">
-            <h1>Estoque Styllo Fashion Modas</h1>
-            <div class="search-bar">
-                <input type="text" id="campo-busca" placeholder="Buscar por produtos, categorias ou ID..." />
-            </div>
-            <div class="layout">
-                <div class="menu-categorias" id="menu-categorias">
-                </div>
-                <div class="produtos" id="area-produtos">
-                    <h2>Bem-vindo!</h2>
-                    <p>Selecione uma categoria para ver os produtos.</p>
+    <main class="main-content estoque-dashboard">
+        <section class="estoque-header">
+            <div class="estoque-header__content">
+                <h1>Estoque Styllo Fashion Modas</h1>
+                <p>Mantenha os produtos organizados, cadastre novidades e acompanhe as quantidades por tamanho.</p>
+                <div class="estoque-header__search">
+                    <input type="text" id="campo-busca" placeholder="Buscar por produtos, categorias ou ID...">
+                    <span class="estoque-header__hint">Dica: busque pelo ID para localizar rapidamente um item.</span>
                 </div>
             </div>
-            
-            <form id="form-produto" class="form">
-                <h3>Adicionar Novo Produto</h3>
+        </section>
 
-                <label for="categoria-select">Categoria:</label>
-                <select id="categoria-select" required></select>
-                
-                <label for="subcategoria-select">Subcategoria:</label>
-                <select id="subcategoria-select"></select>
+        <section class="estoque-content">
+            <aside class="estoque-categorias-panel">
+                <h2>Categorias</h2>
+                <div id="menu-categorias" class="estoque-categorias"></div>
+            </aside>
 
-                <input type="text" id="id" placeholder="ID do produto" required />
-                <input type="text" id="nome" placeholder="Nome do produto" required />
-                <input type="text" id="descricao" placeholder="Descrição (Ex: Saia rosa floral)" required />
-                
-                <input type="number" id="valor" placeholder="Valor do produto (Ex: 99.90)" step="0.01" min="0" required />
+            <div class="estoque-produtos" id="area-produtos">
+                <div class="estoque-empty">
+                    <h2>Selecione uma categoria</h2>
+                    <p>Use o painel ao lado ou a busca para encontrar os produtos desejados.</p>
+                </div>
+            </div>
 
-                <fieldset id="fieldset-tamanhos">
-                    <legend class="legend-title">Quantidade por Tamanho</legend>
-                    <div id="tamanhos-inputs">
+            <aside class="estoque-form-wrapper">
+                <form id="form-produto" class="estoque-form">
+                    <header class="estoque-form__header">
+                        <h3>Adicionar novo produto</h3>
+                        <p>Preencha os dados abaixo e defina as quantidades por tamanho.</p>
+                    </header>
+
+                    <div class="form-field">
+                        <label for="categoria-select">Categoria</label>
+                        <select id="categoria-select" required></select>
                     </div>
-                </fieldset>
-                
-                <button type="submit">Adicionar Produto</button>
-            </form>
-        </div>
+
+                    <div class="form-field">
+                        <label for="subcategoria-select">Subcategoria</label>
+                        <select id="subcategoria-select"></select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="id">ID</label>
+                            <input type="text" id="id" placeholder="Ex: 001-VESTIDO-FLORAL" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="valor">Valor (R$)</label>
+                            <input type="text" id="valor" placeholder="0,00" inputmode="numeric" required>
+                            <span class="input-hint">O valor é formatado automaticamente.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="nome">Nome do produto</label>
+                        <input type="text" id="nome" placeholder="Ex: Vestido floral de verao" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" rows="2" placeholder="Descreva o produto em poucas palavras" required></textarea>
+                    </div>
+
+                    <fieldset id="fieldset-tamanhos" class="estoque-tamanhos">
+                        <legend>Quantidade por tamanho</legend>
+                        <div id="tamanhos-inputs" class="tamanhos-grid"></div>
+                    </fieldset>
+
+                    <button type="submit" class="estoque-form__submit">Adicionar produto</button>
+                </form>
+            </aside>
+        </section>
     </main>
+    <script src="api-client.js"></script>
+    <script src="notifications.js"></script>
+    <script src="auth.js"></script>
     <script src="estoque.js"></script>
 </body>
 </html>
