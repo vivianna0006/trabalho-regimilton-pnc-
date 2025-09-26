@@ -1,41 +1,42 @@
-<!DOCTYPE html> <!-- Declara ao navegador que este é um documento HTML5. -->
-<html lang="pt-BR"> <!-- Inicia o elemento raiz do HTML, definindo o idioma como Português do Brasil. -->
-<head> <!-- Inicia a seção de cabeçalho, com informações para o navegador. -->
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8, suportando acentuação. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a página para ser responsiva a diferentes tamanhos de tela. -->
-    <title>Caixa - Styllo Fashion</title> <!-- Define o título que aparece na aba do navegador. -->
-    <!-- A tag de comentário abaixo serve para agrupar as folhas de estilo. -->
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa - Styllo Fashion</title>
     <link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="menu.css">
-<link rel="stylesheet" href="componentes.css">
-<link rel="stylesheet" href="notifications.css">
-<link rel="stylesheet" href="caixa.css">
-</head> <!-- Fecha a seção de cabeçalho. -->
-<body> <!-- Inicia a seção do corpo, onde o conteúdo visível da página é colocado. -->
-    <header> <!-- Cria a seção de cabeçalho da página. -->
-        <nav> <!-- Cria a barra de navegação. -->
-        </nav> <!-- Fecha a barra de navegação. -->
-    </header> <!-- Fecha a seção de cabeçalho. -->
-    <main class="main-content" > <!-- Inicia o conteúdo principal da página, com a classe de estilo para centralização. -->
-        <section class="caixa-section"> <!-- Inicia a primeira seção, dedicada à venda atual. -->
-            <h2>Venda Atual</h2>
-             <div class="caixa-main-container"></div> <!-- Título da seção. -->
-            <div id="lista-venda"></div> <!-- Contêiner onde o JavaScript irá inserir os produtos da venda. -->
-            <div id="total-venda">Total: R$ 0,00</div> <!-- Elemento que exibirá o valor total da venda, atualizado por JavaScript. -->
-            <button id="finalizar-venda-btn" type="button">Finalizar Venda</button> <!-- Botão para finalizar a venda e registrar os dados. -->
-        </section> <!-- Fecha a seção da venda atual. -->
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="caixa.css">
+</head>
+<body>
+    <header>
+        <nav></nav>
+    </header>
+    <main class="main-content caixa-content">
+        <h1>Frente de Caixa</h1>
+        <div class="caixa-page">
+            <section class="caixa-section caixa-section--venda">
+                <h2>Venda Atual</h2>
+                <div id="lista-venda" class="caixa-lista caixa-lista--venda"></div>
+                <div class="caixa-total-acoes">
+                    <span id="total-venda">Total: R$ 0,00</span>
+                    <button id="finalizar-venda-btn" type="button">Finalizar Venda</button>
+                </div>
+            </section>
 
-
-        <section class="caixa-section"> <!-- Inicia a segunda seção, dedicada à busca de produtos. -->
-            <h2>Buscar Produto</h2> <!-- Título da seção. -->
-            <div class="input-group"> <!-- Agrupa o campo de input para estilização. -->
-                <input type="text" id="busca-produto" placeholder="Digite o código ou nome do produto..."> <!-- Campo de texto para o usuário digitar a busca. -->
-            </div> <!-- Fecha o grupo do input. -->
-            <div id="lista-produtos"></div> <!-- Contêiner onde o JavaScript irá mostrar os resultados da busca de produtos. -->
-        </section> <!-- Fecha a seção de busca de produtos. -->
-    </main> <!-- Fecha o conteúdo principal da página. -->
+            <section class="caixa-section caixa-section--busca">
+                <h2>Buscar Produto</h2>
+                <div class="input-group">
+                    <input type="text" id="busca-produto" placeholder="Digite o codigo ou nome do produto...">
+                </div>
+                <div id="lista-produtos" class="caixa-lista caixa-lista--produtos"></div>
+            </section>
+        </div>
+    </main>
     <script src="notifications.js"></script>
     <script src="auth.js"></script>
-    <script src="caixa.js"></script> <!-- Inclui e executa o arquivo JavaScript que controla a lógica desta página. -->
-</body> <!-- Fecha a seção do corpo. -->
-</html> <!-- Fecha o documento HTML. -->
+    <script src="caixa.js"></script>
+</body>
+</html>

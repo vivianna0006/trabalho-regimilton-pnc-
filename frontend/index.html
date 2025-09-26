@@ -1,30 +1,31 @@
-<!DOCTYPE html> <!-- Declara ao navegador que este documento utiliza o padrão HTML5. -->
-<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como Português do Brasil. -->
-<head> <!-- Inicia a seção de cabeçalho, que contém metadados e links para outros arquivos. -->
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8, permitindo acentos e símbolos. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Garante que a página se adapte bem a telas de diferentes tamanhos (responsividade). -->
-    <title>Login e Cadastro</title> <!-- Define o título que será exibido na aba ou janela do navegador. -->
-    <link rel="stylesheet" href="login.css"> <!-- Importa uma folha de estilos externa (CSS) para aplicar a aparência visual à página. -->
-</head> <!-- Fecha a seção de cabeçalho. -->
-<body> <!-- Inicia a seção do corpo, que contém todo o conteúdo visível da página. -->
-    <div class="container"> <!-- Cria um contêiner (uma caixa) principal para agrupar e estilizar o conteúdo. -->
-        <div id="login-box" class="form-box"> <!-- Cria o contêiner específico para o formulário de login. -->
-            <h2>Login</h2> <!-- Cria um título de nível 2 com o texto "Login". -->
-            <form id="login-form"> <!-- Inicia o formulário de login, com um ID para ser manipulado pelo JavaScript. -->
-                <div class="input-group"> <!-- Cria um grupo para agrupar o rótulo e o campo de texto do usuário. -->
-                    <label for="login-username">Usuário</label> <!-- Cria um rótulo de texto "Usuário" associado ao campo de input abaixo. -->
-                    <input type="text" id="login-username" required> <!-- Cria um campo de entrada de texto para o nome de usuário, que é de preenchimento obrigatório. -->
-                </div> <!-- Fecha o grupo do campo de usuário. -->
-                <div class="input-group"> <!-- Cria um grupo para agrupar o rótulo e o campo de senha. -->
-                    <label for="login-password">Senha</label> <!-- Cria um rótulo de texto "Senha" associado ao campo de senha abaixo. -->
-                    <input type="password" id="login-password" required> <!-- Cria um campo de entrada de senha (esconde os caracteres), que é de preenchimento obrigatório. -->
+﻿<!DOCTYPE html> <!-- Declara ao navegador que este documento utiliza o padrÃ£o HTML5. -->
+<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como PortuguÃªs do Brasil. -->
+<head> <!-- Inicia a seÃ§Ã£o de cabeÃ§alho, que contÃ©m metadados e links para outros arquivos. -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres para UTF-8, permitindo acentos e sÃ­mbolos. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Garante que a pÃ¡gina se adapte bem a telas de diferentes tamanhos (responsividade). -->
+    <title>Login e Cadastro</title> <!-- Define o tÃ­tulo que serÃ¡ exibido na aba ou janela do navegador. -->
+    <link rel="stylesheet" href="login.css"> <!-- Importa uma folha de estilos externa (CSS) para aplicar a aparÃªncia visual Ã  pÃ¡gina. -->
+</head> <!-- Fecha a seÃ§Ã£o de cabeÃ§alho. -->
+<body> <!-- Inicia a seÃ§Ã£o do corpo, que contÃ©m todo o conteÃºdo visÃ­vel da pÃ¡gina. -->
+    <div class="container"> <!-- Cria um contÃªiner (uma caixa) principal para agrupar e estilizar o conteÃºdo. -->
+        <div id="login-box" class="form-box"> <!-- Cria o contÃªiner especÃ­fico para o formulÃ¡rio de login. -->
+            <h2>Login</h2> <!-- Cria um tÃ­tulo de nÃ­vel 2 com o texto "Login". -->
+            <form id="login-form"> <!-- Inicia o formulÃ¡rio de login, com um ID para ser manipulado pelo JavaScript. -->
+                <div class="input-group"> <!-- Cria um grupo para agrupar o rÃ³tulo e o campo de texto do usuÃ¡rio. -->
+                    <label for="login-username">Usuário</label> <!-- Cria um rÃ³tulo de texto "UsuÃ¡rio" associado ao campo de input abaixo. -->
+                    <input type="text" id="login-username" required> <!-- Cria um campo de entrada de texto para o nome de usuÃ¡rio, que Ã© de preenchimento obrigatÃ³rio. -->
+                </div> <!-- Fecha o grupo do campo de usuÃ¡rio. -->
+                <div class="input-group"> <!-- Cria um grupo para agrupar o rÃ³tulo e o campo de senha. -->
+                    <label for="login-password">Senha</label> <!-- Cria um rÃ³tulo de texto "Senha" associado ao campo de senha abaixo. -->
+                    <input type="password" id="login-password" required> <!-- Cria um campo de entrada de senha (esconde os caracteres), que Ã© de preenchimento obrigatÃ³rio. -->
                 </div> <!-- Fecha o grupo do campo de senha. -->
-                <button type="submit">Entrar</button> <!-- Cria um botão que, ao ser clicado, submete o formulário. -->
-            </form> <!-- Fecha o formulário. -->
-            <p id="login-message" class="message"></p> <!-- Cria um parágrafo vazio que será usado pelo JavaScript para exibir mensagens de sucesso ou erro. -->
-        </div> <!-- Fecha o contêiner do formulário de login. -->
+                <button type="submit">Entrar</button> <!-- Cria um botÃ£o que, ao ser clicado, submete o formulÃ¡rio. -->
+            </form> <!-- Fecha o formulÃ¡rio. -->
+            <p id="login-message" class="message"></p> <!-- Cria um parÃ¡grafo vazio que serÃ¡ usado pelo JavaScript para exibir mensagens de sucesso ou erro. -->
+        </div> <!-- Fecha o contÃªiner do formulÃ¡rio de login. -->
 
-<script src="script.js"></script> <!-- Carrega e executa o arquivo JavaScript que controla a lógica desta página. -->
-</div> <!-- Fecha o contêiner principal. -->
-</body> <!-- Fecha a seção do corpo. -->
+<script src="api-client.js"></script>
+<script src="script.js"></script> <!-- Carrega e executa o arquivo JavaScript que controla a lÃ³gica desta pÃ¡gina. -->
+</div> <!-- Fecha o contÃªiner principal. -->
+</body> <!-- Fecha a seÃ§Ã£o do corpo. -->
 </html> <!-- Fecha o documento HTML. -->

@@ -1,27 +1,67 @@
-<!DOCTYPE html> <!-- Declara ao navegador que este documento é um arquivo HTML5. -->
-<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como Português do Brasil. -->
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal - Styllo Fashion</title>
     <link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="menu.css">
-<link rel="stylesheet" href="componentes.css">
-<link rel="stylesheet" href="notifications.css"><!-- Inicia a seção de cabeçalho, que contém metadados e links para outros arquivos. -->
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8, para exibir acentos e símbolos corretamente. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva, adaptando-a a diferentes tamanhos de tela. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Pré-conecta ao servidor de fontes do Google para acelerar o carregamento da fonte. -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> <!-- Importa a fonte 'Playfair Display' do Google Fonts para ser usada na página. -->
-    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos principal do site. -->
-    <link rel="stylesheet" href="menu.css"> <!-- Importa a folha de estilos específica para o menu. -->
-    <title>Menu Principal - Styllo Fashion</title> <!-- Define o título que aparece na aba do navegador. -->
-</head> <!-- Fecha a seção de cabeçalho. -->
-<body> <!-- Inicia o corpo do documento, onde todo o conteúdo visível é colocado. -->
-    <header> <!-- Define uma seção de cabeçalho para a página, contendo a navegação. -->
-        <nav> <!-- Define o contêiner da barra de navegação. -->
-        </nav> <!-- Fecha o contêiner da barra de navegação. -->
-    </header> <!-- Fecha a seção de cabeçalho. -->
-    <main class="main-content"> <!-- Inicia a seção de conteúdo principal da página. -->
-        <h1>Bem-vindo(a) ao Sistema!</h1> <!-- Cria um título principal de boas-vindas. -->
-        <p>Selecione uma opção no menu acima para começar.</p> <!-- Cria um parágrafo de instrução para o usuário. -->
-    </main> <!-- Fecha a seção de conteúdo principal. -->
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="notifications.css">
+</head>
+<body>
+    <header>
+        <nav></nav>
+    </header>
+    <main class="main-content menu-dashboard">
+        <section class="menu-hero">
+            <div class="menu-hero__text">
+                <span class="menu-hero__subtitle">Bem-vindo(a), <strong id="menu-username">Usuario</strong></span>
+                <h1 class="menu-hero__title">Escolha o que deseja gerenciar hoje</h1>
+                <p class="menu-hero__description">Acompanhe o movimento do caixa, cadastre novos produtos e mantenha tudo organizado em um unico lugar.</p>
+                <div class="menu-hero__actions">
+                    <a class="menu-hero__btn menu-hero__btn--primary" href="./caixa.html">Ir para o Caixa</a>
+                    <a class="menu-hero__btn menu-hero__btn--secondary" href="./estoque.html">Ver Estoque</a>
+                </div>
+            </div>
+            <div class="menu-hero__card">
+                <h2>Resumo rapido</h2>
+                <ul>
+                    <li><span class="label">Perfil:</span> <span id="menu-user-role">-</span></li>
+                    <li><span class="label">Ultimo acesso:</span> <span id="menu-last-login">Agora mesmo</span></li>
+                    <li><span class="label">Status:</span> <span class="status-pill status-pill--active">Sistema operacional</span></li>
+                </ul>
+            </div>
+        </section>
+        <section class="menu-info">
+            <div class="menu-info__card">
+                <h4>Boas praticas</h4>
+                <p>Mantenha o estoque atualizado diariamente e realize sangrias sempre que o caixa estiver acima do limite definido pela loja.</p>
+            </div>
+            <div class="menu-info__card">
+                <h4>Dica rapida</h4>
+                <p>Use o menu superior para navegar entre os modulos. As opcoes mudam conforme o cargo do usuario logado.</p>
+            </div>
+        </section>
+    </main>
+
+<script src="api-client.js"></script>
     <script src="auth.js"></script>
-</body> <!-- Fecha a seção do corpo. -->
-</html> <!-- Fecha o documento HTML. -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usernameEl = document.getElementById('menu-username');
+            const roleEl = document.getElementById('menu-user-role');
+            const username = sessionStorage.getItem('username');
+            const cargo = sessionStorage.getItem('userCargo');
+
+            if (username && usernameEl) {
+                usernameEl.textContent = username;
+            }
+
+            if (roleEl) {
+                roleEl.textContent = cargo || 'Usuario';
+            }
+        });
+    </script>
+</body>
+</html>

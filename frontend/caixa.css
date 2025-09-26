@@ -1,160 +1,206 @@
-/* ================================================================= */
-/* == CSS DEFINITIVO PARA CENTRALIZAÇÃO TOTAL (ESTILO LOGIN)      == */
-/* ================================================================= */
-
-/*
- * O truque está aqui:
- * Em vez de estilizar o 'body', nós estilizamos o contêiner '.main-content'
- * para se comportar como a página de login.
-*/
-.main-content {
-    /*
-     * 1. Define a altura: A área principal terá a altura exata da
-     * janela do navegador (100vh) menos a altura do menu (70px).
-     */
-    height: calc(100vh - 70px);
-
-    /*
-     * 2. Ativa o Flexbox para controlar o alinhamento do conteúdo interno.
-    */
-    display: flex;
-
-    /*
-     * 3. Centraliza o conteúdo (as caixas do caixa/sangria) na HORIZONTAL.
-    */
-    justify-content: center;
-
-    /*
-     * 4. Centraliza o conteúdo (as caixas do caixa/sangria) na VERTICAL.
-    */
-    align-items: center;
-
-    /*
-     * 5. Remove margens e paddings herdados que possam atrapalhar
-     * a centralização.
-    */
-    margin: 0 auto;
-    padding: 0;
+﻿.caixa-content {
+    align-items: stretch;
 }
 
-
-/* --- Estilos para o Contêiner do Caixa --- */
-/* (O código abaixo permanece o mesmo, apenas organiza o visual interno) */
-
-.caixa-main-container {
+.caixa-content > h1 {
     width: 100%;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
+    margin: 0 0 1.5rem;
+    color: #2c3e50;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.caixa-page {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
     gap: 2rem;
-    padding: 1rem; /* Adiciona um respiro para telas menores */
+    align-items: start;
 }
 
 .caixa-section {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
 }
 
 .caixa-section h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
+    margin: 0 0 1rem;
+    color: #2c3e50;
+    text-align: left;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
-/* --- Estilos para os Itens e Botões --- */
+.caixa-lista {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow-y: auto;
+    padding-right: 0.35rem;
+}
 
-.item-produto, .item-venda {
+.caixa-lista:empty::after {
+    content: 'Nenhum item listado.';
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 1.6rem 0;
+    border: 1px dashed #dcdfe6;
+    border-radius: 6px;
+}
+
+.item-produto,
+.item-venda {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fb;
+    border: 1px solid #e6e9ef;
+    border-radius: 6px;
+    gap: 1rem;
 }
 
-.item-produto:last-child, .item-venda:last-child {
-    border-bottom: none;
+.item-produto span,
+.item-venda span {
+    flex: 1;
+    color: #34495e;
+    font-weight: 500;
 }
 
-.add-btn, .remove-btn {
-    padding: 6px 16px;
+.add-btn,
+.remove-btn {
+    padding: 0.5rem 1.25rem;
     font-size: 0.9rem;
-    border-radius: 5px;
+    border-radius: 6px;
     border: none;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
     flex-shrink: 0;
 }
 
 .add-btn {
     background-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
 }
+
 .add-btn:hover {
-    background-color: #0056b3;
+    background-color: #0062cc;
 }
 
 .remove-btn {
     background-color: #e74c3c;
+    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
 }
+
 .remove-btn:hover {
     background-color: #c0392b;
 }
 
-/* --- Estilos para Inputs e Total --- */
-
-#busca-produto {
+.input-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-#busca-produto:focus {
+.input-group input:focus {
     outline: none;
     border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.caixa-total-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-top: 1.5rem;
 }
 
 #total-venda {
-    font-size: 1.6rem;
-    font-weight: bold;
-    text-align: right;
-    margin-top: 20px;
-    color: #28a745;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #27ae60;
 }
 
 #finalizar-venda-btn {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
+    min-width: 220px;
+    padding: 0.85rem 2.5rem;
+    background-color: #27ae60;
     border: none;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 #finalizar-venda-btn:hover {
-    background-color: #218838;
+    background-color: #1f8a4d;
+    box-shadow: 0 6px 14px rgba(39, 174, 96, 0.25);
 }
 
-/* --- Estilos para a caixa de Sangria (reutilizando .form-box) --- */
+.caixa-lista--venda {
+    max-height: 440px;
+}
 
-.main-content .form-box {
-    max-width: 450px;
-    width: 100%;
+.caixa-lista--produtos {
+    max-height: 520px;
 }
-body {
-    overflow: hidden;
+
+@media (max-width: 992px) {
+    .caixa-page {
+        grid-template-columns: 1fr;
+    }
+
+    .caixa-total-acoes {
+        align-items: stretch;
+    }
+
+    #finalizar-venda-btn {
+        width: 100%;
+        min-width: 0;
+    }
 }
+
+@media (max-width: 600px) {
+    .caixa-content > h1 {
+        font-size: 1.6rem;
+    }
+
+    .caixa-section {
+        padding: 20px;
+    }
+
+    .item-produto,
+    .item-venda {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .add-btn,
+    .remove-btn {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
+.caixa-section--venda,
+.caixa-section--busca {
+    min-height: 420px;
+}
+
+

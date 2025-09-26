@@ -1,45 +1,48 @@
-<!DOCTYPE html> <!-- Declara ao navegador que este documento é um arquivo HTML5. -->
-<html lang="pt-BR"> <!-- Inicia o documento HTML e define o idioma principal como português do Brasil. -->
-<head> <!-- Inicia a seção de cabeçalho, contendo metadados e links para outros arquivos. -->
-    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 para exibir acentos e símbolos corretamente. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva, ajustando-a à tela do dispositivo. -->
-    <title>Sangria de Caixa - Styllo Fashion</title> <!-- Define o texto que aparecerá na aba do navegador. -->
-    <!-- O comentário abaixo indica a finalidade dos links seguintes. -->
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="menu.css">
-<link rel="stylesheet" href="componentes.css">
-<link rel="stylesheet" href="notifications.css">
-<link rel="stylesheet" href="caixa.css">
-</head> <!-- Fecha a seção de cabeçalho do documento. -->
-<body> <!-- Inicia o corpo do documento, onde todo o conteúdo visível é colocado. -->
-    <!-- O comentário abaixo indica que a seção seguinte é o menu principal. -->
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sangria de Caixa - Styllo Fashion</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="sangria.css">
+</head>
+<body>
     <header>
-        <nav> <!-- Define uma seção de navegação. -->
-        </nav> <!-- Fecha a seção de navegação. -->
-    </header> <!-- Fecha a seção de cabeçalho. -->
-
-
-    <!-- O comentário abaixo indica o início do conteúdo principal da página. -->
-    <main class="main-content">
-        <div class="form-box sangria-form-box"> <!-- Cria um contêiner para o formulário com estilos base e específicos de sangria. -->
-                <h2>Registrar Sangria</h2> <!-- Título principal do formulário. -->
-            <p class="sangria-intro-text">Insira o valor a ser retirado do caixa e o motivo.</p> <!-- Parágrafo de instrução para o usuário. -->
-            <form id="sangria-form"> <!-- Inicia o formulário de sangria, com um ID para ser manipulado pelo JavaScript. -->
-                <div class="input-group"> <!-- Agrupa o rótulo e o campo de entrada para estilização. -->
-                    <label for="sangria-valor">Valor (R$):</label> <!-- Rótulo (etiqueta) para o campo de valor, associado pelo 'for'. -->
-                    <input type="text" id="sangria-valor" placeholder="0,00" required> <!-- Campo de entrada de texto para o valor, com placeholder e marcação de obrigatório. -->
-                </div> <!-- Fecha o grupo de entrada. -->
-                <div class="input-group"> <!-- Agrupa o rótulo e o campo de entrada para estilização. -->
-                    <label for="sangria-motivo">Motivo:</label> <!-- Rótulo para o campo de motivo. -->
-                    <input type="text" id="sangria-motivo" placeholder="Ex: Pagamento de fornecedor" required> <!-- Campo de texto para o motivo, com placeholder e marcação de obrigatório. -->
-                </div> <!-- Fecha o grupo de entrada. -->
-                <button type="submit" class="sangria-submit-btn">Confirmar Retirada</button> <!-- Botão para enviar o formulário, com uma classe de estilo específica. -->
-            </form> <!-- Fecha o formulário. -->
-        </div> <!-- Fecha a caixa do formulário. -->
-    </main> <!-- Fecha a seção de conteúdo principal. -->
-    <!-- O comentário abaixo indica que os scripts são carregados no final para otimização. -->
+        <nav></nav>
+    </header>
+    <main class="main-content sangria-content">
+        <section class="sangria-card">
+            <div class="sangria-card__header">
+                <h1>Registrar Sangria</h1>
+                <p>Informe o valor que sera retirado e o motivo para gerar o registro no caixa.</p>
+            </div>
+            <form id="sangria-form" class="sangria-form">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="sangria-valor">Valor a retirar (R$)</label>
+                        <input type="text" id="sangria-valor" placeholder="0,00" autocomplete="off" required>
+                        <span class="input-hint">O valor e registrado automaticamente em reais.</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="sangria-motivo">Motivo da sangria</label>
+                        <input type="text" id="sangria-motivo" placeholder="Ex: Pagamento de fornecedor" maxlength="120" required>
+                        <span class="input-hint">Descreva brevemente a justificativa da retirada.</span>
+                    </div>
+                </div>
+                <div class="sangria-actions">
+                    <button type="submit" class="sangria-submit-btn">Confirmar Retirada</button>
+                    <button type="reset" class="sangria-reset-btn">Limpar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="api-client.js"></script>
     <script src="notifications.js"></script>
-    <script src="auth.js"></script><!-- Importa e executa o script responsável por mostrar as notificações. -->
-    <script src="sangria.js"></script> <!-- Importa e executa o script com a lógica específica da página de sangria. -->
-</body> <!-- Fecha a seção do corpo do documento. -->
-</html> <!-- Fecha o documento HTML. -->
+    <script src="auth.js"></script>
+    <script src="sangria.js"></script>
+</body>
+</html>

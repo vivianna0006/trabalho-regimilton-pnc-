@@ -1,5 +1,5 @@
 /* Estiliza a caixa principal do formulário dentro da área de conteúdo principal */
-.main-content .form-box {
+ .main-content .form-box {
     max-width: 450px; /* Define a largura máxima do formulário como 450px */
     width: 100%; /* Faz o formulário ocupar toda a largura disponível até o máximo definido */
 }
