@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
     margin: 0;
-    /* IMPORTANTE: Garante que o conteúdo comece abaixo do menu fixo */
+    /* IMPORTANTE: Garante que o conteǧdo comece abaixo do menu fixo */
     padding-top: 70px;
 }
 .main-content {
@@ -15,3 +15,19 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+/* Ajusta o espaçamento superior para o header fixo em telas menores,
+   evitando que o conteúdo fique escondido atrás do menu quando ele
+   quebra em mais de uma linha. */
+@media (max-width: 1024px) {
+    body {
+        padding-top: 84px; /* header um pouco mais alto em tablets */
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        padding-top: 120px; /* header empilha linhas no mobile */
+    }
+}
+

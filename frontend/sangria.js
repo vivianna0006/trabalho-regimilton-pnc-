@@ -71,14 +71,14 @@
     const usuario = sessionStorage.getItem('username');
 
     if (!usuario) {
-      showToast('Erro: Usuario nao identificado. Faca login novamente.', 'error');
+      showToast('Erro: Usuário nao identificado. Faça login novamente.', 'error');
       return;
     }
 
     const valorNumerico = parseCurrency(rawValue);
 
     if (!rawValue || Number.isNaN(valorNumerico) || valorNumerico <= 0) {
-      showToast('Informe um valor valido para registrar a sangria.', 'error');
+      showToast('Informe um valor válido para registrar a sangria.', 'error');
       valorInput.focus();
       return;
     }
@@ -109,7 +109,7 @@
         : {};
 
       if (!response.ok) {
-        throw new Error(data.message || 'nao foi possível registrar a sangria.');
+        throw new Error(data.message || 'não foi possível registrar a sangria.');
       }
 
       showToast('Sangria registrada com sucesso!');

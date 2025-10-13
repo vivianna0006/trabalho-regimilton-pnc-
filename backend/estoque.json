@@ -118,5 +118,20 @@
       "G": 0,
       "GG": 0
     }
+  },
+  {
+    "id": "001-OC",
+    "nome": "óculos coração",
+    "descricao": "óculos coração kawaii",
+    "valor": 30,
+    "categoriaNome": "Acessórios",
+    "subcategoriaNome": "Feminino",
+    "tamanhos": {
+      "PP": 60,
+      "P": 0,
+      "M": 0,
+      "G": 0,
+      "GG": 0
+    }
   }
 ]

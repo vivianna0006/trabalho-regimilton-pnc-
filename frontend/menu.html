@@ -16,31 +16,31 @@
     <main class="main-content menu-dashboard">
         <section class="menu-hero">
             <div class="menu-hero__text">
-                <span class="menu-hero__subtitle">Bem-vindo(a), <strong id="menu-username">Usuario</strong></span>
+                <span class="menu-hero__subtitle">Bem-vindo(a), <strong id="menu-username">Usuário</strong></span>
                 <h1 class="menu-hero__title">Escolha o que deseja gerenciar hoje</h1>
                 <p class="menu-hero__description">Acompanhe o movimento do caixa, cadastre novos produtos e mantenha tudo organizado em um unico lugar.</p>
                 <div class="menu-hero__actions">
-                    <a class="menu-hero__btn menu-hero__btn--primary" href="./caixa.html">Ir para o Caixa</a>
+                    <a class="menu-hero__btn menu-hero__btn--primary" href="./caixa.html">Ir para o Registro de Venda</a>
                     <a class="menu-hero__btn menu-hero__btn--secondary" href="./estoque.html">Ver Estoque</a>
                 </div>
             </div>
             <div class="menu-hero__card">
-                <h2>Resumo rapido</h2>
+                <h2>Resumo rápido</h2>
                 <ul>
                     <li><span class="label">Perfil:</span> <span id="menu-user-role">-</span></li>
-                    <li><span class="label">Ultimo acesso:</span> <span id="menu-last-login">Agora mesmo</span></li>
+                    <li><span class="label">Último acesso:</span> <span id="menu-last-login">Agora mesmo</span></li>
                     <li><span class="label">Status:</span> <span class="status-pill status-pill--active">Sistema operacional</span></li>
                 </ul>
             </div>
         </section>
         <section class="menu-info">
             <div class="menu-info__card">
-                <h4>Boas praticas</h4>
+                <h4>Boas práticas</h4>
                 <p>Mantenha o estoque atualizado diariamente e realize sangrias sempre que o caixa estiver acima do limite definido pela loja.</p>
             </div>
             <div class="menu-info__card">
-                <h4>Dica rapida</h4>
-                <p>Use o menu superior para navegar entre os modulos. As opcoes mudam conforme o cargo do usuario logado.</p>
+                <h4>Dica rápida</h4>
+                <p>Use o menu superior para navegar entre os modulos. As opções mudam conforme o cargo do usuário logado.</p>
             </div>
         </section>
     </main>
@@ -59,8 +59,29 @@
             }
 
             if (roleEl) {
-                roleEl.textContent = cargo || 'Usuario';
+                roleEl.textContent = cargo || 'Usuário';
             }
+
+            // Corrige acentuação de textos estáticos
+            try {
+                const heroDesc = document.querySelector('.menu-hero__description');
+                if (heroDesc) heroDesc.textContent = 'Acompanhe o movimento do caixa, cadastre novos produtos e mantenha tudo organizado em um único lugar.';
+
+                const cardTitle = document.querySelector('.menu-hero__card h2');
+                if (cardTitle) cardTitle.textContent = 'Resumo rápido';
+
+                const lastAccessLabel = document.querySelector('.menu-hero__card .label');
+                const labels = document.querySelectorAll('.menu-hero__card .label');
+                if (labels && labels[1]) labels[1].textContent = 'Último acesso:';
+
+                const boas = Array.from(document.querySelectorAll('.menu-info__card h4')).find(el => el.textContent.includes('Boas'));
+                if (boas) boas.textContent = 'Boas práticas';
+                const dica = Array.from(document.querySelectorAll('.menu-info__card h4')).find(el => el.textContent.includes('Dica'));
+                if (dica) dica.textContent = 'Dica rápida';
+
+                const dicaP = Array.from(document.querySelectorAll('.menu-info__card p')).find(el => el.textContent.includes('menu superior'));
+                if (dicaP) dicaP.textContent = 'Use o menu superior para navegar entre os módulos. As opções mudam conforme o cargo do usuário logado.';
+            } catch (_) {}
         });
     </script>
 </body>
