@@ -6,8 +6,10 @@
     <title>Estoque - Styllo Fashion Modas</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="componentes.css">
     <link rel="stylesheet" href="notifications.css">
     <link rel="stylesheet" href="estoque.css">
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}</style>
 </head>
 <body>
     <header>
@@ -19,6 +21,7 @@
                 <h1>Estoque Styllo Fashion Modas</h1>
                 <p>Mantenha os produtos organizados, cadastre novidades e acompanhe as quantidades por tamanho.</p>
                 <div class="estoque-header__search">
+                    <label for="campo-busca" class="sr-only">Buscar produtos</label>
                     <input type="text" id="campo-busca" placeholder="Buscar por produtos, categorias ou ID...">
                     <span class="estoque-header__hint">Dica: busque pelo ID para localizar rapidamente um item.</span>
                 </div>
@@ -26,10 +29,10 @@
         </section>
 
         <section class="estoque-content">
-            <aside class="estoque-categorias-panel">
+            <aria-label class="estoque-categorias-panel">
                 <h2>Categorias</h2>
                 <div id="menu-categorias" class="estoque-categorias"></div>
-            </aside>
+            </aria-label>
 
             <div class="estoque-produtos" id="area-produtos">
                 <div class="estoque-empty">
@@ -38,7 +41,7 @@
                 </div>
             </div>
 
-            <aside class="estoque-form-wrapper">
+            <aria-label class="estoque-form-wrapper">
                 <form id="form-produto" class="estoque-form">
                     <header class="estoque-form__header">
                         <h3>Adicionar novo produto</h3>
@@ -69,7 +72,7 @@
 
                     <div class="form-field">
                         <label for="nome">Nome do produto</label>
-                        <input type="text" id="nome" placeholder="Ex: Vestido floral de verao" required>
+                        <input type="text" id="nome" placeholder="Ex: Vestido floral de verão" required>
                     </div>
 
                     <div class="form-field">
@@ -84,7 +87,7 @@
 
                     <button type="submit" class="estoque-form__submit">Adicionar produto</button>
                 </form>
-            </aside>
+            </aria-label>
         </section>
     </main>
     <script src="api-client.js"></script>
@@ -93,3 +96,4 @@
     <script src="estoque.js"></script>
 </body>
 </html>
+

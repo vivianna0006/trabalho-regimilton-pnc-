@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Caixa</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="componentes.css">
+  <link rel="stylesheet" href="notifications.css">
+  <link rel="stylesheet" href="historico.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+  <header>
+    <nav></nav>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <h1>Histórico de Caixa</h1>
+
+      <div class="tabs">
+        <button class="tab-button active" data-tab="vendas">Histórico de Vendas</button>
+        <button class="tab-button" data-tab="sangrias">Histórico de Sangrias</button>
+        <button class="tab-button" data-tab="suprimentos">Histórico de Suprimentos</button>
+        <button class="tab-button" data-tab="devolucoes">Histórico de Devoluções</button>
+      </div>
+
+      <section id="vendas" class="tab-content active">
+        <div class="filters">
+          <select id="filtro-vendedor-vendas"></select>
+          <input type="date" id="filtro-dia-vendas">
+          <input type="date" id="filtro-dia-ate-vendas">
+          <input type="text" id="filtro-produto-id" placeholder="Buscar por ID do Produto...">
+          <input type="text" id="filtro-produto-nome" placeholder="Buscar por Nome do Produto...">
+          <select id="filtro-ordem-vendas">
+            <option value="date_desc" selected>Mais recentes</option>
+            <option value="date_asc">Mais antigas</option>
+            <option value="total_desc">Maior total</option>
+            <option value="total_asc">Menor total</option>
+          </select>
+          <button id="limpar-filtros-vendas" type="button">Limpar</button>
+          <button id="exportar-vendas-csv" type="button">Exportar CSV</button>
+        </div>
+        <div id="resumo-vendas"></div>
+        <div id="historico-vendas-lista" class="history-list"></div>
+      </section>
+
+      <section id="sangrias" class="tab-content">
+        <div class="filters">
+          <select id="filtro-vendedor-sangrias"></select>
+          <input type="date" id="filtro-dia-sangrias">
+          <input type="date" id="filtro-dia-ate-sangrias">
+          <select id="ordem-sangrias">
+            <option value="date_desc" selected>Mais recentes</option>
+            <option value="date_asc">Mais antigas</option>
+            <option value="amount_desc">Maior valor</option>
+            <option value="amount_asc">Menor valor</option>
+          </select>
+          <button id="limpar-filtros-sangrias" type="button">Limpar</button>
+          <button id="exportar-sangrias-csv" type="button">Exportar CSV</button>
+        </div>
+        <div id="resumo-sangrias"></div>
+        <div id="historico-sangrias-lista" class="history-list"></div>
+      </section>
+
+      <section id="suprimentos" class="tab-content">
+        <div class="filters">
+          <select id="filtro-vendedor-suprimentos"></select>
+          <input type="date" id="filtro-dia-suprimentos">
+          <input type="date" id="filtro-dia-ate-suprimentos">
+          <select id="ordem-suprimentos">
+            <option value="date_desc" selected>Mais recentes</option>
+            <option value="date_asc">Mais antigas</option>
+            <option value="amount_desc">Maior valor</option>
+            <option value="amount_asc">Menor valor</option>
+          </select>
+          <button id="limpar-filtros-suprimentos" type="button">Limpar</button>
+          <button id="exportar-suprimentos-csv" type="button">Exportar CSV</button>
+        </div>
+        <div id="resumo-suprimentos"></div>
+        <div id="historico-suprimentos-lista" class="history-list"></div>
+      </section>
+
+      <section id="devolucoes" class="tab-content">
+        <div class="filters">
+          <select id="filtro-vendedor-devolucoes"></select>
+          <input type="date" id="filtro-dia-devolucoes">
+          <input type="date" id="filtro-dia-ate-devolucoes">
+          <input type="text" id="filtro-produto-id-devolucao" placeholder="Buscar por ID do Produto...">
+          <input type="text" id="filtro-produto-nome-devolucao" placeholder="Buscar por Nome do Produto...">
+          <select id="ordem-devolucoes">
+            <option value="date_desc" selected>Mais recentes</option>
+            <option value="date_asc">Mais antigas</option>
+            <option value="amount_desc">Maior total</option>
+            <option value="amount_asc">Menor total</option>
+          </select>
+          <button id="limpar-filtros-devolucoes" type="button">Limpar</button>
+          <button id="exportar-devolucoes-csv" type="button">Exportar CSV</button>
+        </div>
+        <div id="resumo-devolucoes"></div>
+        <div id="historico-devolucoes-lista" class="history-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="api-client.js"></script>
+  <script src="notifications.js"></script>
+  <script src="auth.js"></script>
+  <script src="historico.js"></script>
+
+  <!-- Modal Devolução -->
+  <div id="modal-devolucao" class="modal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);">
+    <div class="modal-content" style="background:#fff;max-width:600px;width:95%;border-radius:10px;padding:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <h2 style="margin:0;">Processar Devolução</h2>
+        <button type="button" id="fechar-modal-devolucao" style="background:none;border:none;font-size:20px;cursor:pointer;">×</button>
+      </div>
+      <div style="margin-top:8px;">
+        <p>Venda ID: <strong id="dev-sale-id">-</strong></p>
+        <div id="dev-items" style="max-height:220px;overflow:auto;border:1px solid #eee;border-radius:6px;padding:8px;"></div>
+        <label for="dev-motivo" style="display:block;margin-top:8px;">Motivo</label>
+        <textarea id="dev-motivo" rows="3" style="width:100%;"></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px;">
+        <button type="button" id="cancelar-devolucao">Cancelar</button>
+        <button type="button" id="confirmar-devolucao" style="background:#2563eb;color:#fff;border:none;padding:8px 14px;border-radius:6px;">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

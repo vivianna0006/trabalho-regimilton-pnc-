@@ -1,7 +1,24 @@
 [
   {
-    "username": "aninha123",
-    "password": "$2b$10$YYQa1znH2yfgojsAwn3rM.ixqBZ06D6dGUiXolIiu6RPILAs3uGg6",
-    "cargo": "Administrador"
+    "username": "anninhatwice9",
+    "password": "$2b$10$IsNwtYOobjUD4kUZJu32FeMERE6agZYCYOMzMCi/.jDYx2c1axy82",
+    "cargo": "Administrador",
+    "nomeCompleto": "anna twice gg da nação",
+    "cpf": "72895056030",
+    "email": "omundoteamatwice@gmail.com",
+    "telefone": "61986012478",
+    "createdAt": "2025-10-11T22:50:51.941Z",
+    "updatedAt": "2025-10-11T22:50:51.941Z"
+  },
+  {
+    "username": "30818526254",
+    "password": "$2b$10$aiKJibhY7CIOP1nTG8a64Oo05i/k.RoaqTq9GKmQdfyIbYO1Lb.SS",
+    "cargo": "Funcionario",
+    "nomeCompleto": "Pupyo Wiguowuo",
+    "cpf": "30818526254",
+    "email": "admin@example.com",
+    "telefone": "56211541145",
+    "createdAt": "2025-10-13T00:52:19.055Z",
+    "updatedAt": "2025-10-13T00:52:19.055Z"
   }
 ]

@@ -1,39 +1,32 @@
-// ===================================================================================
-// ==                  SISTEMA DE NOTIFICAÇÕES (notifications.js)                   ==
-// ===================================================================================
-// Descrição: Este script cria e gerencia as notificações flutuantes (toasts)
-// que aparecem no topo da tela para dar feedback ao usuário.
-// ===================================================================================
-
+﻿
 /**
- * Exibe uma notificação flutuante (toast) na tela.
- * @param {string} message - A mensagem a ser exibida.
- * @param {string} [type='success'] - O tipo de notificação ('success' ou 'error').
+ @param {string} message 
+  @param {string} [type='success'] 
  */
 function showToast(message, type = 'success') {
-    // Procura se o contêiner principal de toasts já existe na página.
+    const normalize = (text) => {
+        if (typeof text !== 'string') return text;
+        return text
+            .replace(/Nï¿½o/g, 'NÃ£o')
+            .replace(/nï¿½o/g, 'nÃ£o')
+            .replace(/Sessao/g, 'SessÃ£o')
+            .replace(/Faï¿½ï¿½a/g, 'FaÃ§a')
+            .replace(/funcionário/g, 'funcionÃ¡rio')
+            .replace(/funcionários/g, 'funcionÃ¡rios')
+            .replace(/invï¿½lido/g, 'invÃ¡lido')
+            .replace(/invï¿½lidos/g, 'invÃ¡lidos');
+    };
     let container = document.getElementById('toast-container');
-
-    // Se não existir, cria e adiciona à página.
     if (!container) {
         container = document.createElement('div');
         container.id = 'toast-container';
         container.className = 'toast-container';
         document.body.appendChild(container);
     }
-
-    // Cria o elemento HTML para a notificação individual.
     const toast = document.createElement('div');
-    // Adiciona as classes CSS para estilizar o toast (ex: 'toast success').
     toast.className = `toast ${type}`;
-    // Define o texto da notificação.
-    toast.textContent = message;
-
-    // Adiciona o toast ao contêiner na tela.
+    toast.textContent = normalize(message);
     container.appendChild(toast);
-
-    // Define um tempo para que a notificação seja removida automaticamente.
-    // O tempo (4000ms = 4s) deve corresponder à duração da animação no CSS.
     setTimeout(() => {
         toast.remove();
     }, 4000);

@@ -51,7 +51,7 @@
 
   const wrapError = (error) => {
     if (error && (error.message?.includes('Failed to fetch') || error.name === 'TypeError')) {
-      return new Error('Nao foi possivel conectar ao servidor. Verifique se o back-end esta em execucao.');
+      return new Error('Não foi possivel conectar ao servidor. Verifique se o back-end esta em execução.');
     }
     return error || new Error('Nao foi possivel completar a requisicao.');
   };
@@ -60,6 +60,24 @@
   let discoveryPromise = null;
   let discoveryResponse = null;
   const candidates = buildCandidates();
+
+  // Ensure candidate bases always have proper protocol slashes
+  const ensureProtocolSlashes = (base) => {
+    if (typeof base !== 'string') return base;
+    if (base.startsWith('http://') || base.startsWith('https://')) return base;
+    if (base.startsWith('http:')) return base.replace(/^http:/, 'http://');
+    if (base.startsWith('https:')) return base.replace(/^https:/, 'https://');
+    return base;
+  };
+
+  // Safe join between base and path, adding a slash when needed
+  const joinUrl = (base, path) => {
+    const b = ensureProtocolSlashes(String(base || ''));
+    const p = String(path || '');
+    if (!p) return b;
+    const needSlash = !b.endsWith('/') && !p.startsWith('/');
+    return b + (needSlash ? '/' : '') + p.replace(/^\/+/, '/');
+  };
 
   const resolveBase = async (path, options) => {
     if (cachedBaseUrl) {
@@ -73,13 +91,15 @@
     discoveryPromise = (async () => {
       let lastError = null;
 
-      for (const candidate of candidates) {
+      for (const candidateRaw of candidates) {
+        const candidate = ensureProtocolSlashes(candidateRaw);
         try {
-          const response = await fetch(`${candidate}${path}`, options);
+          const url = joinUrl(candidate, path);
+          const response = await fetch(url, options);
           const contentType = response.headers?.get('content-type') || '';
 
           if (!response.ok || (response.status !== 204 && !contentType.includes('application/json'))) {
-            lastError = new Error(`Endpoint ${candidate}${path} respondeu ${response.status}.`);
+            lastError = new Error(`Endpoint ${url} respondeu ${response.status}.`);
             continue;
           }
 
@@ -108,7 +128,8 @@
 
     if (cachedBaseUrl) {
       try {
-        return await fetch(`${cachedBaseUrl}${path}`, options);
+        const url = joinUrl(cachedBaseUrl, path);
+        return await fetch(url, options);
       } catch (error) {
         throw wrapError(error);
       }
@@ -130,7 +151,8 @@
     }
 
     try {
-      return await fetch(`${baseUrl}${path}`, options);
+      const url = joinUrl(baseUrl, path);
+      return await fetch(url, options);
     } catch (error) {
       throw wrapError(error);
     }

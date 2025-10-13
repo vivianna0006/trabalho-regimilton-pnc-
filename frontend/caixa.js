@@ -1,5 +1,5 @@
 // ===================================================================================
-// ==                          LÓGICA DA FRENTE DE CAIXA (caixa.js)                   ==
+// ==                          LÓGICA DO REGISTRO DE VENDA (caixa.js)                   ==
 // ===================================================================================
 
 const buscaInput = document.getElementById('busca-produto');
@@ -18,7 +18,7 @@ let vendaAtual = [];
 const fetchProdutos = async () => {
     try {
         // CORREÇÃO #1: A rota correta é /produtos, sem o /api.
-        const response = await fetch(`${API_URL}/produtos`);
+        const response = await fetch(`${API_URL}/api/produtos`);
         if (!response.ok) {
             throw new Error('Não foi possível carregar os produtos do estoque.');
         }
@@ -69,9 +69,6 @@ const renderizarVenda = () => {
     });
     totalVendaEl.textContent = `Total: R$ ${total.toFixed(2)}`;
 };
-
-// --- EVENT LISTENERS (Funcionalidades dos botões e campos) ---
-
 buscaInput.addEventListener('input', () => {
     const termoBusca = buscaInput.value.toLowerCase();
     if (termoBusca.length >= 2) {

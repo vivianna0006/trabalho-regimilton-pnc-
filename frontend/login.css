@@ -1,47 +1,93 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+﻿/* Ajustes leves para telas independentes (login/setup) */
+.form-box { max-width: 460px; }
+
+/* Eye toggle for password fields (login/setup) */
+.input-group .input-wrapper { position: relative; display: block; }
+.input-group .input-wrapper input[type="password"],
+.input-group .input-wrapper input[type="text"] {
+  padding-right: 3rem;
+  width: 100%;
+  box-sizing: border-box;
 }
-.form-box {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+.input-group .eye-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  color: #555;
+  z-index: 2;
 }
-.form-box h2 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 20px;
+.input-group .eye-toggle svg { display: block; width: 100%; height: 100%; }
+.input-group .eye-toggle .icon-open { display: inline; }
+.input-group .eye-toggle .icon-closed { display: none; }
+.input-group .eye-toggle.closed .icon-open { display: none; }
+.input-group .eye-toggle.closed .icon-closed { display: inline; }
+/* Login page enhancements inspired by menu/estoque */
+.login-hero {
+  width: 100%;
+  max-width: 1200px;
+  min-height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+  padding-bottom: 2rem;
 }
-.form-box .input-group { margin-bottom: 15px; }
-.form-box .input-group label { display: block; margin-bottom: 5px; }
-.form-box .input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+.login-grid {
+  width: 100%;
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  justify-items: center;
+  /* sobe um pouco o bloco em relação ao centro exato */
+  transform: translateY(-24px);
 }
-.form-box button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+.login-brand .brand-name {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  color: var(--sf-dark, #1f2937);
+  text-decoration: none;
 }
-.message {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-    min-height: 20px;
+.login-brand { text-align: center; }
+.login-brand h2 { margin: 0.25rem 0 0.35rem; font-size: 1.8rem; color: #111827; }
+.login-brand p { margin: 0; color: var(--sf-muted, #6b7280); font-size: 1rem; }
+
+.login-card { width: 100%; box-shadow: 0 18px 40px rgba(15,23,42,0.08); border: 1px solid rgba(37,99,235,0.06); border-radius: 14px; }
+.form-box button[type="submit"], .form-box .btn-primary {
+  background: linear-gradient(135deg, var(--sf-primary, #2563eb), #1d4ed8);
+  box-shadow: 0 12px 24px rgba(37,99,235,0.2);
+  border-radius: 10px;
+  transition: transform .15s ease, box-shadow .2s ease, filter .15s ease;
+}
+.form-box button[type="submit"]:hover, .form-box .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(37,99,235,.24); }
+.form-box button[type="submit"]:active, .form-box .btn-primary:active { transform: translateY(0); filter: brightness(.98); }
+
+/* Harmonização dos campos com tokens do site */
+.form-box .input-group input,
+.form-box .input-group select,
+.form-box .input-group textarea {
+  border: 1px solid var(--sf-border, #e5e7eb);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.form-box .input-group input:focus,
+.form-box .input-group select:focus,
+.form-box .input-group textarea:focus {
+  outline: none;
+  border-color: var(--sf-primary, #2563eb);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  background: #fff;
+}
+.form-box .input-group input::placeholder { color: var(--sf-muted, #6b7280); opacity: .8; }
+.form-header h1 { margin-bottom: .25rem; }
+.form-header .intro-p { margin-top: 0; color: var(--sf-muted, #6b7280); }
+@media (max-width: 900px) {
+  .login-hero { min-height: calc(100vh - 84px); }
+  .login-grid { transform: translateY(-12px); }
 }

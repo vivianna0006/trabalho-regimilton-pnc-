@@ -9,7 +9,7 @@
     --sf-surface: #ffffff;
 }
 
-header {
+body > header {
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
     padding: 0 2.5rem;
@@ -119,19 +119,21 @@ nav {
     border-radius: 10px;
     box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
     z-index: 1100;
-    top: calc(100% + 12px);
-    left: 0;
+    /* Remove gap that caused hover flicker */
+    top: calc(100% + 24px);
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .dropdown-content::before {
     content: '';
     position: absolute;
     top: -10px;
-    left: 28px;
+    left: 50%;
     width: 16px;
     height: 16px;
     background: var(--sf-surface);
-    transform: rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
 }
 
 .dropdown-content a {
@@ -148,7 +150,9 @@ nav {
     padding-left: 22px;
 }
 
-.dropdown:hover .dropdown-content {
+/* Open by JS toggle (more stable than hover) */
+.dropdown.open .dropdown-content,
+.dropdown:focus-within .dropdown-content {
     display: block;
 }
 
@@ -373,7 +377,7 @@ nav {
 }
 
 @media (max-width: 1024px) {
-    header {
+    body > header {
         padding: 0 1.5rem;
     }
 
@@ -401,7 +405,7 @@ nav {
 }
 
 @media (max-width: 640px) {
-    header {
+    body > header {
         padding: 0 1rem;
     }
 
