@@ -1245,5 +1245,5 @@ app.delete('/api/transactions/:id', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor Styllo Fashion ouvindo em http://localhost:${PORT}`);
+  console.log(`Servidor Styllo Fashion ouvindo em http://localhost:${PORT}`); 
 });

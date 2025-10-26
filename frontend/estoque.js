@@ -260,7 +260,7 @@ const renderProdutosLayout = ({ titulo, descricao, categoriaNome, subcategorias 
   const header = document.createElement('div');
   header.className = 'estoque-products-header';
   const titleEl = document.createElement('h2');
-  titleEl.textContent = titulo;
+  titleEl.textContent = titulo; 
   header.appendChild(titleEl);
   if (descricao) {
     const descEl = document.createElement('p');

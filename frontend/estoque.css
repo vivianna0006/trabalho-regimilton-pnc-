@@ -7,15 +7,15 @@
     --estoque-muted: #6b7280;
     --estoque-border: #e5e7eb;
     --estoque-danger: #dc2626;
-}
-
+}   
+   
 body {
     background: var(--estoque-bg);
 }
 
 .main-content.estoque-dashboard {
-    align-items: stretch;
-    width: 100%;
+    align-items: stretch;   
+    width: 100%;   
     max-width: 1200px;
     margin: 0 auto;
     gap: 2.2rem;

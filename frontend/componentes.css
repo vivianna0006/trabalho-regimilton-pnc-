@@ -9,14 +9,14 @@
 }
 .form-box h1, .form-box h2 {
     text-align: center;
-    margin-top: 0;
+    margin-top: 0;  
 }
 .form-box .input-group { margin-bottom: 15px; }
 .form-box .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
 .form-box .input-group input, .form-box .input-group select {
-    width: 100%;
+    width: 100%;  
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc;  
     border-radius: 4px;
     box-sizing: border-box;
 }

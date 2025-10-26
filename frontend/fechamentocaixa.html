@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fechamento de Caixa</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="fechamentocaixa.css"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <header> 
+        <nav></nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container"> 
+            
+            <div class="header-fechamento">
+                <h1>Fechamento de Caixa Diário</h1>
+                
+                <a href="historico.html" id="btn-toggle-historico" class="btn-historico-link">Ver Histórico</a>
+                
+            </div>
+            
+            <div class="filters" style="margin-bottom: 20px;">
+                <label for="data-fechamento">Data do Fechamento:</label>
+                <input type="date" id="data-fechamento" onchange="iniciarFechamento()">
+                <button onclick="iniciarFechamento()" style="padding: 10px 15px;">Recarregar Dados</button>
+            </div>
+
+                        <section class="resumo-esperado componente-card">
+                <h2>Resumo Esperado (Teórico)</h2>
+                <div class="grid-resumo">
+                    <p>Suprimento de Troco/Inicial: <span id="val-suprimento">R$ 0,00</span></p>
+                    <p>Vendas em Dinheiro (Bruto): <span id="val-vendas-dinheiro">R$ 0,00</span></p>
+                    <p>Vendas em Cartão (Teórico): <span id="val-vendas-cartao">R$ 0,00</span></p>
+                    <p>Sangrias Realizadas: <span id="val-sangrias">R$ 0,00</span></p>
+                    <p>Devoluções/Cancelamentos (Dinheiro): <span id="val-devolucoes">R$ 0,00</span></p>
+                    <p class="total-caixa">CAIXA ESPERADO (DINHEIRO): <span id="val-esperado-caixa">R$ 0,00</span></p>
+                    <p class="total-geral">TOTAL GERAL ESPERADO: <span id="val-esperado-geral">R$ 0,00</span></p>
+                </div>
+            </section>
+            
+            <hr>
+
+                        <section class="conferencia-real componente-card">
+                <h2>Conferência Real</h2>
+                <div class="grid-conferencia">
+                    <div>
+                        <label for="dinheiro-contado">Dinheiro Contado:</label>
+                        <input type="number" step="0.01" id="dinheiro-contado" value="0.00" data-esperado-dinheiro="0.00">
+                    </div>
+                    <div>
+                        <label for="cartao-extrato">Cartão Extrato (Maq.):</label>
+                        <input type="number" step="0.01" id="cartao-extrato" value="0.00" data-esperado-cartao="0.00">
+                    </div>
+                </div>
+            </section>
+            
+            <hr>
+
+                        <section class="resultado-final componente-card">
+                <h2>Resultado Final</h2>
+                <div class="grid-resumo grid-resultado">
+                    <p>Diferença Dinheiro (Contado vs Esperado): <span id="val-dif-dinheiro">R$ 0,00</span></p>
+                    <p>Status Dinheiro: <span id="status-dinheiro" class="neutro-tag">OK</span></p>
+                    
+                    <p>Diferença Cartão (Extrato vs Esperado): <span id="val-dif-cartao">R$ 0,00</span></p>
+                    <p>Status Cartão: <span id="status-cartao" class="neutro-tag">OK</span></p>
+                    
+                    <p class="total-diferenca">DIFERENÇA GERAL (TOTAL): <span id="val-dif-geral">R$ 0,00</span></p>
+                    <p class="total-status">STATUS GERAL: <span id="status-geral" class="neutro-tag">Bateu</span></p>
+                </div>
+                
+                <button onclick="finalizarCaixa()" id="finalizar-fechamento" disabled>Finalizar Fechamento</button>
+            </section>
+            
+            <hr>
+
+                    </div>
+    </main>
+
+    <script src="api-client.js"></script>
+    <script src="notifications.js"></script>
+    <script src="auth.js"></script>
+    <script src="fechamentocaixa.js"></script> 
+</body>
+</html>

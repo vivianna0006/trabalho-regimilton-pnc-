@@ -19,7 +19,7 @@
                 // OPÃ‡Ã•ES RESTAURADAS ABAIXO
                 { text: 'Suprimento de Caixa', href: '#', adminOnly: false },
                  { text: 'Histórico de Caixa', href: 'historico.html', adminOnly: true },
-                { text: 'Fechamento de Caixa', href: '#', adminOnly: false }
+                { text: 'Fechamento de Caixa', href: 'fechamentocaixa.html', adminOnly: true }
             ]
         },
         { text: 'Estoque', href: 'estoque.html', parent: 'estoque' },
