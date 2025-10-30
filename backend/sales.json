@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "id": 1761783077935,
+    "date": "2025-10-30T00:11:17.935Z",
+    "items": [
+      {
+        "id": "001",
+        "nome": "Blusa cinza",
+        "descricao": "Blusa cinza",
+        "valor": 20,
+        "categoriaNome": "Blusas",
+        "subcategoriaNome": "Masculina",
+        "tamanhos": {
+          "PP": 0,
+          "P": 0,
+          "M": 7,
+          "G": 0,
+          "GG": 0
+        }
+      },
+      {
+        "id": "002",
+        "nome": "blusa marrom",
+        "descricao": "marrom",
+        "valor": 2000,
+        "categoriaNome": "Acessórios",
+        "subcategoriaNome": "Feminino",
+        "tamanhos": {
+          "PP": 0,
+          "P": 1,
+          "M": 0,
+          "G": 0,
+          "GG": 0
+        }
+      },
+      {
+        "id": "05",
+        "categoriaNome": "Blusas",
+        "subcategoriaNome": "Feminina",
+        "nome": "blusa listrada",
+        "descricao": "blusa kwaii do sol listrada",
+        "valor": 50,
+        "tamanhos": {
+          "PP": 55,
+          "P": 20,
+          "M": 10,
+          "G": 20,
+          "GG": 30
+        }
+      }
+    ],
+    "seller": "anninhatwice9"
+  }
+]
