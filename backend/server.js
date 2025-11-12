@@ -1243,6 +1243,107 @@ app.delete('/api/transactions/:id', (req, res) => {
     res.status(500).json({ message: 'Erro interno ao excluir transação.' });
   }
 });
+// ============================
+// Importa as bibliotecas necessárias
+// ============================
+
+// 'express' é o framework que usamos pra criar o servidor e as rotas HTTP
+const express = require('express');
+
+// 'fs' (file system) permite ler e gravar arquivos no computador (nativo do Node.js)
+const fs = require('fs');
+
+// 'path' serve pra montar caminhos de arquivos de forma segura (independente do sistema operacional)
+const path = require('path');
+
+
+// ============================
+// Configuração do caminho do arquivo JSON
+// ============================
+
+// Aqui estamos definindo o caminho até o arquivo 'suprimentos.json'
+// __dirname representa a pasta atual (no caso, a pasta 'backend')
+const SUPRIMENTOS_PATH = path.join(__dirname, 'suprimentos.json');
+
+
+// ============================
+// Função para ler os dados do arquivo JSON
+// ============================
+
+// Essa função vai abrir o arquivo 'suprimentos.json' e converter o conteúdo dele pra um objeto JavaScript
+function lerSuprimentos() {
+    // Lê o arquivo como texto usando codificação 'utf8'
+    const data = fs.readFileSync(SUPRIMENTOS_PATH, 'utf8');
+    
+    // Converte o texto JSON para um array de objetos JS
+    // Caso o arquivo esteja vazio ou corrompido, retorna um array vazio []
+    return JSON.parse(data || '[]');
+}
+
+
+// ============================
+// Função para salvar os dados no arquivo JSON
+// ============================
+
+// Essa função sobrescreve o arquivo 'suprimentos.json' com os dados atualizados
+function salvarSuprimentos(suprimentos) {
+    // Converte o array JS para texto JSON formatado com indentação de 2 espaços
+    fs.writeFileSync(SUPRIMENTOS_PATH, JSON.stringify(suprimentos, null, 2), 'utf8');
+}
+
+
+// ============================
+// Criação das rotas de API (usadas pelo frontend)
+// ============================
+
+// Aqui assumimos que você já criou o app express no server.js assim:
+// const app = express();
+
+
+// ----------------------------
+// ROTA GET  ->  /api/suprimentos
+// ----------------------------
+// Essa rota retorna todos os suprimentos registrados
+app.get('/api/suprimentos', (req, res) => {
+    try {
+        // Lê os suprimentos do arquivo JSON
+        const suprimentos = lerSuprimentos();
+
+        // Envia a lista como resposta JSON
+        res.json(suprimentos);
+    } catch (error) {
+        // Caso ocorra erro (arquivo inexistente, JSON inválido, etc.)
+        res.status(500).json({ error: 'Erro ao ler suprimentos.' });
+    }
+});
+
+
+// ----------------------------
+// ROTA POST  ->  /api/suprimentos
+// ----------------------------
+// Essa rota adiciona um novo suprimento ao arquivo JSON
+// 'express.json()' é um middleware que permite ler dados enviados no corpo da requisição (body)
+app.post('/api/suprimentos', express.json(), (req, res) => {
+    try {
+        // Pega o corpo da requisição (os dados enviados pelo frontend)
+        const novoSuprimento = req.body;
+
+        // Lê os suprimentos existentes no arquivo
+        const suprimentos = lerSuprimentos();
+
+        // Adiciona o novo suprimento no array
+        suprimentos.push(novoSuprimento);
+
+        // Salva o array atualizado de volta no arquivo
+        salvarSuprimentos(suprimentos);
+
+        // Retorna uma resposta de sucesso
+        res.status(201).json({ message: 'Suprimento registrado com sucesso!' });
+    } catch (error) {
+        // Se algo der errado, retorna erro 500
+        res.status(500).json({ error: 'Erro ao registrar suprimento.' });
+    }
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor Styllo Fashion ouvindo em http://localhost:${PORT}`); 
