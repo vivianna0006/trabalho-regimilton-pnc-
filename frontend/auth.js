@@ -17,7 +17,7 @@
                 { text: 'Registro de Venda', href: 'caixa.html', adminOnly: false },
                 { text: 'Sangria', href: 'sangria.html', adminOnly: true },
                 // OPÃ‡Ã•ES RESTAURADAS ABAIXO
-                { text: 'Suprimento de Caixa', href: '#', adminOnly: false },
+                { text: 'Suprimento de Caixa', href: 'Suprimentos.html', adminOnly: false },
                  { text: 'Histórico de Caixa', href: 'historico.html', adminOnly: true },
                 { text: 'Fechamento de Caixa', href: 'fechamentocaixa.html', adminOnly: true }
             ]
@@ -80,7 +80,16 @@
         }
     });
 
-    menuHTML += `</ul><button id="logout-btn-menu" type="button">Sair</button></div>`;
+  
+// --- 3.2: Adiciona o botão "Relatórios" dentro da lista de navegação ---
+menuHTML += `
+    <li><a href="relatorios.html" id="relatorios-link" class="menu-link">Relatórios</a></li> <!-- Botão Relatórios -->
+    </ul>
+    <button id="logout-btn-menu" type="button">Sair</button>
+</div>`;
+
+navElement.innerHTML = menuHTML;
+
     navElement.innerHTML = menuHTML;
 
     // 3.1: Dropdown por clique para evitar sumiço ao mover o mouse
@@ -129,6 +138,15 @@
             }
         });
     }
+    // --- 4.1: Funcionalidade do botão "Relatórios" ---
+const relatoriosBtn = document.getElementById('relatorios-btn-menu');
+if (relatoriosBtn) {
+    relatoriosBtn.addEventListener('click', () => {
+        // redireciona para a página de relatórios
+        window.location.href = 'relatorios.html';
+    });
+}
+
 });
 // Em frontend/auth.js
 

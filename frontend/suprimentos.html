@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suprimento de Caixa - Styllo Fashion Modas</title>
+  <link rel="stylesheet" href="suprimentos.css">
+  <script src="frontend/auth.js"></script>
+</head>
+
+<body>
+    
+  <nav></nav>
+
+  <main class="container">
+    <h1>💵 Suprimento de Caixa</h1>
+    <p>Registre novos suprimentos e visualize o histórico de entradas no caixa.</p>
+
+    <form id="formSuprimento">
+      <label>Descrição:</label>
+      <input type="text" id="descricao" required>
+
+      <label>Valor (R$):</label>
+      <input type="number" id="valor" required step="0.01">
+
+      <button type="submit">Registrar Suprimento</button>
+    </form>
+
+    <h2>Histórico de Suprimentos</h2>
+    <table id="tabelaSuprimentos">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script src="suprimentos.js"></script>
+</body>
+</html>
+

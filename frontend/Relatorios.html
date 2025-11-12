@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> <!-- Define o idioma da página -->
+<head>
+    <meta charset="UTF-8"> <!-- Define o padrão de caracteres (UTF-8) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade em celulares -->
+    <title>Relatórios de Vendas - Styllo Fashion Modas</title> <!-- Título da aba do navegador -->
+
+    <!-- Importa o arquivo CSS do seu projeto (pode ser o mesmo usado nas outras páginas) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Importa a biblioteca Chart.js para criar os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- O menu será carregado automaticamente pelo arquivo frontend/auth.js -->
+    <nav></nav>
+
+    <!-- Conteúdo principal da página -->
+    <main class="container">
+        <h1>📊 Relatórios de Vendas</h1> <!-- Título principal -->
+        <p>Visualize o desempenho de vendas da loja por mês e por ano.</p> <!-- Texto explicativo -->
+
+        <!-- Seção do gráfico mensal -->
+        <section class="relatorio-section">
+            <h2>Vendas Mensais (2025)</h2> <!-- Título do gráfico mensal -->
+            <canvas id="graficoMensal"></canvas> <!-- Área onde o gráfico será desenhado -->
+        </section>
+
+        <!-- Seção do gráfico anual -->
+        <section class="relatorio-section">
+            <h2>Vendas Anuais (2021–2025)</h2> <!-- Título do gráfico anual -->
+            <canvas id="graficoAnual"></canvas> <!-- Área onde o gráfico será desenhado -->
+        </section>
+    </main>
+
+    <!-- Importa o script que monta o menu e verifica o login -->
+    <script src="frontend/auth.js"></script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Função que carrega as vendas do backend
+    async function carregarVendas() {
+        try {
+            const resposta = await fetch('../backend/sales.json'); // caminho pro arquivo de vendas
+            const vendas = await resposta.json(); // converte o JSON em objeto JS
+
+            console.log('📦 Dados de vendas carregados:', vendas);
+
+            // --- EXEMPLO DE PROCESSAMENTO ---
+            // Aqui você adapta conforme a estrutura do seu sales.json
+            // (vou supor que tem { data: "2025-03-01", total: 123.45 } em cada venda)
+
+            // Agrupa por mês e por ano
+            const vendasPorMes = Array(12).fill(0);
+            const vendasPorAno = {};
+
+            vendas.forEach(v => {
+                const data = new Date(v.data);
+                const mes = data.getMonth(); // 0 = janeiro
+                const ano = data.getFullYear();
+
+                vendasPorMes[mes] += v.total;
+                vendasPorAno[ano] = (vendasPorAno[ano] || 0) + v.total;
+            });
+
+            const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            const anos = Object.keys(vendasPorAno).sort();
+
+            // --- GRÁFICO MENSAL ---
+            new Chart(document.getElementById('graficoMensal'), {
+                type: 'bar',
+                data: {
+                    labels: meses,
+                    datasets: [{
+                        label: 'Vendas (R$)',
+                        data: vendasPorMes,
+                        borderWidth: 1,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Vendas por Mês' }
+                    },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // --- GRÁFICO ANUAL ---
+            new Chart(document.getElementById('graficoAnual'), {
+                type: 'line',
+                data: {
+                    labels: anos,
+                    datasets: [{
+                        label: 'Total Anual (R$)',
+                        data: anos.map(a => vendasPorAno[a]),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'Crescimento de Vendas Anual' }
+                    },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+        } catch (erro) {
+            console.error('❌ Erro ao carregar vendas:', erro);
+            alert('Não foi possível carregar os dados de vendas.');
+        }
+    }
+
+    // Chama a função ao abrir a página
+    carregarVendas();
+
+    // Atualiza automaticamente a cada 1 minuto
+    setInterval(carregarVendas, 60000);
+});
+</script>
+
+
+    <!-- CSS interno apenas para essa página (pode colocar no style.css se preferir) -->
+    <style>
+        /* Define o estilo geral da página */
+        body {
+            font-family: Arial, sans-serif; /* Fonte usada no texto */
+            background: #fafafa; /* Cor de fundo clara */
+            margin: 0; /* Remove margens externas */
+            padding: 0; /* Remove espaçamento interno */
+        }
+
+        /* Define a área principal */
+        .container {
+            padding: 2rem; /* Espaçamento interno */
+        }
+
+        /* Estilo do título principal */
+        h1 {
+            text-align: center; /* Centraliza o texto */
+            margin-bottom: 1rem; /* Espaço abaixo do título */
+        }
+
+        /* Cada bloco de relatório (gráfico) */
+        .relatorio-section {
+            background: #fff; /* Fundo branco */
+            border-radius: 12px; /* Cantos arredondados */
+            padding: 1.5rem; /* Espaçamento interno */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Sombra leve */
+            margin: 1.5rem auto; /* Centraliza e adiciona espaçamento vertical */
+            max-width: 800px; /* Largura máxima */
+        }
+
+        /* Define o tamanho do canvas (gráfico) */
+        canvas {
+            width: 100%; /* Ocupa toda a largura do bloco */
+            height: 400px; /* Altura fixa dos gráficos */
+        }
+    </style>
+</body>
+</html>
